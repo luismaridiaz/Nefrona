@@ -1,0 +1,1820 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="NEFRONA"><meta name="theme-color" content="#0f766e"><title>NEFRONA</title><style>:root{--bg:#f4f7f8;--card:#fff;--ink:#14282e;--mut:#5b7078;--pri:#0f766e;--pri2:#115e59;--acc:#b45309;--bad:#b91c1c;--ok:#15803d;--line:#d9e3e6;--chip:#e6f2f1;--warn:#fef3c7;--info:#e0f2fe;--alert:#fee2e2}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1a1e;--card:#15262b;--ink:#e6f0f2;--mut:#9ab2ba;--pri:#2dd4bf;--pri2:#5eead4;--acc:#fbbf24;--bad:#f87171;--ok:#4ade80;--line:#264048;--chip:#1b3a3f;--warn:#3a2f0f;--info:#10303f;--alert:#3f1717}}
+:root[data-theme="dark"]{--bg:#0d1a1e;--card:#15262b;--ink:#e6f0f2;--mut:#9ab2ba;--pri:#2dd4bf;--pri2:#5eead4;--acc:#fbbf24;--bad:#f87171;--ok:#4ade80;--line:#264048;--chip:#1b3a3f;--warn:#3a2f0f;--info:#10303f;--alert:#3f1717}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+header{position:sticky;top:0;z-index:5;background:var(--pri);color:#fff;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;display:flex;align-items:center;gap:10px}
+header b{font-size:20px;letter-spacing:.14em}
+header .sp{flex:1}header button{background:rgba(255,255,255,.18);color:#fff;border:0;border-radius:10px;width:40px;height:36px;font-size:18px;cursor:pointer}header span.t{font-size:12px;opacity:.85}
+main{max-width:760px;margin:0 auto;padding:12px 16px}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--card);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;border:0;background:none;color:var(--mut);padding:8px 2px 7px;font-size:11px;font-family:inherit;cursor:pointer}
+nav button i{display:block;font-style:normal;font-size:20px;line-height:1.1}
+nav button.on{color:var(--pri);font-weight:700}
+h2{font-size:20px;margin:6px 0 10px}
+h3{font-size:16px;margin:14px 0 6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:0 0 12px}
+.card h3:first-child{margin-top:0}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row>*{flex:1 1 120px}
+label{display:block;font-size:13px;color:var(--mut);margin:8px 0 3px}
+input,select{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 10px;min-height:42px}
+input[type=checkbox]{flex:none;width:20px;min-width:20px;height:20px;min-height:0;margin:0 8px 0 0;vertical-align:middle}
+.ck{display:flex;align-items:center;padding:5px 0;font-size:15px;color:var(--ink);margin:0}
+.btn{display:inline-block;border:0;border-radius:12px;padding:11px 16px;background:var(--pri);color:#fff;font:inherit;font-weight:600;cursor:pointer;min-height:44px}
+.btn.s{background:var(--chip);color:var(--pri2)}
+.btn.w{width:100%}
+.btn.sm{padding:6px 10px;min-height:34px;font-size:14px}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:2px 0 8px;-webkit-overflow-scrolling:touch}
+.chip{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 12px;font:inherit;font-size:14px;cursor:pointer}
+.chip.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.chip.done{border-color:var(--ok)}
+.tag{display:inline-block;background:var(--chip);color:var(--pri2);border-radius:8px;padding:1px 7px;font-size:12px;margin:0 3px 3px 0;cursor:pointer}
+.tag.v0{background:var(--warn);color:var(--acc)}
+.box{border-radius:10px;padding:8px 10px;margin:6px 0;font-size:14px}
+.box.info{background:var(--info)}.box.warn{background:var(--warn)}.box.alert{background:var(--alert)}
+.mut{color:var(--mut);font-size:13px}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.kv div{background:var(--chip);border-radius:10px;padding:8px 10px}
+.kv b{display:block;font-size:18px}
+.kv small{color:var(--mut)}
+.meter{margin:5px 0}
+.meter .t{display:flex;justify-content:space-between;font-size:13px}
+.meter .b{height:7px;background:var(--line);border-radius:5px;overflow:hidden}
+.meter .b i{display:block;height:100%;background:var(--pri)}
+.meter.over .b i{background:var(--bad)}
+.meal{border-top:1px solid var(--line);padding:9px 0}
+.meal:first-child{border-top:0}
+.meal .h{display:flex;justify-content:space-between;gap:8px;cursor:pointer}
+.meal .h b{font-size:15px}.meal .h .mut{white-space:nowrap}
+.meal ul{margin:6px 0 4px;padding-left:18px;font-size:14px}
+.meal .det{margin-top:6px;font-size:14px}
+.meal ol{padding-left:20px;margin:4px 0}
+.ex{border-top:1px solid var(--line);padding:8px 0;font-size:14px}
+.ex b{font-size:15px}
+.ack{display:flex;gap:8px;align-items:flex-start}
+#run{position:fixed;top:0;left:0;right:0;bottom:0;z-index:20;background:var(--bg);overflow:auto;padding:calc(14px + env(safe-area-inset-top)) 16px 30px}
+#run .big{font-size:54px;font-weight:700;text-align:center;color:var(--pri)}
+.hide{display:none!important}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:12px;font-size:14px;z-index:30}
+#print{display:none}
+@media print{header,nav,main,#run,.toast{display:none!important}#print{display:block;color:#000;background:#fff;font-size:11px}#print h2{page-break-before:always}#print table{border-collapse:collapse;width:100%}#print td,#print th{border:1px solid #999;padding:3px;vertical-align:top}}
+
+header .ti{display:flex;flex-direction:column;line-height:1}header .ti small{font-size:9px;letter-spacing:.2em;opacity:.8;margin-top:2px}
+</style></head><body><header><div class="ti"><b>NEFRONA</b><small>LD</small></div><span class="t">dieta y ejercicio para el riñón</span><span class="sp"></span><button data-act="theme" aria-label="Claro/oscuro">◐</button><button data-act="wipe" aria-label="Borrar datos del paciente">🗑</button></header><main id="view"></main><nav id="tabs"></nav><div id="run" class="hide"></div><div id="print"></div><script>/* ==== foods ==== */
+/* NEFRONA · tabla de composición (por 100 g de porción comestible, tal como se consume)
+   Valores de referencia aproximados (USDA FoodData Central / BEDCA, redondeados). NO sustituye al etiquetado ni al cálculo de un dietista.
+   Verduras: valores de hervido con el agua desechada (el K baja respecto a crudo). Patata: dados pequeños hervidos y agua desechada.
+   Campos: kcal, prot(g), hc(g), grasa(g), fibra(g), Na(mg), K(mg), P(mg), Ca(mg) */
+var FOODS = {};
+function F(id, name, kcal, p, c, f, fib, na, k, ph, ca, flags, unit) {
+  FOODS[id] = { id: id, n: name, kcal: kcal, p: p, c: c, f: f, fib: fib, na: na, k: k, ph: ph, ca: ca,
+    fl: (flags || '').split(' '), u: unit || null };
+}
+/* ---- Proteínas animales ---- */
+F('pollo', 'Pechuga de pollo', 120, 22.5, 0, 2.6, 0, 45, 330, 210, 5, 'carne');
+F('pavo', 'Pechuga de pavo', 110, 23.5, 0, 1.2, 0, 50, 300, 210, 10, 'carne');
+F('ternera', 'Ternera magra', 125, 21.5, 0, 4, 0, 60, 340, 190, 5, 'carne');
+F('cerdo', 'Lomo de cerdo magro', 140, 21.5, 0, 5.5, 0, 55, 360, 215, 5, 'carne');
+F('conejo', 'Conejo', 135, 20.5, 0, 5.5, 0, 45, 330, 215, 10, 'carne');
+F('huevo', 'Huevo', 143, 12.6, 0.7, 9.5, 0, 142, 138, 198, 56, 'huevo', [55, 'huevo', 'huevos']);
+F('clara', 'Claras de huevo', 52, 10.9, 0.7, 0.2, 0, 166, 163, 15, 7, 'huevo', [33, 'clara', 'claras']);
+F('merluza', 'Merluza', 80, 16.5, 0, 1.5, 0, 80, 320, 190, 10, 'pescado');
+F('bacalao', 'Bacalao fresco', 82, 17.8, 0, 0.7, 0, 54, 390, 203, 16, 'pescado');
+F('lubina', 'Lubina', 97, 18.4, 0, 2, 0, 68, 256, 200, 10, 'pescado');
+F('dorada', 'Dorada', 100, 19.5, 0, 2.4, 0, 60, 300, 200, 20, 'pescado');
+F('rape', 'Rape', 76, 14.5, 0, 1.5, 0, 25, 300, 140, 20, 'pescado');
+F('salmon', 'Salmón', 200, 20, 0, 13.5, 0, 55, 360, 240, 12, 'pescado');
+F('atun', 'Atún al natural (lata, escurrido)', 105, 24, 0, 0.8, 0, 250, 230, 190, 10, 'pescado purina', [80, 'lata', 'latas']);
+/* ---- Proteínas vegetales ---- */
+F('tofu', 'Tofu firme', 110, 11, 2, 6.5, 0.5, 10, 150, 140, 300, 'soja');
+F('lentejas', 'Lentejas cocidas', 116, 9, 20, 0.4, 7.9, 2, 369, 180, 19, 'legumbre');
+F('garbanzos', 'Garbanzos cocidos', 164, 8.9, 27.4, 2.6, 7.6, 7, 291, 168, 49, 'legumbre');
+/* ---- Lácteos y alternativas ---- */
+F('leche', 'Leche semidesnatada', 46, 3.3, 4.8, 1.6, 0, 45, 150, 93, 120, 'lacteo');
+F('yogur', 'Yogur natural (sin aditivos fosfatados)', 61, 3.5, 4.7, 3.3, 0, 46, 155, 95, 121, 'lacteo', [125, 'yogur', 'yogures']);
+F('qfresco', 'Queso fresco batido 0 %', 46, 7.5, 4, 0.2, 0, 50, 140, 110, 100, 'lacteo');
+F('qcrema', 'Queso crema', 342, 6, 4, 34, 0, 321, 138, 106, 98, 'lacteo');
+F('brice', 'Bebida de arroz (sin fosfatos añadidos)', 50, 0.3, 10, 1, 0, 30, 30, 20, 0, '');
+/* ---- Cereales y tubérculos ---- */
+F('arroz', 'Arroz blanco cocido', 130, 2.7, 28, 0.3, 0.4, 1, 35, 43, 10, 'cereal');
+F('pasta', 'Pasta cocida', 158, 5.8, 31, 0.9, 1.8, 1, 44, 58, 7, 'cereal gluten');
+F('pan', 'Pan blanco sin sal', 265, 8.5, 54, 1.5, 2.5, 10, 100, 90, 20, 'cereal gluten', [30, 'rebanada', 'rebanadas']);
+F('pansal', 'Pan blanco habitual (con sal)', 265, 8.5, 54, 1.5, 2.5, 520, 115, 100, 20, 'cereal gluten', [30, 'rebanada', 'rebanadas']);
+F('panint', 'Pan integral sin sal', 250, 9.5, 44, 3.5, 7, 15, 220, 190, 40, 'cereal gluten', [30, 'rebanada', 'rebanadas']);
+F('cuscus', 'Cuscús cocido', 112, 3.8, 23, 0.2, 1.4, 5, 58, 22, 8, 'cereal gluten');
+F('avena', 'Copos de avena', 370, 13, 63, 7, 9, 3, 360, 410, 50, 'cereal gluten');
+F('harina', 'Harina de trigo', 364, 10, 76, 1, 3, 2, 107, 108, 15, 'cereal gluten');
+F('patata', 'Patata hervida en dados (agua desechada)', 80, 1.8, 18.5, 0.1, 1.5, 5, 230, 38, 5, 'tuberculo');
+F('panhipo', 'Pan hipoproteico (según etiqueta)', 245, 0.7, 53, 1.8, 2, 25, 30, 25, 10, 'cereal gluten especial', [30, 'rebanada', 'rebanadas']);
+F('pastahipo', 'Pasta hipoproteica cocida (según etiqueta)', 130, 0.4, 30, 0.3, 1, 10, 20, 15, 5, 'cereal gluten especial');
+/* ---- Verduras (hervidas, agua desechada) ---- */
+F('calabacin', 'Calabacín', 16, 1.1, 3, 0.3, 1.1, 3, 255, 40, 15, 'verdura');
+F('berenjena', 'Berenjena cocida', 35, 0.8, 8.7, 0.2, 2.5, 1, 123, 15, 6, 'verdura');
+F('pimiento', 'Pimiento', 25, 1, 5, 0.2, 1.5, 3, 180, 25, 10, 'verdura');
+F('coliflor', 'Coliflor hervida', 23, 1.8, 4.1, 0.5, 2.3, 15, 142, 32, 16, 'verdura');
+F('brocoli', 'Brócoli hervido', 35, 2.4, 7.2, 0.4, 3.3, 41, 293, 67, 40, 'verdura vitK');
+F('judias', 'Judías verdes hervidas', 35, 1.9, 7.9, 0.3, 3.2, 1, 146, 38, 44, 'verdura');
+F('zanahoria', 'Zanahoria hervida', 35, 0.8, 8.2, 0.2, 3, 58, 235, 30, 30, 'verdura');
+F('cebolla', 'Cebolla', 40, 1.1, 9.3, 0.1, 1.7, 4, 146, 29, 23, 'verdura');
+F('puerro', 'Puerro hervido', 31, 0.8, 7.6, 0.2, 1, 5, 87, 17, 30, 'verdura');
+F('lechuga', 'Lechuga', 14, 0.9, 3, 0.1, 1.2, 10, 160, 20, 18, 'verdura');
+F('pepino', 'Pepino', 15, 0.7, 3.6, 0.1, 0.5, 2, 147, 24, 16, 'verdura');
+F('tomate', 'Tomate', 18, 0.9, 3.9, 0.2, 1.2, 5, 237, 24, 10, 'verdura');
+F('repollo', 'Repollo', 25, 1.3, 5.8, 0.1, 2.5, 18, 170, 26, 40, 'verdura vitK');
+F('ajo', 'Ajo', 149, 6.4, 33, 0.5, 2.1, 17, 401, 153, 181, '');
+/* ---- Frutas ---- */
+F('manzana', 'Manzana', 52, 0.3, 13.8, 0.2, 2.4, 1, 107, 11, 6, 'fruta', [150, 'manzana', 'manzanas']);
+F('pera', 'Pera', 57, 0.4, 15, 0.1, 3.1, 1, 116, 12, 9, 'fruta', [150, 'pera', 'peras']);
+F('fresas', 'Fresas', 32, 0.7, 7.7, 0.3, 2, 1, 153, 24, 16, 'fruta');
+F('arandanos', 'Arándanos', 57, 0.7, 14.5, 0.3, 2.4, 1, 77, 12, 6, 'fruta');
+F('uvas', 'Uvas', 69, 0.7, 18, 0.2, 0.9, 2, 191, 20, 10, 'fruta');
+F('mandarina', 'Mandarinas', 53, 0.8, 13.3, 0.3, 1.8, 2, 166, 20, 37, 'fruta', [75, 'mandarina', 'mandarinas']);
+F('naranja', 'Naranja', 47, 0.9, 11.8, 0.1, 2.4, 0, 181, 14, 40, 'fruta', [150, 'naranja', 'naranjas']);
+F('pina', 'Piña natural', 50, 0.5, 13, 0.1, 1.4, 1, 109, 8, 13, 'fruta');
+F('sandia', 'Sandía', 30, 0.6, 7.6, 0.2, 0.4, 1, 112, 11, 7, 'fruta');
+F('melocoton', 'Melocotón', 39, 0.9, 9.5, 0.3, 1.5, 0, 190, 20, 6, 'fruta', [140, 'melocotón', 'melocotones']);
+F('ciruela', 'Ciruelas', 46, 0.7, 11.4, 0.3, 1.4, 0, 157, 16, 6, 'fruta', [60, 'ciruela', 'ciruelas']);
+F('cerezas', 'Cerezas', 63, 1, 16, 0.2, 2.1, 0, 222, 21, 13, 'fruta');
+F('platano', 'Plátano', 89, 1.1, 23, 0.3, 2.6, 1, 358, 22, 5, 'fruta', [120, 'plátano', 'plátanos']);
+F('kiwi', 'Kiwi', 61, 1.1, 14.7, 0.5, 3, 3, 312, 34, 34, 'fruta', [75, 'kiwi', 'kiwis']);
+F('melon', 'Melón', 34, 0.8, 8.2, 0.2, 0.9, 16, 267, 15, 9, 'fruta');
+F('aguacate', 'Aguacate', 160, 2, 8.5, 14.7, 6.7, 7, 485, 52, 12, 'fruta');
+/* ---- Grasas, dulces y otros ---- */
+F('aove', 'Aceite de oliva virgen extra', 884, 0, 0, 100, 0, 2, 1, 0, 1, 'grasa');
+F('nueces', 'Nueces', 654, 15.2, 7, 65, 6.7, 2, 441, 346, 98, 'frutosec');
+F('miel', 'Miel', 304, 0.3, 82, 0, 0.2, 4, 52, 4, 6, 'miel azucar');
+F('azucar', 'Azúcar', 387, 0, 100, 0, 0, 1, 2, 0, 1, 'azucar');
+F('mermelada', 'Mermelada', 250, 0.4, 65, 0.1, 0.5, 12, 40, 5, 8, 'azucar');
+F('limon', 'Zumo de limón', 22, 0.4, 6.9, 0.2, 0.3, 1, 103, 8, 6, '');
+F('cafe', 'Café o infusión', 2, 0.1, 0, 0, 0, 2, 50, 3, 2, '');
+
+/* ==== dishes ==== */
+/* NEFRONA · recetario. Cada plato: ingredientes [alimento, gramos base, rol]
+   rol: p = ancla proteica (se escala para llegar al objetivo de proteína)
+        e = energía (almidón/grasa; se escala para llegar al objetivo calórico)
+        v = verdura/fruta fija   x = extra fijo
+   Etiquetas de alergia, vegetariano, gluten, lactosa, vitamina K, purinas se DERIVAN de los ingredientes. */
+var DISHES = {};
+function D(id, name, slots, ing, steps, tip, min) {
+  DISHES[id] = { id: id, n: name, s: slots.split(' '), ing: ing, st: steps, tip: tip || '', min: min || 20 };
+}
+var TIPS_SAL = 'Sin sal añadida: usa ajo, limón, pimienta, pimentón, orégano, perejil, laurel o vinagre.';
+
+/* ======================= DESAYUNOS ======================= */
+D('d_tostada_huevo', 'Tostadas con huevo revuelto y tomate', 'D',
+  [['huevo', 110, 'p'], ['pan', 60, 'e'], ['aove', 6, 'e'], ['tomate', 60, 'v'], ['cafe', 150, 'x']],
+  ['Tuesta el pan.', 'Bate el huevo con pimienta y cuájalo removiendo en una sartén antiadherente con el aceite.', 'Sirve sobre el pan con el tomate rallado.'],
+  'Huevo entero: buena proteína, pero la yema aporta fósforo. Si el fósforo está alto, alterna con claras.', 10);
+D('d_tostada_qfresco', 'Tostadas con queso fresco batido y mermelada', 'D',
+  [['qfresco', 100, 'p'], ['pan', 60, 'e'], ['mermelada', 15, 'x'], ['cafe', 150, 'x']],
+  ['Tuesta el pan.', 'Unta el queso fresco batido 0 % y añade la mermelada.'],
+  'Elige queso fresco SIN fosfatos añadidos en el etiquetado (E338-E343, E450-E452).', 5);
+D('d_yogur_manzana', 'Yogur natural con manzana y pan tostado', 'D',
+  [['yogur', 125, 'p'], ['manzana', 100, 'v'], ['pan', 40, 'e'], ['aove', 4, 'e'], ['cafe', 150, 'x']],
+  ['Pica la manzana en dados y mézclala con el yogur.', 'Acompaña con el pan tostado con un hilo de aceite.'],
+  'Lácteos: 1 ración al día suele ser compatible con el fósforo; más, solo si tu analítica lo permite.', 5);
+D('d_tortilla_claras', 'Tortilla de claras con cebolla y pan', 'D',
+  [['clara', 132, 'p'], ['cebolla', 30, 'v'], ['aove', 6, 'e'], ['pan', 60, 'e'], ['cafe', 150, 'x']],
+  ['Sofríe la cebolla picada con el aceite a fuego suave.', 'Añade las claras batidas y cuaja la tortilla.', 'Sirve con el pan.'],
+  'La clara aporta proteína de alta calidad con muy poco fósforo (≈15 mg/100 g): muy útil en diálisis.', 10);
+D('d_porridge', 'Porridge de avena con leche y fresas', 'D',
+  [['leche', 200, 'p'], ['avena', 40, 'e'], ['fresas', 80, 'v'], ['miel', 5, 'x']],
+  ['Calienta la leche con la avena 4-5 minutos removiendo.', 'Sirve con las fresas troceadas y la miel.'],
+  'La avena es rica en fósforo y potasio (en forma de fitato, de peor absorción). Mejor en estadios iniciales.', 8);
+D('d_arroz_leche', 'Arroz con bebida de arroz y canela', 'D',
+  [['arroz', 130, 'e'], ['brice', 200, 'x'], ['azucar', 8, 'x'], ['manzana', 80, 'v']],
+  ['Calienta el arroz cocido con la bebida de arroz y la canela 5 minutos.', 'Sirve con la manzana rallada.'],
+  'Desayuno muy bajo en proteína, útil si tu objetivo proteico es restrictivo.', 8);
+D('d_tortitas', 'Tortitas de harina y claras con arándanos', 'D',
+  [['harina', 40, 'e'], ['clara', 66, 'p'], ['brice', 60, 'x'], ['aove', 4, 'e'], ['arandanos', 60, 'v']],
+  ['Mezcla harina, claras y bebida de arroz hasta lograr una masa fluida.', 'Cuece pequeñas tortitas en sartén antiadherente con unas gotas de aceite.', 'Sirve con los arándanos.'],
+  'Evita la levadura química (lleva fosfatos): la masa queda más densa pero segura.', 15);
+D('d_tofu_revuelto', 'Tofu revuelto con cebolla y tostada', 'D',
+  [['tofu', 120, 'p'], ['cebolla', 30, 'v'], ['pan', 60, 'e'], ['aove', 6, 'e'], ['cafe', 150, 'x']],
+  ['Sofríe la cebolla con el aceite.', 'Desmenuza el tofu, añádelo con cúrcuma y pimienta y saltea 5 minutos.', 'Sirve con el pan tostado.'],
+  'Opción vegana. El tofu con sulfato cálcico aporta calcio sin sobrecarga de fósforo.', 12);
+D('d_tostada_atun', 'Tostada con atún al natural y pepino', 'D',
+  [['atun', 60, 'p'], ['pan', 60, 'e'], ['pepino', 40, 'v'], ['aove', 6, 'e'], ['cafe', 150, 'x']],
+  ['Tuesta el pan y añade un hilo de aceite.', 'Cubre con el atún escurrido y el pepino en rodajas.'],
+  'El atún en lata lleva sal: elige "al natural bajo en sal" y escúrrelo bien.', 5);
+D('d_tostada_pollo', 'Tostada de pollo a la plancha con lechuga', 'D',
+  [['pollo', 70, 'p'], ['pan', 60, 'e'], ['lechuga', 30, 'v'], ['aove', 6, 'e'], ['cafe', 150, 'x']],
+  ['Plancha el pollo con pimienta y limón.', 'Monta sobre el pan tostado con la lechuga.'],
+  'Evita fiambres y embutidos: llevan sal y fosfatos añadidos. Usa pollo cocinado en casa.', 12);
+D('d_tostada_aguacate', 'Tostada con aguacate y huevo', 'D',
+  [['aguacate', 50, 'v'], ['huevo', 55, 'p'], ['pan', 60, 'e'], ['limon', 5, 'x'], ['cafe', 150, 'x']],
+  ['Aplasta el aguacate con limón sobre el pan tostado.', 'Cubre con el huevo cocido o a la plancha.'],
+  'El aguacate es rico en potasio: solo si tu potasio está normal.', 10);
+D('d_yogur_nueces', 'Yogur con nueces y arándanos', 'D',
+  [['yogur', 125, 'p'], ['nueces', 10, 'x'], ['arandanos', 60, 'v'], ['pan', 40, 'e']],
+  ['Mezcla el yogur con los arándanos.', 'Añade las nueces troceadas y acompaña con pan tostado.'],
+  'Las nueces aportan omega-3 vegetal, pero también fósforo: pequeñas cantidades.', 5);
+
+/* ======================= MEDIA MAÑANA / MERIENDA ======================= */
+D('m_pan_aove', 'Pan con aceite y tomate', 'M Me',
+  [['pan', 40, 'e'], ['aove', 5, 'e'], ['tomate', 40, 'v']],
+  ['Tuesta el pan, ralla el tomate y añade el aceite.'], 'Pan SIN sal: pregunta en tu panadería.', 4);
+D('m_queso_pina', 'Queso fresco con piña', 'M Me',
+  [['qfresco', 80, 'p'], ['pina', 80, 'v']],
+  ['Sirve el queso fresco con la piña troceada.'], 'La piña es de las frutas con menos potasio.', 3);
+D('me_yogur_arandanos', 'Yogur natural con arándanos', 'Me M',
+  [['yogur', 125, 'p'], ['arandanos', 50, 'v']],
+  ['Mezcla el yogur con los arándanos.'], 'Sin azúcares añadidos.', 2);
+D('me_tostada_qfresco_pera', 'Tostada con queso fresco y pera', 'Me',
+  [['qfresco', 60, 'p'], ['pan', 30, 'e'], ['pera', 100, 'v']],
+  ['Tuesta el pan, unta el queso y cubre con láminas de pera.'], '', 4);
+D('me_bocadillo_pollo', 'Mini bocadillo de pollo a la plancha', 'Me',
+  [['pollo', 40, 'p'], ['pan', 40, 'e'], ['lechuga', 20, 'v'], ['aove', 4, 'e']],
+  ['Plancha el pollo, enfría y monta el bocadillo con la lechuga.'], 'Ideal tras la sesión de ejercicio de fuerza: proteína + hidrato.', 8);
+D('me_manzana_asada', 'Manzana asada con canela', 'Me M',
+  [['manzana', 150, 'e']],
+  ['Hornea la manzana entera 20 minutos a 180 °C con canela.'], 'Asada o cocida, la fruta baja algo su contenido en potasio si desechas el jugo.', 22);
+D('me_tostada_mermelada', 'Tostada con mermelada', 'Me',
+  [['pan', 40, 'e'], ['mermelada', 15, 'x']],
+  ['Tuesta el pan y unta la mermelada.'], 'Tentempié de bajo potasio y bajo fósforo, útil como pre-entreno.', 3);
+D('me_batido_fresas', 'Batido de bebida de arroz y fresas', 'Me M',
+  [['brice', 150, 'x'], ['fresas', 80, 'v']],
+  ['Tritura la bebida de arroz con las fresas.'], 'Bajo en proteína, fósforo y potasio.', 3);
+D('me_tostada_atun', 'Tostada con atún', 'Me',
+  [['atun', 40, 'p'], ['pan', 40, 'e']],
+  ['Tuesta el pan y cubre con el atún escurrido.'], '', 3);
+D('me_tortilla_mini', 'Mini tortilla francesa con pan', 'Me',
+  [['huevo', 55, 'p'], ['pan', 40, 'e'], ['aove', 4, 'e']],
+  ['Haz una tortilla francesa pequeña y acompaña con el pan.'], '', 6);
+
+/* ======================= COMIDAS Y CENAS ======================= */
+D('c_pollo_arroz', 'Pollo a la plancha con arroz blanco y judías verdes', 'C CE',
+  [['pollo', 120, 'p'], ['arroz', 150, 'e'], ['judias', 100, 'v'], ['aove', 8, 'e'], ['limon', 5, 'x']],
+  ['Hierve las judías en abundante agua (≥5 veces su volumen) y desecha el agua.', 'Plancha el pollo con limón y pimienta.', 'Sirve con el arroz hervido sin sal.'],
+  'Hervir verduras en mucha agua y desecharla reduce el potasio.', 25);
+D('c_pavo_puerro', 'Pavo en salsa de puerro con patatas', 'C CE',
+  [['pavo', 120, 'p'], ['patata', 150, 'e'], ['puerro', 80, 'v'], ['cebolla', 30, 'v'], ['aove', 8, 'e']],
+  ['Pela la patata, córtala en dados pequeños, hiérvela en abundante agua y desecha el agua.', 'Rehoga puerro y cebolla con el aceite, añade el pavo en tiras y cuece 10 minutos.', 'Sirve con las patatas.'],
+  'Patata en dados pequeños y doble agua: baja su potasio aproximadamente a la mitad (estimación orientativa).', 30);
+D('c_merluza_horno', 'Merluza al horno con patata y cebolla', 'C CE',
+  [['merluza', 180, 'p'], ['patata', 150, 'e'], ['cebolla', 50, 'v'], ['aove', 10, 'e'], ['limon', 5, 'x']],
+  ['Hierve la patata en rodajas finas y desecha el agua.', 'Coloca patata y cebolla en la bandeja, la merluza encima, aceite y limón.', 'Hornea 15 minutos a 190 °C.'],
+  TIPS_SAL, 35);
+D('c_merluza_verde', 'Merluza en salsa verde con arroz', 'C CE',
+  [['merluza', 180, 'p'], ['arroz', 120, 'e'], ['ajo', 3, 'x'], ['aove', 8, 'e'], ['limon', 10, 'x']],
+  ['Dora el ajo laminado en el aceite, añade agua y perejil.', 'Cuece la merluza 6 minutos en la salsa con el limón.', 'Sirve con arroz hervido.'],
+  TIPS_SAL, 25);
+D('c_lubina_coliflor', 'Lubina al horno con coliflor y patata', 'C CE',
+  [['lubina', 150, 'p'], ['coliflor', 120, 'v'], ['patata', 120, 'e'], ['aove', 10, 'e']],
+  ['Hierve coliflor y patata en abundante agua y desecha el agua.', 'Hornea la lubina con aceite y limón 15 minutos a 190 °C.', 'Sirve junto.'],
+  'La coliflor hervida tiene menos de la mitad del potasio de las espinacas o el tomate frito.', 30);
+D('c_dorada_pimiento', 'Dorada al horno con pimientos y arroz', 'C CE',
+  [['dorada', 150, 'p'], ['pimiento', 80, 'v'], ['arroz', 120, 'e'], ['aove', 10, 'e']],
+  ['Hornea la dorada sobre los pimientos en tiras con el aceite 18 minutos a 190 °C.', 'Sirve con arroz hervido.'],
+  '', 30);
+D('c_bacalao_papillote', 'Bacalao fresco en papillote con puerro y zanahoria', 'C CE',
+  [['bacalao', 160, 'p'], ['puerro', 70, 'v'], ['zanahoria', 60, 'v'], ['patata', 120, 'e'], ['aove', 10, 'e']],
+  ['Envuelve el bacalao con puerro y zanahoria laminados, aceite y limón en papel de horno.', 'Hornea 20 minutos a 180 °C.', 'Acompaña con patata hervida (agua desechada).'],
+  'Bacalao FRESCO (no salado). El bacalao en salazón lleva muchísimo sodio.', 35);
+D('c_rape_ajillo', 'Rape al ajillo con arroz', 'C CE',
+  [['rape', 170, 'p'], ['arroz', 130, 'e'], ['ajo', 4, 'x'], ['aove', 10, 'e'], ['limon', 5, 'x']],
+  ['Dora el ajo en el aceite.', 'Saltea el rape en trozos 5 minutos, añade limón y perejil.', 'Sirve con arroz.'],
+  '', 20);
+D('c_salmon_cuscus', 'Salmón a la plancha con cuscús y calabacín', 'C CE',
+  [['salmon', 110, 'p'], ['cuscus', 150, 'e'], ['calabacin', 100, 'v'], ['aove', 4, 'e']],
+  ['Hidrata el cuscús con agua caliente sin sal.', 'Saltea el calabacín en dados.', 'Plancha el salmón 3 minutos por lado.'],
+  'Pescado azul: omega-3 cardioprotector, pero más fósforo; 1 vez por semana suele encajar.', 20);
+D('c_pasta_pollo', 'Pasta con pollo y calabacín', 'C CE',
+  [['pasta', 180, 'e'], ['pollo', 100, 'p'], ['calabacin', 80, 'v'], ['aove', 8, 'e']],
+  ['Cuece la pasta sin sal.', 'Saltea el pollo en tacos con el calabacín.', 'Mezcla con un hilo de aceite.'],
+  '', 25);
+D('c_pasta_atun', 'Macarrones con atún y tomate', 'C CE',
+  [['pasta', 180, 'e'], ['atun', 60, 'p'], ['tomate', 80, 'v'], ['aove', 8, 'e']],
+  ['Cuece la pasta sin sal.', 'Rehoga el tomate pelado y añade el atún escurrido.', 'Mezcla con la pasta.'],
+  'Usa tomate natural: el tomate frito y las salsas de bote llevan sal y mucho potasio.', 20);
+D('c_arroz_pollo_verduras', 'Arroz con pollo y verduras (sin sal)', 'C CE',
+  [['arroz', 160, 'e'], ['pollo', 100, 'p'], ['pimiento', 50, 'v'], ['judias', 50, 'v'], ['aove', 8, 'e']],
+  ['Sofríe el pollo en tacos con el pimiento.', 'Añade el arroz y agua; cuece 18 minutos.', 'Incorpora las judías ya hervidas.'],
+  'Cocina el arroz sin cubitos de caldo (sodio y fosfatos).', 30);
+D('c_cerdo_pure', 'Lomo de cerdo con puré de patata y zanahoria', 'C CE',
+  [['cerdo', 110, 'p'], ['patata', 180, 'e'], ['zanahoria', 60, 'v'], ['aove', 10, 'e'], ['brice', 40, 'x']],
+  ['Hierve patata y zanahoria en abundante agua y desecha el agua.', 'Tritura con la bebida de arroz y el aceite.', 'Plancha el lomo.'],
+  'Puré con bebida de arroz o agua en vez de leche: menos fósforo.', 30);
+D('c_conejo_ajillo', 'Conejo al ajillo con patatas', 'C CE',
+  [['conejo', 130, 'p'], ['patata', 150, 'e'], ['ajo', 4, 'x'], ['aove', 10, 'e'], ['limon', 5, 'x']],
+  ['Dora el ajo, añade el conejo en trozos y cuece tapado 25 minutos con agua y laurel.', 'Sirve con la patata hervida (agua desechada).'],
+  '', 40);
+D('c_ternera_pimiento', 'Ternera salteada con pimiento y arroz', 'C CE',
+  [['ternera', 110, 'p'], ['pimiento', 80, 'v'], ['arroz', 140, 'e'], ['aove', 8, 'e'], ['cebolla', 30, 'v']],
+  ['Saltea la ternera en tiras con cebolla y pimiento.', 'Sirve con arroz.'],
+  'Carne roja: 1-2 veces por semana. Prefiere cortes magros.', 20);
+D('c_hamburguesa_pavo', 'Hamburguesa casera de pavo con ensalada', 'C CE',
+  [['pavo', 120, 'p'], ['cebolla', 20, 'v'], ['pan', 60, 'e'], ['lechuga', 50, 'v'], ['tomate', 30, 'v'], ['aove', 8, 'e']],
+  ['Pica el pavo con la cebolla y pimienta; forma la hamburguesa.', 'Plánchala.', 'Sirve con el pan y la ensalada aliñada con aceite y vinagre.'],
+  'Las hamburguesas comerciales llevan sal y fosfatos: mejor casera.', 20);
+D('c_tortilla_patata', 'Tortilla de patata con ensalada', 'C CE',
+  [['huevo', 110, 'p'], ['patata', 150, 'e'], ['cebolla', 30, 'v'], ['aove', 12, 'e'], ['lechuga', 50, 'v'], ['pepino', 30, 'v']],
+  ['Hierve la patata en dados y desecha el agua.', 'Pocha cebolla y patata con el aceite, mezcla con los huevos batidos y cuaja.', 'Sirve con la ensalada.'],
+  'Clásico adaptado: patata hervida antes de cuajar baja su potasio.', 30);
+D('c_tortilla_claras_calabacin', 'Tortilla de claras y calabacín con arroz', 'C CE',
+  [['clara', 165, 'p'], ['calabacin', 100, 'v'], ['arroz', 120, 'e'], ['aove', 8, 'e']],
+  ['Saltea el calabacín en dados con el aceite.', 'Añade las claras batidas y cuaja.', 'Sirve con arroz hervido.'],
+  'Plan con poco fósforo y buena proteína.', 20);
+D('c_albondigas_pollo', 'Albóndigas de pollo en salsa de cebolla con arroz', 'C CE',
+  [['pollo', 100, 'p'], ['clara', 30, 'p'], ['cebolla', 60, 'v'], ['arroz', 140, 'e'], ['aove', 8, 'e']],
+  ['Pica el pollo con la clara y pimienta; forma albóndigas.', 'Dóralas y cuécelas en una salsa de cebolla pochada con agua.', 'Sirve con arroz.'],
+  'Sin harina ni pan rallado con sal: la clara actúa de ligante.', 30);
+D('c_brocheta_pollo', 'Brocheta de pollo y pimiento con cuscús', 'C CE',
+  [['pollo', 120, 'p'], ['pimiento', 80, 'v'], ['cebolla', 30, 'v'], ['cuscus', 150, 'e'], ['aove', 8, 'e']],
+  ['Ensarta pollo, pimiento y cebolla en brochetas.', 'Plancha 12 minutos.', 'Sirve con el cuscús hidratado sin sal.'],
+  '', 25);
+D('c_lentejas_arroz', 'Lentejas estofadas con arroz y zanahoria', 'C CE',
+  [['lentejas', 150, 'p'], ['arroz', 80, 'e'], ['zanahoria', 50, 'v'], ['cebolla', 30, 'v'], ['aove', 8, 'e']],
+  ['Cocina las lentejas con cebolla, zanahoria y laurel; cambia el agua de la primera ebullición.', 'Añade el arroz hervido aparte.'],
+  'Legumbres: fósforo de peor absorción (fitatos) pero potasio alto; raciones moderadas y cocidas con cambio de agua.', 45);
+D('c_garbanzos_coliflor', 'Garbanzos con coliflor y huevo', 'C CE',
+  [['garbanzos', 100, 'p'], ['huevo', 55, 'x'], ['coliflor', 100, 'v'], ['arroz', 60, 'e'], ['aove', 8, 'e']],
+  ['Hierve la coliflor y desecha el agua.', 'Rehoga con aceite y pimentón, añade los garbanzos cocidos (lavados).', 'Corona con el huevo cocido.'],
+  'Si usas garbanzos de bote, aclara bien (menos sodio).', 25);
+D('c_tofu_verduras_arroz', 'Tofu salteado con verduras y arroz', 'C CE',
+  [['tofu', 150, 'p'], ['pimiento', 60, 'v'], ['calabacin', 60, 'v'], ['arroz', 150, 'e'], ['aove', 8, 'e']],
+  ['Dora el tofu en dados.', 'Saltea las verduras, añade el tofu y pimienta.', 'Sirve con arroz.'],
+  'Opción vegana (necesita suplemento de B12).', 20);
+D('c_crema_puerro_tortilla', 'Crema de puerro y patata con tortilla francesa', 'C CE',
+  [['puerro', 120, 'v'], ['patata', 100, 'e'], ['huevo', 110, 'p'], ['aove', 10, 'e']],
+  ['Cuece puerro y patata en agua; desecha parte del caldo y tritura.', 'Haz la tortilla francesa con el aceite.'],
+  'Caldo casero desgrasado, nunca de cubito.', 25);
+D('c_ensalada_pasta', 'Ensalada de pasta con atún y pepino', 'C CE',
+  [['pasta', 160, 'e'], ['atun', 60, 'p'], ['pepino', 60, 'v'], ['tomate', 40, 'v'], ['aove', 10, 'e'], ['limon', 8, 'x']],
+  ['Cuece la pasta sin sal y enfría.', 'Mezcla con atún escurrido, pepino y tomate; aliña con aceite y limón.'],
+  '', 15);
+D('c_sopa_fideos_pollo', 'Sopa de fideos con pollo y zanahoria (sin sal)', 'C CE',
+  [['pasta', 150, 'e'], ['pollo', 100, 'p'], ['zanahoria', 60, 'v'], ['puerro', 40, 'v'], ['aove', 6, 'e']],
+  ['Cuece pollo, zanahoria y puerro en agua.', 'Añade los fideos y cocina 6 minutos.', 'Desmenuza el pollo.'],
+  'Los caldos de sobre y los concentrados tienen sal y potasio añadido.', 30);
+D('c_pollo_limon_arroz', 'Pollo al limón con arroz y ensalada', 'C CE',
+  [['pollo', 120, 'p'], ['limon', 15, 'x'], ['arroz', 150, 'e'], ['lechuga', 50, 'v'], ['pepino', 40, 'v'], ['aove', 8, 'e']],
+  ['Marina el pollo con limón y pimienta; plánchalo.', 'Sirve con arroz y ensalada aliñada.'],
+  '', 25);
+D('c_pavo_limon_pasta', 'Pavo al limón con pasta y judías verdes', 'C CE',
+  [['pavo', 110, 'p'], ['pasta', 170, 'e'], ['judias', 80, 'v'], ['aove', 8, 'e'], ['limon', 15, 'x']],
+  ['Cuece la pasta y las judías por separado.', 'Saltea el pavo con limón.', 'Mezcla todo.'],
+  '', 25);
+D('c_revuelto_calabacin', 'Revuelto de calabacín y cebolla con claras y pan', 'C CE',
+  [['clara', 100, 'p'], ['huevo', 55, 'p'], ['calabacin', 120, 'v'], ['cebolla', 40, 'v'], ['pan', 60, 'e'], ['aove', 8, 'e']],
+  ['Pocha cebolla y calabacín.', 'Añade huevo y claras batidos y revuelve.', 'Sirve con el pan.'],
+  '', 20);
+D('c_arroz_huevo_tomate', 'Arroz con huevo y tomate natural', 'C CE',
+  [['arroz', 170, 'e'], ['huevo', 110, 'p'], ['tomate', 80, 'v'], ['aove', 8, 'e']],
+  ['Cuece el arroz sin sal.', 'Rehoga el tomate pelado sin sal.', 'Añade el huevo a la plancha.'],
+  'Tomate natural: el frito de bote suma sodio y potasio.', 20);
+D('c_merluza_pure_coliflor', 'Merluza con puré de coliflor y patata', 'C CE',
+  [['merluza', 170, 'p'], ['coliflor', 100, 'v'], ['patata', 120, 'e'], ['aove', 10, 'e']],
+  ['Hierve coliflor y patata en abundante agua, desecha el agua y tritúralas con aceite.', 'Plancha la merluza con limón.'],
+  '', 30);
+D('c_pisto_huevo', 'Pisto de calabacín y berenjena con huevo', 'C CE',
+  [['calabacin', 100, 'v'], ['berenjena', 80, 'v'], ['pimiento', 50, 'v'], ['tomate', 50, 'v'], ['huevo', 110, 'p'], ['pan', 50, 'e'], ['aove', 10, 'e']],
+  ['Sofríe pimiento y cebolla; añade calabacín, berenjena y tomate.', 'Cuece a fuego suave 20 minutos.', 'Sirve con el huevo y el pan.'],
+  'Más potasio que otros platos: en dieta estricta en potasio, mejor alternarlo con otros.', 35);
+D('c_pasta_verduras_qfresco', 'Pasta con verduras y queso fresco', 'C CE',
+  [['pasta', 180, 'e'], ['qfresco', 80, 'p'], ['calabacin', 80, 'v'], ['pimiento', 40, 'v'], ['aove', 8, 'e']],
+  ['Cuece la pasta.', 'Saltea las verduras.', 'Mezcla con el queso fresco desmenuzado.'],
+  '', 20);
+D('c_pollo_guisado_judias', 'Pollo guisado con judías verdes y patata', 'C CE',
+  [['pollo', 120, 'p'], ['judias', 100, 'v'], ['patata', 140, 'e'], ['cebolla', 30, 'v'], ['aove', 8, 'e']],
+  ['Hierve las judías y la patata (en dados, mucha agua) y desecha el agua.', 'Guisa el pollo con cebolla y agua 20 minutos.', 'Une todo.'],
+  '', 35);
+D('c_ensalada_arroz_atun', 'Ensalada de arroz con atún', 'C CE',
+  [['arroz', 170, 'e'], ['atun', 70, 'p'], ['pepino', 40, 'v'], ['pimiento', 30, 'v'], ['aove', 10, 'e'], ['limon', 8, 'x']],
+  ['Mezcla arroz frío, atún, pepino y pimiento.', 'Aliña con aceite y limón.'],
+  '', 15);
+D('c_dorada_patata_judias', 'Dorada con patatas y judías verdes', 'C CE',
+  [['dorada', 160, 'p'], ['patata', 130, 'e'], ['judias', 80, 'v'], ['aove', 10, 'e']],
+  ['Hierve patatas y judías y desecha el agua.', 'Hornea la dorada 18 minutos con aceite y limón.'],
+  '', 30);
+D('c_arroz_garbanzos_verduras', 'Arroz con garbanzos y verduras', 'C CE',
+  [['garbanzos', 100, 'p'], ['arroz', 120, 'e'], ['pimiento', 50, 'v'], ['judias', 50, 'v'], ['aove', 8, 'e']],
+  ['Sofríe pimiento; añade arroz y agua.', 'A mitad de cocción incorpora garbanzos lavados y judías.'],
+  'Plato único vegano; legumbre en ración controlada.', 30);
+D('c_pollo_brocoli_pasta', 'Pollo salteado con brócoli y pasta', 'C CE',
+  [['pollo', 110, 'p'], ['brocoli', 70, 'v'], ['pasta', 170, 'e'], ['ajo', 3, 'x'], ['aove', 8, 'e']],
+  ['Hierve el brócoli en abundante agua y desecha el agua.', 'Saltea pollo y ajo; une con la pasta.'],
+  'Brócoli: vitamina K alta (relevante con acenocumarol/warfarina).', 25);
+D('c_ternera_pure', 'Filete de ternera magra con puré de patata', 'C CE',
+  [['ternera', 110, 'p'], ['patata', 180, 'e'], ['brice', 40, 'x'], ['aove', 10, 'e'], ['lechuga', 40, 'v']],
+  ['Hierve la patata en dados, desecha el agua y tritúrala con bebida de arroz y aceite.', 'Plancha el filete y sirve con lechuga.'],
+  '', 30);
+
+/* ---- más desayunos ---- */
+D('d_tostada_pavo', 'Tostada de pavo a la plancha con tomate', 'D',
+  [['pavo', 70, 'p'], ['pan', 60, 'e'], ['tomate', 50, 'v'], ['aove', 6, 'e'], ['cafe', 150, 'x']],
+  ['Plancha el pavo con pimienta y limón.', 'Monta sobre el pan tostado con el tomate rallado y el aceite.'],
+  'Pavo cocinado en casa: los fiambres de pavo llevan sal y fosfatos añadidos.', 10);
+D('d_revuelto_claras_pimiento', 'Revuelto de claras con pimiento y tostada', 'D',
+  [['clara', 132, 'p'], ['pimiento', 40, 'v'], ['pan', 60, 'e'], ['aove', 6, 'e'], ['cafe', 150, 'x']],
+  ['Saltea el pimiento en tiras finas con el aceite.', 'Añade las claras y revuelve hasta cuajar.', 'Sirve con el pan tostado.'],
+  '', 10);
+D('d_cuscus_leche_arroz', 'Cuscús con bebida de arroz, canela y manzana', 'D',
+  [['cuscus', 130, 'e'], ['brice', 200, 'x'], ['manzana', 80, 'v'], ['aove', 4, 'e']],
+  ['Calienta el cuscús cocido con la bebida de arroz y la canela 4 minutos.', 'Añade la manzana rallada.'],
+  'Desayuno dulce sin azúcar añadido y bajo en proteína, potasio y fósforo.', 8);
+D('d_yogur_pera', 'Yogur natural con pera y tostada', 'D',
+  [['yogur', 125, 'p'], ['pera', 100, 'v'], ['pan', 40, 'e'], ['aove', 4, 'e'], ['cafe', 150, 'x']],
+  ['Trocea la pera y mézclala con el yogur.', 'Acompaña con pan tostado y aceite.'],
+  '', 5);
+D('d_tostada_qfresco_pina', 'Tostada con queso fresco y piña', 'D',
+  [['qfresco', 100, 'p'], ['pan', 60, 'e'], ['pina', 80, 'v'], ['aove', 4, 'e'], ['cafe', 150, 'x']],
+  ['Tuesta el pan, unta el queso y cubre con la piña.'], 'Sin azúcares añadidos (apto en diabetes).', 5);
+D('d_tortilla_pavo', 'Tortilla de claras con pavo en tiras', 'D',
+  [['clara', 99, 'p'], ['pavo', 40, 'p'], ['pan', 60, 'e'], ['aove', 6, 'e'], ['cafe', 150, 'x']],
+  ['Saltea el pavo en tiras finas.', 'Añade las claras y cuaja.', 'Sirve con el pan.'],
+  '', 10);
+D('d_crepes_qfresco', 'Crepes de harina y clara con queso fresco', 'D',
+  [['harina', 35, 'e'], ['clara', 66, 'p'], ['qfresco', 40, 'p'], ['brice', 70, 'x'], ['aove', 4, 'e']],
+  ['Bate harina, clara y bebida de arroz.', 'Haz crepes finas en sartén antiadherente.', 'Rellénalas con el queso fresco.'],
+  '', 15);
+
+/* ---- más comidas y cenas ---- */
+D('c_calabacin_relleno', 'Calabacines rellenos de pollo y arroz', 'C CE',
+  [['calabacin', 200, 'v'], ['pollo', 100, 'p'], ['arroz', 100, 'e'], ['cebolla', 30, 'v'], ['aove', 8, 'e']],
+  ['Vacía los calabacines y trocea la pulpa.', 'Sofríe cebolla, pulpa y pollo picado; mezcla con el arroz cocido.', 'Rellena y hornea 20 minutos a 190 °C.'],
+  'Plato único completo, con poco sodio.', 45);
+D('c_pimientos_rellenos', 'Pimientos rellenos de arroz y pavo', 'C CE',
+  [['pimiento', 150, 'v'], ['pavo', 100, 'p'], ['arroz', 100, 'e'], ['cebolla', 30, 'v'], ['aove', 8, 'e']],
+  ['Sofríe cebolla y pavo picado, mezcla con el arroz cocido.', 'Rellena los pimientos y hornea 25 minutos a 190 °C.'],
+  '', 45);
+D('c_fideua_merluza', 'Fideuá de merluza sin sal', 'C CE',
+  [['pasta', 170, 'e'], ['merluza', 150, 'p'], ['ajo', 3, 'x'], ['aove', 10, 'e'], ['limon', 8, 'x']],
+  ['Dora el ajo y los fideos en el aceite.', 'Cubre con agua y cuece 8 minutos; añade la merluza en tacos.', 'Termina con limón.'],
+  'Caldo de pescado casero, nunca de pastilla.', 30);
+D('c_arroz_caldoso_rape', 'Arroz caldoso con rape y pimiento', 'C CE',
+  [['arroz', 150, 'e'], ['rape', 150, 'p'], ['pimiento', 50, 'v'], ['ajo', 3, 'x'], ['aove', 8, 'e']],
+  ['Sofríe pimiento y ajo, añade el arroz y agua abundante.', 'Cuece 15 minutos; añade el rape los últimos 5.'],
+  '', 30);
+D('c_pollo_asado_patatas', 'Pollo asado con patatas y cebolla', 'C CE',
+  [['pollo', 130, 'p'], ['patata', 150, 'e'], ['cebolla', 50, 'v'], ['aove', 10, 'e'], ['limon', 8, 'x']],
+  ['Hierve la patata en rodajas finas y desecha el agua.', 'Asa el pollo con cebolla, limón y pimentón 30 minutos a 190 °C.', 'Añade la patata los últimos 10.'],
+  '', 45);
+D('c_pavo_estofado', 'Pavo estofado con zanahoria y arroz', 'C CE',
+  [['pavo', 120, 'p'], ['zanahoria', 70, 'v'], ['arroz', 140, 'e'], ['cebolla', 30, 'v'], ['aove', 8, 'e']],
+  ['Dora el pavo en tacos, añade cebolla y zanahoria.', 'Cubre con agua y cuece 25 minutos; sirve con arroz.'],
+  '', 40);
+D('c_tortilla_calabacin', 'Tortilla de calabacín y cebolla con pan', 'C CE',
+  [['huevo', 55, 'p'], ['clara', 66, 'p'], ['calabacin', 120, 'v'], ['cebolla', 30, 'v'], ['pan', 60, 'e'], ['aove', 10, 'e']],
+  ['Pocha calabacín y cebolla.', 'Mezcla con huevo y claras batidos y cuaja la tortilla.'],
+  'Mitad huevo, mitad claras: menos fósforo y colesterol.', 25);
+D('c_cuscus_verduras_pollo', 'Cuscús con verduras y pollo', 'C CE',
+  [['cuscus', 160, 'e'], ['pollo', 100, 'p'], ['calabacin', 70, 'v'], ['zanahoria', 40, 'v'], ['pimiento', 40, 'v'], ['aove', 8, 'e']],
+  ['Saltea las verduras en dados y el pollo en tacos.', 'Mezcla con el cuscús hidratado sin sal.'],
+  '', 25);
+D('c_lubina_papillote', 'Lubina en papillote con calabacín y patata', 'C CE',
+  [['lubina', 150, 'p'], ['calabacin', 100, 'v'], ['patata', 120, 'e'], ['limon', 10, 'x'], ['aove', 10, 'e']],
+  ['Hierve la patata en rodajas finas y desecha el agua.', 'Envuelve la lubina con calabacín, patata, limón y aceite en papel de horno.', 'Hornea 20 minutos a 190 °C.'],
+  '', 35);
+D('c_albondigas_ternera', 'Albóndigas de ternera en salsa con arroz', 'C CE',
+  [['ternera', 100, 'p'], ['clara', 33, 'p'], ['cebolla', 60, 'v'], ['arroz', 140, 'e'], ['aove', 8, 'e']],
+  ['Mezcla la carne con la clara y pimienta; forma albóndigas.', 'Cuécelas en una salsa de cebolla con agua 15 minutos.', 'Sirve con arroz.'],
+  'Carne roja: máximo 2 veces por semana.', 35);
+D('c_ensalada_patata_huevo', 'Ensalada templada de patata, judías y huevo', 'C CE',
+  [['patata', 160, 'e'], ['judias', 80, 'v'], ['huevo', 55, 'p'], ['clara', 33, 'p'], ['aove', 12, 'e'], ['limon', 8, 'x']],
+  ['Hierve patata y judías en abundante agua y desecha el agua.', 'Añade huevo cocido y clara troceados; aliña con aceite y limón.'],
+  '', 25);
+D('c_pasta_pimientos_pollo', 'Pasta con salsa de pimientos asados y pollo', 'C CE',
+  [['pasta', 170, 'e'], ['pimiento', 100, 'v'], ['pollo', 100, 'p'], ['ajo', 3, 'x'], ['aove', 8, 'e']],
+  ['Asa los pimientos, pélalos y tritúralos con ajo y aceite.', 'Saltea el pollo y mezcla con la pasta y la salsa.'],
+  '', 30);
+D('c_merluza_gallega', 'Merluza a la gallega sin sal, con patata', 'C CE',
+  [['merluza', 170, 'p'], ['patata', 150, 'e'], ['cebolla', 30, 'v'], ['ajo', 3, 'x'], ['aove', 10, 'e'], ['limon', 8, 'x']],
+  ['Hierve la patata en rodajas y desecha el agua.', 'Cuece la merluza en poca agua con cebolla; aliña con ajo dorado, pimentón y limón.'],
+  '', 30);
+D('c_hamburguesa_ternera', 'Hamburguesa casera de ternera con patatas', 'C CE',
+  [['ternera', 110, 'p'], ['patata', 150, 'e'], ['lechuga', 40, 'v'], ['cebolla', 20, 'v'], ['aove', 10, 'e']],
+  ['Pica la carne con cebolla y pimienta; forma y plancha.', 'Sirve con patata hervida y ensalada.'],
+  '', 25);
+D('c_veg_pasta_tofu', 'Pasta con tofu y verduras salteadas', 'C CE',
+  [['pasta', 170, 'e'], ['tofu', 120, 'p'], ['calabacin', 70, 'v'], ['pimiento', 40, 'v'], ['aove', 8, 'e']],
+  ['Cuece la pasta.', 'Dora el tofu en dados y saltea las verduras.', 'Mezcla todo.'],
+  'Opción vegana.', 25);
+D('c_veg_cuscus_garbanzos', 'Cuscús con garbanzos y verduras', 'C CE',
+  [['cuscus', 150, 'e'], ['garbanzos', 90, 'p'], ['calabacin', 70, 'v'], ['zanahoria', 40, 'v'], ['aove', 8, 'e']],
+  ['Saltea las verduras en dados.', 'Añade los garbanzos lavados y mezcla con el cuscús hidratado.'],
+  'Opción vegana.', 25);
+D('c_veg_tofu_patata', 'Tofu a la plancha con patatas y judías verdes', 'C CE',
+  [['tofu', 150, 'p'], ['patata', 150, 'e'], ['judias', 80, 'v'], ['aove', 10, 'e']],
+  ['Hierve patata y judías en abundante agua y desecha el agua.', 'Plancha el tofu con pimienta y limón.'],
+  'Opción vegana.', 25);
+
+/* ======================= POSTRES / FRUTA (se generan por temporada) ======================= */
+/* Meses 1-12. m: [inicio, fin] */
+var FRUTAS = {
+  manzana: { m: [1, 12], g: 150 }, pera: { m: [8, 4], g: 150 }, fresas: { m: [3, 6], g: 120 },
+  arandanos: { m: [5, 9], g: 100 }, uvas: { m: [8, 11], g: 100 }, mandarina: { m: [10, 2], g: 150 },
+  naranja: { m: [11, 5], g: 150 }, pina: { m: [1, 12], g: 150 }, sandia: { m: [6, 9], g: 200 },
+  melocoton: { m: [6, 9], g: 140 }, ciruela: { m: [6, 9], g: 120 }, cerezas: { m: [5, 7], g: 100 },
+  platano: { m: [1, 12], g: 100 }, kiwi: { m: [11, 4], g: 120 }, melon: { m: [6, 9], g: 150 }
+};
+function inSeason(foodId, month) {
+  var s = FRUTAS[foodId]; if (!s) { return true; }
+  var a = s.m[0], b = s.m[1];
+  return a <= b ? (month >= a && month <= b) : (month >= a || month <= b);
+}
+
+/* ==== engine ==== */
+/* NEFRONA · motor clínico: objetivos nutricionales + generador de menús de 8 semanas (ES5) */
+var NEF = (function () {
+  var E = {};
+  var SLOTS = ['D', 'M', 'C', 'Me', 'CE'];
+  var SLOT_NAME = { D: 'Desayuno', M: 'Media mañana', C: 'Comida', Me: 'Merienda', CE: 'Cena' };
+  var SHARE_K = { D: 0.22, M: 0.07, C: 0.33, Me: 0.08, CE: 0.30 };   /* reparto de energía */
+  var SHARE_P = { D: 0.20, M: 0.04, C: 0.36, Me: 0.07, CE: 0.33 };   /* reparto de proteína */
+  var SHARE_B = { D: 0.18, M: 0.08, C: 0.32, Me: 0.10, CE: 0.32 };   /* reparto de presupuesto K/P/Na */
+  E.SLOTS = SLOTS; E.SLOT_NAME = SLOT_NAME;
+
+  /* ---------- utilidades ---------- */
+  function rnd(x, d) { var m = Math.pow(10, d || 0); return Math.round(x * m) / m; }
+  function clamp(x, a, b) { return x < a ? a : (x > b ? b : x); }
+  function hashStr(s) { var h = 2166136261; s = String(s); for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = (h * 16777619) >>> 0; } return h >>> 0; }
+  function RNG(seed) { var a = seed >>> 0; return function () { a = (a + 0x6D2B79F5) >>> 0; var t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  if (!Math.imul) { Math.imul = function (a, b) { var ah = (a >>> 16) & 0xffff, al = a & 0xffff, bh = (b >>> 16) & 0xffff, bl = b & 0xffff; return ((al * bl) + (((ah * bl + al * bh) << 16) >>> 0) | 0); }; }
+  function has(arr, x) { for (var i = 0; i < arr.length; i++) { if (arr[i] === x) { return true; } } return false; }
+  function keys(o) { var r = []; for (var k in o) { if (o.hasOwnProperty(k)) { r.push(k); } } return r; }
+  E.rnd = rnd; E.clamp = clamp; E.hashStr = hashStr;
+
+  /* ---------- nutrientes ---------- */
+  function emptyTot() { return { kcal: 0, p: 0, pa: 0, c: 0, f: 0, fib: 0, na: 0, k: 0, ph: 0, ca: 0 }; }
+  function addItem(t, fid, g) {
+    var f = FOODS[fid]; if (!f) { return t; }
+    var m = g / 100;
+    t.kcal += f.kcal * m; t.p += f.p * m; t.c += f.c * m; t.f += f.f * m; t.fib += f.fib * m;
+    t.na += f.na * m; t.k += f.k * m; t.ph += f.ph * m; t.ca += f.ca * m;
+    if (has(f.fl, 'carne') || has(f.fl, 'pescado') || has(f.fl, 'huevo') || has(f.fl, 'lacteo')) { t.pa += f.p * m; }
+    return t;
+  }
+  function totOf(items) { var t = emptyTot(); for (var i = 0; i < items.length; i++) { addItem(t, items[i].f, items[i].g); } return t; }
+  function sumTot(a, b) { var t = emptyTot(); for (var k in t) { t[k] = a[k] + b[k]; } return t; }
+  E.totOf = totOf;
+
+  /* ---------- etiquetas derivadas de los ingredientes ---------- */
+  function dishFlagSet(dish) {
+    var s = {}, i, j;
+    for (i = 0; i < dish.ing.length; i++) { var f = FOODS[dish.ing[i][0]]; if (!f) { continue; } for (j = 0; j < f.fl.length; j++) { if (f.fl[j]) { s[f.fl[j]] = true; } } }
+    return s;
+  }
+  function vegLevelOf(flags) { if (flags.carne || flags.pescado) { return 0; } if (flags.huevo || flags.lacteo || flags.miel) { return 1; } return 2; }
+  E.dishFlags = dishFlagSet; E.vegLevel = vegLevelOf;
+  function mainAnchor(dish) { for (var i = 0; i < dish.ing.length; i++) { if (dish.ing[i][2] === 'p') { return dish.ing[i][0]; } } return dish.ing[0][0]; }
+  function anchorFamily(fid) {
+    var f = FOODS[fid]; if (!f) { return fid; }
+    if (has(f.fl, 'pescado')) { return fid === 'salmon' ? 'pescado_azul' : 'pescado'; }
+    if (fid === 'pollo' || fid === 'pavo') { return 'ave'; }
+    if (fid === 'huevo' || fid === 'clara') { return 'huevo'; }
+    if (has(f.fl, 'legumbre')) { return 'legumbre'; }
+    return fid;
+  }
+
+  /* ---------- objetivos ---------- */
+  var IBW_BASE = { M: 50, F: 45.5 };
+  E.computeTargets = function (p) {
+    var T = { blocked: null, rules: [] };
+    var a = +p.age, w = +p.weight, h = +p.height, male = p.sex === 'M';
+    if (!(a >= 18)) { T.blocked = 'peds'; return T; }
+    if (!(w > 25 && h > 120)) { T.blocked = 'datos'; return T; }
+    var c = p.conds || {}, labs = p.labs || {};
+    var stage = p.stage, dial = (stage === 'HD' || stage === 'PD');
+    var bmi = w / ((h / 100) * (h / 100));
+    var inch = Math.max(0, h / 2.54 - 60);
+    var ibw = IBW_BASE[male ? 'M' : 'F'] + 2.3 * inch;
+    var adj = ibw + 0.25 * (w - ibw);
+    var ref = bmi >= 25 ? adj : w;
+    var pewRisk = !!(c.pew || bmi < 18.5 || (labs.alb && labs.alb < 3.5));
+    var frail = a >= 70 || !!c.sarcop || pewRisk;
+    var dm = !!(c.dm2 || c.dmhypo);
+    var alb = p.albu || 'A1';
+    T.bmi = rnd(bmi, 1); T.ibw = rnd(ibw, 1); T.adjw = rnd(adj, 1); T.refW = rnd(ref, 1); T.dial = dial; T.frail = frail; T.dm = dm; T.pewRisk = pewRisk;
+
+    /* --- proteína (g/kg/día) --- */
+    var g, src, restrictive = false;
+    if (dial) {
+      g = (stage === 'PD' || frail) ? 1.2 : 1.1; src = 'kdoqi20 espen21';
+    } else if (stage === 'G1' || stage === 'G2') {
+      g = (alb !== 'A1' || dm || c.hta) ? 0.8 : 1.0; if (frail) { g = 1.0; } src = 'kdigo24';
+    } else if (stage === 'G3a' || stage === 'G3b') {
+      g = frail ? 1.0 : 0.8; src = 'kdigo24';
+    } else { g = 0.8; src = 'kdigo24 kdigodm22'; }
+    if (p.restrict && !dial && !frail && (stage === 'G3b' || stage === 'G4' || stage === 'G5')) { g = dm ? 0.7 : 0.6; restrictive = true; src = 'kdoqi20 hahn20'; }
+    T.restrictive = restrictive;
+    T.protG = g; T.protDay = Math.round(g * ref);
+    T.protRange = dial ? [rnd(1.0 * ref, 0), rnd(1.2 * ref, 0)] : [rnd(Math.max(0.55, g - 0.1) * ref, 0), rnd(Math.min(1.3, g + 0.2) * ref, 0)];
+
+    /* --- energía (kcal/día): Mifflin-St Jeor × actividad, acotada a 25-35 kcal/kg (KDOQI 2020) --- */
+    var bmr = 10 * w + 6.25 * h - 5 * a + (male ? 5 : -161);
+    var pal = p.pal === 'mod' ? 1.55 : (p.pal === 'lig' ? 1.375 : 1.2);
+    var tdee = bmr * pal;
+    var goal = p.goal || 'mant';
+    if (pewRisk && goal === 'perder') { goal = 'mant'; }
+    var kcal;
+    if (goal === 'perder' && bmi >= 27) { kcal = 25 * ref; }
+    else if (goal === 'ganar' || pewRisk) { kcal = Math.max(clamp(tdee, 25 * ref, 35 * ref), 32 * ref); }
+    else { kcal = clamp(tdee, 25 * ref, 35 * ref); }
+    T.goal = goal; T.bmr = Math.round(bmr); T.tdee = Math.round(tdee);
+    T.kcal = Math.round(kcal / 10) * 10; T.kcalPerKg = rnd(T.kcal / ref, 1);
+
+    /* --- sodio --- */
+    T.na = c.salwast ? null : 2000;
+
+    /* --- potasio --- */
+    var kSer = labs.k, kMode, kWhy = '';
+    var ko = p.kOverride || 'auto';
+    if (ko !== 'auto') { kMode = ko; kWhy = 'Fijado manualmente por el clínico.'; }
+    else if (kSer) {
+      if (kSer > 5.5) { kMode = 'estr'; kWhy = 'Potasio sérico ' + kSer + ' mmol/L (>5,5).'; }
+      else if (kSer > 5.0) { kMode = 'mod'; kWhy = 'Potasio sérico ' + kSer + ' mmol/L (5,1-5,5).'; }
+      else { kMode = 'libre'; kWhy = 'Potasio sérico ' + kSer + ' mmol/L (normal): no se restringe.'; }
+    } else {
+      if (stage === 'HD' || stage === 'G5') { kMode = 'mod'; }
+      else if (stage === 'PD') { kMode = 'libre'; }
+      else if ((stage === 'G3b' || stage === 'G4') && (c.raasi || dm || c.hiperkprev)) { kMode = 'mod'; }
+      else if (c.hiperkprev) { kMode = 'mod'; }
+      else { kMode = 'libre'; }
+      kWhy = 'Sin potasio sérico: pauta orientativa por estadio/medicación. Ajusta con tu analítica.';
+    }
+    T.kMode = kMode; T.kWhy = kWhy;
+    T.kCap = kMode === 'estr' ? 2000 : (kMode === 'mod' ? ((stage === 'HD' || stage === 'G5') ? 2500 : 3000) : null);
+
+    /* --- fósforo --- */
+    var pSer = labs.p, pMode, pWhy = '';
+    var po = p.pOverride || 'auto';
+    if (po !== 'auto') { pMode = po; pWhy = 'Fijado manualmente por el clínico.'; }
+    else if (pSer && ((dial && pSer > 5.5) || (!dial && pSer > 4.5)) || c.hiperp) { pMode = 'restr'; pWhy = 'Fósforo sérico elevado o hiperfosforemia conocida.'; }
+    else if (pSer) { pMode = (stage === 'G1' || stage === 'G2') ? 'libre' : 'mod'; pWhy = 'Fósforo sérico ' + pSer + ' mg/dL.'; }
+    else if (dial || stage === 'G5' || stage === 'G4') { pMode = 'restr'; pWhy = 'Sin fósforo sérico: pauta orientativa por estadio.'; }
+    else if (stage === 'G3a' || stage === 'G3b') { pMode = 'mod'; pWhy = 'Sin fósforo sérico: vigilancia (evitar aditivos).'; }
+    else { pMode = 'libre'; pWhy = 'Sin restricción de fósforo en este estadio; evita aditivos.'; }
+    T.pMode = pMode; T.pWhy = pWhy;
+    T.pCap = pMode === 'restr' ? 1000 : (pMode === 'mod' ? 1200 : null);
+
+    /* --- otros --- */
+    T.ca = [800, 1000]; T.fib = 25;
+    if (stage === 'HD') { T.fluid = 'Ingesta orientativa: diuresis residual + 500-750 mL/día (ganancia interdiálisis ≤ 2,5-3,5 % del peso seco). Lo fija tu nefrólogo.'; }
+    else if (stage === 'PD') { T.fluid = 'Según ultrafiltración y diuresis residual. Lo fija tu nefrólogo.'; }
+    else if (c.icc) { T.fluid = 'Según cardiología/nefrología (insuficiencia cardiaca).'; }
+    else { T.fluid = 'Sin restricción salvo edemas o indicación médica: bebe a demanda (≈1,5-2 L/día).'; }
+
+    /* --- reglas y avisos (con fuentes) --- */
+    var R = T.rules;
+    function rule(lvl, t, s) { R.push({ lvl: lvl, t: t, src: (s || '').split(' ') }); }
+    if (labs.k && labs.k >= 6.0) { rule('alert', 'Potasio sérico ≥ 6,0 mmol/L: requiere valoración médica urgente. Esta app NO sustituye esa evaluación.', 'clase20'); }
+    else if (labs.k && labs.k > 5.5) { rule('warn', 'Potasio > 5,5 mmol/L: contacta con tu equipo; revisa fármacos (IECA/ARA-II/ARM), estreñimiento y acidosis, además de la dieta.', 'clase20 kdigo24'); }
+    if (restrictive) { rule('warn', 'Pauta hipoproteica 0,6 g/kg (KDOQI 2020): solo bajo supervisión de nefrología/dietista; vigila peso, albúmina y composición corporal cada 2-3 meses; valorar cetoanálogos. La certeza de la evidencia es moderada-baja y la adherencia es difícil.', 'kdoqi20 hahn20 garneata16'); }
+    if (p.restrict && frail && !dial) { rule('warn', 'Se ha desactivado la restricción proteica 0,6 g/kg por fragilidad, sarcopenia o riesgo de desnutrición. Se aplica la pauta de KDIGO 2024.', 'kdigo24'); }
+    if (dial) { rule('info', 'En diálisis se invierte la lógica: la diálisis pierde aminoácidos, por eso se pautan ' + g + ' g/kg/día. Prioriza proteína de bajo contenido en fósforo (clara de huevo, pollo, pescado).', 'kdoqi20 espen21'); }
+    else if (frail) { rule('info', 'Fragilidad/sarcopenia/riesgo nutricional: se prioriza mantener peso y masa magra antes que restringir proteínas (KDIGO 2024: considerar objetivos más altos). En G4-G5 no diálisis se mantiene 0,8 g/kg y se prioriza la energía.', 'kdigo24 protage13 carballo24'); }
+    else { rule('info', 'Proteína ' + g + ' g/kg/día sobre peso de referencia ' + T.refW + ' kg. Evita >1,3 g/kg/día en ERC con riesgo de progresión.', src); }
+    if (pewRisk) { rule('warn', 'Riesgo de desgaste proteico-energético (IMC < 18,5, albúmina < 3,5 g/dL o desnutrición marcada). Se sube la energía (≥32 kcal/kg) y se recomienda valoración por dietista y suplementación oral si no se alcanzan objetivos.', 'ikizler13 fouque08'); }
+    if (kMode === 'libre') { rule('info', 'Potasio: sin restricción. KDOQI 2020 recomienda ajustar el potasio de la dieta al potasio sérico; no retires fruta y verdura sin necesidad (patrón vegetal, efecto alcalinizante y cardiovascular).', 'kdoqi20 carrero20'); }
+    else { rule('info', 'Potasio: tope orientativo ' + T.kCap + ' mg/día. No hay un número validado por ensayos; ajusta con analítica. Técnicas: cortar en dados pequeños, remojo y hervir en abundante agua desechándola.', 'kdoqi20 clase20 pineda16'); }
+    if (pMode !== 'libre') { rule('info', 'Fósforo: tope orientativo ' + T.pCap + ' mg/día. Lo que más cuenta es el aditivo (absorción ~90 %), seguido de la proteína animal (40-60 %) y la vegetal (menos, por fitatos). Evita etiquetas con fosfato (E338-E343, E450-E452, E541).', 'kdoqi20 asn25 kz10 moe11'); }
+    else { rule('info', 'Fósforo: sin tope en este estadio, pero evita aditivos fosfatados (no aportan beneficio y aumentan la carga).', 'asn25'); }
+    if (T.na) { rule('info', 'Sodio < 2.000 mg/día (< 5 g de sal). KDIGO 2024 sugiere < 2 g; KDOQI 2020 acepta < 2,3 g. Los menús se calculan SIN sal añadida.', 'kdigo24 kdoqi20 mcmahon13'); }
+    rule('warn', 'Evita sustitutos de sal con cloruro potásico ("sal sin sodio", "sal light") si tienes ERC G4-G5, diálisis, hiperpotasemia o tomas IECA/ARA-II/ARM, salvo indicación expresa.', 'kdigo24 clase20');
+    if (c.dmhypo) { rule('warn', 'Insulina/sulfonilureas en ERC: más riesgo de hipoglucemia. Reparte los hidratos de forma regular, ten glucosa en comprimidos (no zumo de naranja: mucho potasio) y consulta ajustes antes de cambiar la dieta o el ejercicio.', 'kdigodm22'); }
+    if (dm) { rule('info', 'Diabetes + ERC: 0,8 g/kg/día de proteína (KDIGO 2022) y dieta rica en vegetales, fibra y grasas insaturadas; se excluyen los dulces y mermeladas del plan.', 'kdigodm22'); }
+    if (c.sglt2) { rule('info', 'Tomas iSGLT2: ten pauta de "días de enfermedad" (suspender si vómitos, diarrea, ayuno o cirugía) y evita dietas cetogénicas/ayunos prolongados (riesgo de cetoacidosis).', 'kdigodm22'); }
+    if (c.warf) { rule('info', 'Anticoagulación con antagonistas de vitamina K: se excluyen verduras muy ricas en vitamina K (brócoli, repollo). Mantén constante el consumo de verdura de hoja verde.', 'kdigo24'); }
+    if (c.gota) { rule('info', 'Hiperuricemia/gota: se excluyen alimentos con purinas altas (atún en lata); evita vísceras, marisco y alcohol.', 'kdigo24'); }
+    if (c.raasi) { rule('info', 'Con IECA/ARA-II/ARM: ante hiperpotasemia, KDIGO 2024 propone tratarla (dieta, diuréticos, captores de potasio) en vez de retirar el fármaco sin más.', 'kdigo24 clase20'); }
+    if (c.acid) { rule('info', 'Acidosis metabólica: se trata con bicarbonato u otros alcalinizantes según nefrología; las frutas y verduras reducen la carga ácida si el potasio lo permite.', 'kdigo24 goraya14'); }
+    if (bmi >= 30 && !pewRisk) { rule('info', 'Obesidad: KDIGO 2024 anima a perder peso. El plan usa el límite inferior de energía (25 kcal/kg del peso ajustado) si eliges "perder peso"; sin déficit extremo.', 'kdigo24 kdoqi20'); }
+    if (stage === 'HD') { rule('info', 'Hemodiálisis: reparte la proteína en 4-5 tomas; en días de diálisis puedes llevar un tentempié para después de la sesión. La ingesta de líquidos la pauta nefrología.', 'kdoqi20'); }
+    if (stage === 'PD') { rule('info', 'Diálisis peritoneal: el dializado aporta glucosa (calorías extra) y la diálisis suele permitir más potasio; vigila peso y triglicéridos.', 'kdoqi20 espen21'); }
+    rule('info', 'Cocina con hierbas y especias sin sal. Evita precocinados, embutidos, quesos curados/procesados, conservas saladas, colas oscuras y alimentos con fosfatos o cloruro potásico añadidos. Evita carambola (neurotóxica en ERC) y productos "naturales" ricos en potasio sin consultar.', 'asn25 kdigo24');
+    return T;
+  };
+
+  /* ---------- contexto de generación ---------- */
+  function foodBlocked(ctx, fid) {
+    var f = FOODS[fid]; if (!f) { return true; }
+    var P = ctx.profile, c = P.conds || {}, d = P.diet || {}, T = ctx.T, i, fl = f.fl;
+    if ((d.veg || 0) >= 1 && (has(fl, 'carne') || has(fl, 'pescado'))) { return true; }
+    if ((d.veg || 0) >= 2 && (has(fl, 'huevo') || has(fl, 'lacteo') || has(fl, 'miel'))) { return true; }
+    if (d.noGluten && has(fl, 'gluten')) { return true; }
+    if (d.noLact && has(fl, 'lacteo')) { return true; }
+    if (d.noHuevo && has(fl, 'huevo')) { return true; }
+    if (d.noPescado && has(fl, 'pescado')) { return true; }
+    if (d.noFrutosec && has(fl, 'frutosec')) { return true; }
+    if (d.noSoja && has(fl, 'soja')) { return true; }
+    if (d.noLegumbre && has(fl, 'legumbre')) { return true; }
+    if (c.warf && has(fl, 'vitK')) { return true; }
+    if (c.gota && has(fl, 'purina')) { return true; }
+    if (T.dm && has(fl, 'azucar')) { return true; }
+    if (T.kMode !== 'libre' && has(fl, 'fruta')) { var th = T.kMode === 'estr' ? 200 : 260; if (f.k > th) { return true; } }
+    if (T.kMode === 'estr' && (fid === 'aguacate' || fid === 'lentejas' || fid === 'garbanzos')) { return true; }
+    if (T.pMode === 'restr' && (fid === 'nueces' || fid === 'avena')) { return true; }
+    if (!T.restrictive && has(fl, 'especial')) { return true; }
+    return false;
+  }
+  function dishAllowed(ctx, dish) {
+    if (ctx.dislikes[dish.id]) { return false; }
+    for (var i = 0; i < dish.ing.length; i++) { if (foodBlocked(ctx, dish.ing[i][0])) { return false; } }
+    return true;
+  }
+  /* Sustituciones de ingredientes: pan con sal (si se elige) y productos hipoproteicos en pauta 0,6 g/kg */
+  function swapSpecial(ctx, ing) {
+    var useSp = ctx.T.restrictive && ctx.useSpecial, pansal = !!ctx.profile.panSal;
+    if (!useSp && !pansal) { return ing; }
+    var out = [];
+    for (var i = 0; i < ing.length; i++) {
+      var f = ing[i][0];
+      if (f === 'pan' && useSp) { out.push(['panhipo', ing[i][1], ing[i][2]]); }
+      else if (f === 'pan' && pansal) { out.push(['pansal', ing[i][1], ing[i][2]]); }
+      else if (f === 'pasta' && useSp) { out.push(['pastahipo', ing[i][1], ing[i][2]]); }
+      else { out.push(ing[i]); }
+    }
+    return out;
+  }
+
+  function fruitDish(fid, role, g) {
+    return { id: 'f_' + fid + '_' + role, n: FOODS[fid].n, s: ['M', 'Me'], ing: [[fid, g || (FRUTAS[fid] ? FRUTAS[fid].g : 150), role]], st: ['Lava la fruta, pélala si lo prefieres y tómala a temperatura ambiente.'], tip: 'La fruta fresca es mejor que el zumo (el zumo concentra el potasio).', min: 2, virt: true };
+  }
+
+  function stepRound(fid, g) {
+    if (fid === 'huevo') { return Math.max(55, Math.round(g / 55) * 55); }
+    if (fid === 'clara') { return Math.max(33, Math.round(g / 33) * 33); }
+    if (fid === 'aove') { return Math.max(2, Math.round(g / 2) * 2); }
+    if (fid === 'ajo' || fid === 'limon') { return Math.max(1, Math.round(g)); }
+    if (fid === 'cafe') { return g; }
+    return Math.max(5, Math.round(g / 5) * 5);
+  }
+
+  /* escala un plato a un objetivo de energía/proteína; devuelve items [{f,g,r}]
+     p = ancla proteica; e = energía (almidón primero hasta 1,5x, luego grasa hasta 3x, luego almidón hasta 2,3x) */
+  function isFat(fid) { var f = FOODS[fid]; return !!f && has(f.fl, 'grasa'); }
+  function scaleItems(ing, tk, tp, cap) {
+    cap = cap || { s1: 1.5, f: 3.0, s2: 2.3 };
+    var i, fixed = emptyTot(), pb = emptyTot(), sb = emptyTot(), fb = emptyTot(), hasP = false, hasS = false, hasF = false;
+    for (i = 0; i < ing.length; i++) {
+      var role = ing[i][2], t;
+      if (role === 'p') { t = pb; hasP = true; }
+      else if (role === 'e') { if (isFat(ing[i][0])) { t = fb; hasF = true; } else { t = sb; hasS = true; } }
+      else { t = fixed; }
+      addItem(t, ing[i][0], ing[i][1]);
+    }
+    var sp = 1, ss = 1, sf = 1, it, rem;
+    for (it = 0; it < 16; it++) {
+      if (hasP && pb.p > 0.01) { sp = clamp((tp - fixed.p - ss * sb.p - sf * fb.p) / pb.p, 0.55, 2.2); }
+      rem = tk - fixed.kcal - sp * pb.kcal;
+      if (hasS) { ss = clamp((rem - sf * fb.kcal) / sb.kcal, 0.3, cap.s1); }
+      if (hasF) { sf = clamp((rem - ss * sb.kcal) / fb.kcal, 0.3, cap.f); }
+      if (hasS && rem - ss * sb.kcal - sf * fb.kcal > 25) { ss = clamp((rem - sf * fb.kcal) / sb.kcal, 0.3, cap.s2); }
+    }
+    var items = [];
+    for (i = 0; i < ing.length; i++) {
+      var r = ing[i][2], mult = 1;
+      if (r === 'p') { mult = sp; } else if (r === 'e') { mult = isFat(ing[i][0]) ? sf : ss; }
+      items.push({ f: ing[i][0], g: (r === 'v' || r === 'x') ? ing[i][1] : stepRound(ing[i][0], ing[i][1] * mult), r: r });
+    }
+    return items;
+  }
+
+  function newCtx(profile, T) {
+    var dl = {}, i, a = profile.dislikes || [];
+    for (i = 0; i < a.length; i++) { dl[a[i]] = true; }
+    var ctx = { cap: (T.dm || T.bmi >= 30) ? { s1: 1.2, f: 4.0, s2: 1.9 } : { s1: 1.5, f: 3.0, s2: 2.3 }, profile: profile, T: T, dislikes: dl, useSpecial: profile.useSpecial !== false, seed: hashStr((profile.seed || 'nefrona') + '|' + profile.sex + profile.age + profile.stage), pool: {} };
+    SLOTS.forEach(function (s) { ctx.pool[s] = []; });
+    for (var id in DISHES) {
+      if (!DISHES.hasOwnProperty(id)) { continue; }
+      var d = DISHES[id];
+      var dd = { id: d.id, n: d.n, s: d.s, ing: swapSpecial(ctx, d.ing), st: d.st, tip: d.tip, min: d.min };
+      if (!dishAllowed(ctx, dd)) { continue; }
+      for (i = 0; i < d.s.length; i++) { if (ctx.pool[d.s[i]]) { ctx.pool[d.s[i]].push(dd); } }
+    }
+    ctx.fruits = [];
+    for (var fid in FRUTAS) { if (FRUTAS.hasOwnProperty(fid) && !foodBlocked(ctx, fid)) { ctx.fruits.push(fid); } }
+    return ctx;
+  }
+  E.newCtx = newCtx;
+
+  function pickFruit(ctx, month, usedToday, rng, lastFruit) {
+    var cand = [], i;
+    for (i = 0; i < ctx.fruits.length; i++) {
+      var f = ctx.fruits[i];
+      if (usedToday[f] || !inSeason(f, month)) { continue; }
+      var sc = rng() * 0.6; if (f === lastFruit) { sc += 1; } if (f === 'platano' || f === 'kiwi') { sc += 0.2; }
+      /* en bajo potasio, preferir las de menos K */
+      if (ctx.T.kMode !== 'libre') { sc += FOODS[f].k / 400; }
+      cand.push([sc, f]);
+    }
+    if (!cand.length) { for (i = 0; i < ctx.fruits.length; i++) { if (!usedToday[ctx.fruits[i]]) { cand.push([rng(), ctx.fruits[i]]); } } }
+    if (!cand.length) { return null; }
+    cand.sort(function (a, b) { return a[0] - b[0]; });
+    return cand[0][1];
+  }
+
+  /* construye candidatos para un hueco; devuelve lista ordenada */
+  function evalCandidates(ctx, slot, tk, tp, postre, hist, rng, dayIdx, bud) {
+    var pool = ctx.pool[slot].slice(), i, out = [];
+    if (slot === 'M') { for (i = 0; i < ctx.fruits.length; i++) { pool.push(fruitDish(ctx.fruits[i], 'e')); } }
+    var postT = postre ? totOf([{ f: postre.f, g: postre.g }]) : emptyTot();
+    var T = ctx.T;
+    for (i = 0; i < pool.length; i++) {
+      var d = pool[i];
+      if (d.virt && !inSeason(d.ing[0][0], hist.month)) { continue; }
+      var items = scaleItems(d.ing, tk - postT.kcal, tp - postT.p, ctx.cap);
+      var tot = totOf(items); tot = sumTot(tot, postT);
+      var s = 0;
+      s += Math.abs(tot.p - tp) / Math.max(tp, 3) * 1.6;
+      s += Math.abs(tot.kcal - tk) / Math.max(tk, 100) * 1.6;
+      if (T.kCap && bud.k) { s += 3 * Math.max(0, tot.k / bud.k - 1) + 0.6 * (tot.k / bud.k); }
+      if (T.pCap && bud.p) { s += 3 * Math.max(0, tot.ph / bud.p - 1) + 0.6 * (tot.ph / bud.p); }
+      if (T.na && bud.na) { s += 3 * Math.max(0, tot.na / bud.na - 1) + 0.3 * (tot.na / bud.na); }
+      if (!T.kCap) { s += 0.0; }
+      /* relación fósforo/proteína (menor = mejor) en pautas de fósforo */
+      if (T.pMode !== 'libre' && tot.p > 4) { s += 0.25 * Math.max(0, (tot.ph / tot.p - 12) / 12); }
+      /* variedad */
+      var last = hist.lastUse[d.id];
+      if (last !== undefined) { var gap = dayIdx - last; if (gap === 0) { s += 8; } else if (gap < 14) { s += 2.4 * (14 - gap) / 14; } }
+      var fam = anchorFamily(mainAnchor(d));
+      if (slot === 'C' || slot === 'CE') {
+        if (has(hist.recentFam, fam)) { s += 1.0; }
+        if (fam === 'huevo' && hist.weekEgg >= 3) { s += 2.2; }
+        if ((fam === 'pescado' || fam === 'pescado_azul') && hist.weekFish < 3) { s -= 0.9; }
+        if ((fam === 'pescado' || fam === 'pescado_azul') && hist.weekFish >= 4) { s += 1.5; }
+        if (fam === 'pescado_azul' && hist.weekAzul >= 1) { s += 1.5; }
+        if ((fam === 'ternera' || fam === 'cerdo') && hist.weekRed >= 2) { s += 1.5; }
+        if (fam === 'legumbre' && hist.weekLeg < 2 && (ctx.profile.diet || {}).veg >= 2) { s -= 0.6; }
+        if (fam === 'legumbre' && hist.weekLeg >= 2) { s += 1.6; }
+      }
+      for (var q = 0; q < d.ing.length; q++) {
+        if (d.ing[q][2] !== 'p') { continue; }
+        var af = d.ing[q][0];
+        if (hist.anchorToday && hist.anchorToday[af]) { s += 1.4; }
+        if (hist.weekAnchor && hist.weekAnchor[af] >= (af === 'atun' ? 2 : 4)) { s += 1.3; }
+      }
+      s += rng() * 0.35;
+      out.push({ dish: d, items: items, tot: tot, score: s, fam: fam });
+    }
+    out.sort(function (a, b) { return a.score - b.score; });
+    return out;
+  }
+
+  function budgets(T, slot) {
+    return { k: T.kCap ? T.kCap * SHARE_B[slot] : 0, p: T.pCap ? T.pCap * SHARE_B[slot] : 0, na: T.na ? T.na * SHARE_B[slot] : 0 };
+  }
+
+  function mealFrom(slot, cand, postre) {
+    var items = cand.items.slice(); var tot = cand.tot;
+    return { slot: slot, dish: cand.dish.id, name: cand.dish.n, items: items, postre: postre ? { f: postre.f, g: postre.g } : null, tot: tot, virt: !!cand.dish.virt, ingBase: cand.dish.ing };
+  }
+
+  function dayTotals(day) {
+    var t = emptyTot();
+    for (var i = 0; i < SLOTS.length; i++) { var m = day.meals[SLOTS[i]]; if (m) { t = sumTot(t, m.tot); } }
+    return t;
+  }
+
+  function violation(ctx, t) {
+    var T = ctx.T, v = 0;
+    if (T.kCap) { v += Math.max(0, t.k - T.kCap) / T.kCap; }
+    if (T.pCap) { v += Math.max(0, t.ph - T.pCap) / T.pCap; }
+    if (T.na) { v += Math.max(0, t.na - T.na) / T.na; }
+    v += Math.max(0, Math.abs(t.p - T.protDay) / T.protDay - 0.06) * 2;
+    v += Math.max(0, Math.abs(t.kcal - T.kcal) / T.kcal - 0.06);
+    return v;
+  }
+
+  function dateOf(startDate, i) {
+    var d = new Date(startDate.getTime()); d.setDate(d.getDate() + i); return d;
+  }
+  function iso(d) { var m = d.getMonth() + 1, dd = d.getDate(); return d.getFullYear() + '-' + (m < 10 ? '0' : '') + m + '-' + (dd < 10 ? '0' : '') + dd; }
+
+  E.generatePlan = function (profile, T, opts) {
+    opts = opts || {};
+    var ctx = newCtx(profile, T);
+    var start = profile.startDate ? new Date(profile.startDate + 'T12:00:00') : new Date();
+    var rng = RNG(ctx.seed);
+    var nDays = opts.days || 56;
+    var days = [], d, s, i;
+    var hist = { lastUse: {}, recentFam: [], weekEgg: 0, weekFish: 0, weekAzul: 0, weekRed: 0, weekLeg: 0, month: 1, anchorToday: {}, weekAnchor: {} };
+    var lastFruit = null;
+    for (d = 0; d < nDays; d++) {
+      var date = dateOf(start, d);
+      if (d % 7 === 0) { hist.weekEgg = 0; hist.weekFish = 0; hist.weekAzul = 0; hist.weekRed = 0; hist.weekLeg = 0; hist.weekAnchor = {}; }
+      hist.anchorToday = {};
+      hist.month = date.getMonth() + 1;
+      var day = { idx: d, date: iso(date), month: hist.month, meals: {} };
+      var usedFruit = {};
+      var famToday = [];
+      var order = ['C', 'CE', 'D', 'Me', 'M'];
+      for (i = 0; i < order.length; i++) {
+        s = order[i];
+        var tk = T.kcal * SHARE_K[s], tp = T.protDay * SHARE_P[s];
+        var postre = null;
+        if (s === 'C' || s === 'CE') {
+          var pf = pickFruit(ctx, hist.month, usedFruit, rng, lastFruit);
+          if (pf) { usedFruit[pf] = true; postre = { f: pf, g: FRUTAS[pf].g }; if (s === 'CE') { lastFruit = pf; } }
+        }
+        var bud = budgets(T, s);
+        hist.recentFam = famToday.slice();
+        var cands = evalCandidates(ctx, s, tk, tp, postre, hist, rng, d, bud);
+        if (!cands.length) { day.meals[s] = null; continue; }
+        var pickN = Math.min(cands.length, 3), r = rng(), idx = r < 0.6 ? 0 : (r < 0.85 ? 1 : 2);
+        if (idx >= pickN) { idx = 0; }
+        var cand = cands[idx];
+        day.meals[s] = mealFrom(s, cand, postre);
+        hist.lastUse[cand.dish.id] = d;
+        for (var qa = 0; qa < cand.dish.ing.length; qa++) { if (cand.dish.ing[qa][2] === 'p') { var afn = cand.dish.ing[qa][0]; hist.anchorToday[afn] = true; hist.weekAnchor[afn] = (hist.weekAnchor[afn] || 0) + 1; } }
+        if (s === 'C' || s === 'CE') {
+          famToday.push(cand.fam);
+          if (cand.fam === 'huevo') { hist.weekEgg++; }
+          if (cand.fam === 'pescado' || cand.fam === 'pescado_azul') { hist.weekFish++; }
+          if (cand.fam === 'pescado_azul') { hist.weekAzul++; }
+          if (cand.fam === 'ternera' || cand.fam === 'cerdo') { hist.weekRed++; }
+          if (cand.fam === 'legumbre') { hist.weekLeg++; }
+        }
+      }
+      /* ajuste del día: sustituir comidas que provocan el exceso */
+      for (var pass = 0; pass < 3; pass++) {
+        var tot0 = dayTotals(day), v0 = violation(ctx, tot0);
+        if (v0 <= 0.0005) { break; }
+        var improved = false;
+        var orderFix = ['C', 'CE', 'D', 'Me', 'M'];
+        for (i = 0; i < orderFix.length; i++) {
+          s = orderFix[i]; var cur = day.meals[s]; if (!cur) { continue; }
+          var tk2 = T.kcal * SHARE_K[s], tp2 = T.protDay * SHARE_P[s];
+          var bud2 = budgets(T, s);
+          var cs = evalCandidates(ctx, s, tk2, tp2, cur.postre, hist, rng, d, bud2), j;
+          var bestV = v0, bestC = null;
+          for (j = 0; j < cs.length && j < 40; j++) {
+            if (cs[j].dish.id === cur.dish) { continue; }
+            var test = {}; for (var k2 in day.meals) { test[k2] = day.meals[k2]; }
+            test[s] = mealFrom(s, cs[j], cur.postre);
+            var vv = violation(ctx, dayTotals({ meals: test }));
+            if (vv < bestV - 1e-6) { bestV = vv; bestC = cs[j]; }
+          }
+          if (bestC) { day.meals[s] = mealFrom(s, bestC, cur.postre); hist.lastUse[bestC.dish.id] = d; v0 = bestV; improved = true; if (v0 <= 0.0005) { break; } }
+        }
+        if (!improved) { break; }
+      }
+      day.tot = dayTotals(day);
+      day.viol = violation(ctx, day.tot);
+      days.push(day);
+    }
+    var plan = { days: days, start: iso(start), nDays: nDays, T: T, seed: ctx.seed };
+    plan.stats = E.planStats(plan);
+    return plan;
+  };
+
+  E.dayCheck = function (T, tot) {
+    var r = { ok: true, issues: [] };
+    if (T.kCap && tot.k > T.kCap * 1.03) { r.ok = false; r.issues.push('K'); }
+    if (T.pCap && tot.ph > T.pCap * 1.03) { r.ok = false; r.issues.push('P'); }
+    if (T.na && tot.na > T.na * 1.03) { r.ok = false; r.issues.push('Na'); }
+    if (Math.abs(tot.p - T.protDay) / T.protDay > 0.10) { r.ok = false; r.issues.push('Prot'); }
+    if (Math.abs(tot.kcal - T.kcal) / T.kcal > 0.10) { r.ok = false; r.issues.push('Kcal'); }
+    return r;
+  };
+
+  E.planStats = function (plan) {
+    var T = plan.T, n = plan.days.length, ok = 0, sum = emptyTot(), i, bad = { K: 0, P: 0, Na: 0, Prot: 0, Kcal: 0 };
+    for (i = 0; i < n; i++) {
+      var d = plan.days[i], c = E.dayCheck(T, d.tot);
+      d.ok = c.ok; d.issues = c.issues;
+      if (c.ok) { ok++; }
+      for (var j = 0; j < c.issues.length; j++) { bad[c.issues[j]]++; }
+      sum = sumTot(sum, d.tot);
+    }
+    var avg = {}; for (var k in sum) { avg[k] = sum[k] / n; }
+    avg.pc = avg.p * 4 / avg.kcal * 100; avg.cc = avg.c * 4 / avg.kcal * 100; avg.fc = avg.f * 9 / avg.kcal * 100;
+    return { ok: ok, n: n, avg: avg, bad: bad };
+  };
+
+  /* alternativas para un hueco (para "cambiar plato") */
+  E.alternatives = function (ctx, plan, dayIdx, slot, n) {
+    var day = plan.days[dayIdx], cur = day.meals[slot]; if (!cur) { return []; }
+    var T = ctx.T, rng = RNG(ctx.seed + dayIdx * 7 + 3);
+    var hist = { lastUse: {}, recentFam: [], weekEgg: 0, weekFish: 0, weekAzul: 0, weekRed: 0, weekLeg: 0, month: day.month };
+    for (var q = Math.max(0, dayIdx - 14); q < dayIdx; q++) { for (var si = 0; si < SLOTS.length; si++) { var mm = plan.days[q].meals[SLOTS[si]]; if (mm) { hist.lastUse[mm.dish] = q; } } }
+    var cs = evalCandidates(ctx, slot, T.kcal * SHARE_K[slot], T.protDay * SHARE_P[slot], cur.postre, hist, rng, dayIdx, budgets(T, slot));
+    var out = [];
+    for (var i = 0; i < cs.length && out.length < n; i++) { if (cs[i].dish.id !== cur.dish) { out.push({ id: cs[i].dish.id, name: cs[i].dish.n, tot: cs[i].tot, cand: cs[i] }); } }
+    return out;
+  };
+  E.swapMeal = function (ctx, plan, dayIdx, slot, dishId) {
+    var day = plan.days[dayIdx], cur = day.meals[slot];
+    var T = ctx.T, rng = RNG(ctx.seed + dayIdx * 13 + 1);
+    var hist = { lastUse: {}, recentFam: [], weekEgg: 0, weekFish: 0, weekAzul: 0, weekRed: 0, weekLeg: 0, month: day.month };
+    var cs = evalCandidates(ctx, slot, T.kcal * SHARE_K[slot], T.protDay * SHARE_P[slot], cur.postre, hist, rng, dayIdx, budgets(T, slot));
+    for (var i = 0; i < cs.length; i++) {
+      if (cs[i].dish.id === dishId) { day.meals[slot] = mealFrom(slot, cs[i], cur.postre); day.tot = dayTotals(day); var c = E.dayCheck(T, day.tot); day.ok = c.ok; day.issues = c.issues; plan.stats = E.planStats(plan); return true; }
+    }
+    return false;
+  };
+
+  /* lista de la compra por semana (0-7) o total (-1) */
+  E.shopping = function (plan, week) {
+    var acc = {}, i, s, j, d0 = week < 0 ? 0 : week * 7, d1 = week < 0 ? plan.days.length : Math.min(plan.days.length, d0 + 7);
+    for (i = d0; i < d1; i++) {
+      for (s = 0; s < SLOTS.length; s++) {
+        var m = plan.days[i].meals[SLOTS[s]]; if (!m) { continue; }
+        for (j = 0; j < m.items.length; j++) { var it = m.items[j]; if (it.f === 'cafe') { continue; } acc[it.f] = (acc[it.f] || 0) + it.g; }
+        if (m.postre) { acc[m.postre.f] = (acc[m.postre.f] || 0) + m.postre.g; }
+      }
+    }
+    return acc;
+  };
+  var GROUPS = [
+    ['Proteínas', ['pollo', 'pavo', 'ternera', 'cerdo', 'conejo', 'huevo', 'clara', 'merluza', 'bacalao', 'lubina', 'dorada', 'rape', 'salmon', 'atun', 'tofu', 'lentejas', 'garbanzos']],
+    ['Lácteos y bebidas vegetales', ['leche', 'yogur', 'qfresco', 'qcrema', 'brice']],
+    ['Cereales, pan y tubérculos', ['arroz', 'pasta', 'pan', 'pansal', 'panint', 'cuscus', 'avena', 'harina', 'patata', 'panhipo', 'pastahipo']],
+    ['Verduras', ['calabacin', 'berenjena', 'pimiento', 'coliflor', 'brocoli', 'judias', 'zanahoria', 'cebolla', 'puerro', 'lechuga', 'pepino', 'tomate', 'repollo', 'ajo']],
+    ['Fruta', ['manzana', 'pera', 'fresas', 'arandanos', 'uvas', 'mandarina', 'naranja', 'pina', 'sandia', 'melocoton', 'ciruela', 'cerezas', 'platano', 'kiwi', 'melon', 'aguacate']],
+    ['Despensa', ['aove', 'nueces', 'miel', 'azucar', 'mermelada', 'limon']]
+  ];
+  E.shoppingGroups = function (acc) {
+    var out = [], gi, k, used = {};
+    for (gi = 0; gi < GROUPS.length; gi++) {
+      var rows = [];
+      for (k = 0; k < GROUPS[gi][1].length; k++) { var fid = GROUPS[gi][1][k]; if (acc[fid]) { rows.push({ f: fid, g: acc[fid] }); used[fid] = true; } }
+      if (rows.length) { out.push({ name: GROUPS[gi][0], rows: rows }); }
+    }
+    return out;
+  };
+
+  /* texto de cantidad: unidades domésticas cuando existen */
+  E.fmtQty = function (fid, g) {
+    var f = FOODS[fid]; if (!f) { return Math.round(g) + ' g'; }
+    if (fid === 'aove') {
+      var cs = Math.round(g / 10 * 2) / 2, whole = Math.floor(cs), half = (cs - whole) > 0.2;
+      var txt = cs < 1 ? (g >= 4 ? '½ cda.' : '1 cdta.') : (whole + (half ? '½' : '') + (cs > 1 ? ' cdas.' : ' cda.'));
+      return txt + ' (' + Math.round(g) + ' g)';
+    }
+    if (fid === 'cafe') { return '1 taza'; }
+    if (f.u && g >= f.u[0] * 0.45) {
+      var n = g / f.u[0], q = Math.round(n * 2) / 2;
+      if (Math.abs(n - q) < 0.12 && q > 0) { return (q === 1 ? '1 ' + f.u[1] : (q % 1 === 0 ? q + ' ' + f.u[2] : String(q).replace('.', ',') + ' ' + f.u[2])) + ' (' + Math.round(g) + ' g)'; }
+    }
+    if (g >= 1000) { return rnd(g / 1000, 2).toString().replace('.', ',') + ' kg'; }
+    return Math.round(g) + ' g';
+  };
+
+  E.dateISO = iso; E.RNG = RNG;
+  return E;
+})();
+
+/* ==== exercise ==== */
+/* NEFRONA · motor de ejercicio (ES5). Biblioteca adaptada de MoveSalud + ejercicios intradiálisis.
+   Prescripción orientada por RPE (escala de Borg 6-20, objetivo 11-13) y prueba del habla; NO por FC (220-edad no es fiable en ERC/diálisis/betabloqueantes). */
+var EXL = {};
+function X(id, name, pat, lv, pos, type, d, ci, desc, tip, extra) {
+  var o = { id: id, n: name, pat: pat, lv: lv, pos: pos, type: type, ci: ci ? ci.split(' ') : [], desc: desc, tip: tip || '' };
+  o.base = d; /* reps | segundos */
+  if (extra) { for (var k in extra) { if (extra.hasOwnProperty(k)) { o[k] = extra[k]; } } }
+  EXL[id] = o;
+}
+/* pat: wu calentamiento, aer aeróbico, sq sentadilla/levantarse, hing cadera/puente, push empuje, pull tirón, calf gemelo, abd abducción, core, grip agarre, bal equilibrio, str estiramiento, resp respiración, ida intradiálisis
+   lv: nivel mínimo (0 sentado/asistido, 1 bajo, 2 medio, 3 alto)  pos: sentado | tumbado | de pie | suelo | caminando
+   type: reps | time | isom   ci: banderas de contraindicación (floor, knee, hip, lumb, neuro, retin, osteop, claud, cardio, epoc, falls, amput, shoulder, catperit, balance) */
+
+/* ---- calentamiento / movilidad ---- */
+X('w_ank', 'Círculos de tobillo', 'wu', 0, 'sentado', 'time', 40, '', 'Sentado, levanta un pie del suelo y dibuja círculos amplios con el tobillo, 10 hacia cada lado. Cambia de pie.', 'Activa la circulación; úsalo cada hora si pasas mucho tiempo sentado.');
+X('w_shoulder', 'Movilidad de cuello y hombros', 'wu', 0, 'sentado', 'time', 45, 'shoulder', 'Gira el cuello despacio a ambos lados 5 veces. Haz 5 círculos lentos de hombros hacia atrás. Sube los hombros hacia las orejas y suelta.', 'Nunca fuerces el cuello.');
+X('w_march_sit', 'Marcha sentado', 'wu', 0, 'sentado', 'time', 60, '', 'Sentado con la espalda recta, eleva las rodillas alternando como si caminaras y mueve los brazos al compás.', 'Ritmo cómodo: debes poder hablar sin esfuerzo.');
+X('w_march', 'Marcha en el sitio suave', 'wu', 1, 'de pie', 'time', 90, 'balance', 'De pie con una mano cerca de un apoyo, marcha suave elevando las rodillas a media altura.', 'Si te mareas, siéntate y respira.');
+X('w_hip', 'Movilidad de cadera con apoyo', 'wu', 1, 'de pie', 'reps', 8, 'hip balance', 'Agarrado a una silla, balancea una pierna adelante y atrás 8 veces y luego hacia los lados 8 veces. Cambia de pierna.', 'Movimientos pequeños y controlados.', { each: true });
+X('w_trunk', 'Rotación suave de tronco sentado', 'wu', 0, 'sentado', 'reps', 8, 'lumb osteop', 'Sentado, manos cruzadas en el pecho. Gira el tronco a un lado y al otro sin forzar.', 'Sin dolor. En osteoporosis, evita torsiones amplias.');
+X('w_pump', 'Bombeo de tobillos', 'wu', 0, 'sentado', 'reps', 20, '', 'Sentado o tumbado: lleva la punta del pie hacia ti y luego hacia delante, 20 veces.', 'Mejora el retorno venoso.', { dial: true });
+
+/* ---- aeróbico ---- */
+X('a_walk', 'Caminata a paso ligero', 'aer', 1, 'caminando', 'time', 600, '', 'Camina a un ritmo en el que puedas hablar en frases cortas pero no cantar (RPE 11-13). Calzado cómodo y firme.', 'Empieza con 2 minutos suaves, termina con 2 suaves.');
+X('a_bike', 'Bicicleta estática o pedalier', 'aer', 0, 'sentado', 'time', 600, '', 'Pedalea a ritmo constante con poca resistencia, de modo que puedas hablar. Aumenta la resistencia solo cuando 20 minutos te resulten fáciles.', 'Muy amable con rodillas y espalda.');
+X('a_march_sit', 'Marcha sentado continua', 'aer', 0, 'sentado', 'time', 300, '', 'Sentado, marcha enérgica elevando las rodillas y moviendo los brazos. Mantén el ritmo.', 'Opción segura si el equilibrio es inestable.');
+X('a_march_stand', 'Marcha en el sitio enérgica', 'aer', 1, 'de pie', 'time', 300, 'balance claud', 'Marcha elevando las rodillas a la altura de la cadera con brazos activos. Apóyate cerca de una pared si lo necesitas.', 'Si la cadera o la rodilla se resienten, vuelve a la marcha sentado.');
+X('a_pedal_dial', 'Pedaleo en sillón (intradiálisis)', 'aer', 0, 'sentado', 'time', 900, '', 'Pedalier de suelo o cicloergómetro de cama durante la 1.ª-2.ª hora de diálisis. Resistencia muy baja; mantén la conversación posible.', 'Con tu equipo de enfermería avisado. Para si notas mareo, calambres o la tensión baja.', { dial: true });
+
+/* ---- fuerza: piernas ---- */
+X('s_sts_hands', 'Levantarse de la silla ayudándote con las manos', 'sq', 0, 'sentado', 'reps', 8, '', 'Siéntate en una silla firme (con respaldo, contra la pared). Inclínate algo hacia delante y empuja con las manos para levantarte; baja controlado en 3 segundos.', 'Es el gesto funcional más importante del día a día.');
+X('s_sts', 'Levantarse y sentarse sin manos', 'sq', 1, 'sentado', 'reps', 8, 'knee', 'Brazos cruzados en el pecho. Levántate completamente y siéntate despacio (3 segundos al bajar).', 'Mide cómo mejoras: cuenta cuántas haces en 30 segundos.');
+X('s_squat', 'Sentadilla con silla detrás', 'sq', 2, 'de pie', 'reps', 10, 'knee hip balance', 'Pies a la anchura de los hombros. Baja como si fueras a sentarte, roza la silla y sube. Rodillas en la dirección de los pies.', 'Espalda recta, peso en los talones.');
+X('s_squat_load', 'Sentadilla con peso (botellas o mancuernas)', 'sq', 3, 'de pie', 'reps', 10, 'knee hip balance cardio osteop', 'Sostén una botella de 1,5 L en cada mano pegada al cuerpo. Sentadilla controlada hasta que los muslos queden casi paralelos al suelo.', 'No bloquees la respiración: espira al subir.');
+X('s_legext', 'Extensión de rodilla sentado', 'sq', 0, 'sentado', 'reps', 10, '', 'Sentado, estira una pierna hasta dejarla recta y mantén 2 segundos. Baja en 4 segundos. Con goma o tobillera ligera cuando sea fácil.', 'Trabaja el cuádriceps sin cargar la rodilla.', { each: true, dial: true });
+X('s_hipflex', 'Elevación de rodilla sentado', 'sq', 0, 'sentado', 'reps', 10, '', 'Sentado, eleva una rodilla hacia el pecho todo lo que puedas, mantén 2 segundos y baja.', 'Mejora la cadera para subir escalones.', { each: true, dial: true });
+X('s_bridge', 'Puente de glúteos', 'hing', 1, 'suelo', 'reps', 10, 'floor', 'Tumbado boca arriba con rodillas dobladas. Eleva la cadera apretando glúteos, mantén 2 segundos y baja vértebra a vértebra. Puedes hacerlo en la cama.', 'No arquees la zona lumbar.', { dial: true });
+X('s_hinge', 'Bisagra de cadera con apoyo', 'hing', 2, 'de pie', 'reps', 10, 'lumb osteop balance', 'Manos en el respaldo de una silla. Lleva la cadera hacia atrás con la espalda recta hasta notar el trabajo de la parte posterior del muslo; vuelve apretando glúteos.', 'Es una bisagra de cadera, no una flexión de columna.');
+X('s_abd_sit', 'Abducción de cadera sentado con goma', 'abd', 0, 'sentado', 'reps', 12, '', 'Sentado con una goma elástica sobre las rodillas, separa las rodillas contra la resistencia y vuelve despacio.', 'Activa el glúteo medio, clave para evitar caídas.', { dial: true });
+X('s_abd_stand', 'Abducción de cadera de pie con apoyo', 'abd', 1, 'de pie', 'reps', 10, 'hip balance', 'Agarrado a una silla, eleva la pierna recta hacia un lado sin inclinar el tronco. Baja en 3 segundos.', 'Lento es mejor que alto.', { each: true });
+X('s_calf_sit', 'Elevación de talones sentado', 'calf', 0, 'sentado', 'reps', 15, '', 'Sentado, sube los talones apoyándote en las puntas, mantén 1 segundo y baja despacio.', 'Gemelos y circulación.', { dial: true });
+X('s_calf_stand', 'Elevación de talones de pie', 'calf', 1, 'de pie', 'reps', 12, 'balance', 'De pie, agarrado a un respaldo, sube de puntillas despacio y baja en 4 segundos.', 'Mejora el equilibrio y la marcha.');
+X('s_stepup', 'Subida a escalón bajo', 'sq', 2, 'de pie', 'reps', 8, 'knee balance claud', 'Con un escalón bajo (10-15 cm) y una mano apoyada, sube un pie, impulsa y junta el otro; baja controlado. Cambia de pierna.', 'La bajada controlada es lo que más trabaja.', { each: true });
+X('s_lunge', 'Zancada con apoyo', 'sq', 3, 'de pie', 'reps', 8, 'knee hip lumb balance', 'Con una mano en la pared, da un paso largo, baja la rodilla trasera sin tocar el suelo y empuja para volver. Cambia de pierna.', 'Rodilla delantera sobre el tobillo.', { each: true });
+X('s_adduct_ball', 'Apretar pelota entre rodillas', 'abd', 0, 'sentado', 'isom', 8, '', 'Sentado o tumbado, coloca una pelota blanda o cojín entre las rodillas y aprieta 5 segundos; relaja.', 'Respira con normalidad, sin aguantar el aire.', { dial: true, sets: 2 });
+X('s_quad_set', 'Contracción isométrica de cuádriceps', 'sq', 0, 'tumbado', 'isom', 5, '', 'Tumbado o con la pierna estirada, aprieta el muslo empujando la rodilla hacia abajo 5 segundos. Suelta.', 'Sirve en la camilla de diálisis.', { dial: true, each: true, sets: 2 });
+
+/* ---- fuerza: empuje y tirón (brazo de fístula: usa el otro brazo con carga) ---- */
+X('s_wall_push', 'Flexión en pared', 'push', 1, 'de pie', 'reps', 10, 'shoulder', 'Manos en la pared a la altura del pecho. Dobla los codos acercando el pecho y empuja. Cuanto más lejos pongas los pies, más difícil.', 'Cuerpo en línea recta.');
+X('s_counter_push', 'Flexión en encimera o mesa', 'push', 2, 'de pie', 'reps', 10, 'shoulder', 'Manos en el borde firme de una mesa, cuerpo en diagonal. Baja el pecho y empuja.', 'Progresión: pared → mesa → silla → suelo.');
+X('s_knee_push', 'Flexión con rodillas apoyadas', 'push', 3, 'suelo', 'reps', 8, 'shoulder floor osteop', 'Apoya manos y rodillas; baja el pecho cerca del suelo y empuja.', 'Si hay dolor de muñeca, usa la pared.');
+X('s_press_band', 'Press de hombros con goma', 'push', 1, 'sentado', 'reps', 10, 'shoulder retin cardio', 'Pisa la goma, sube las manos a los hombros y empuja hacia arriba sin bloquear los codos. Baja en 3 segundos.', 'Espira al empujar. Evita aguantar la respiración.', { arm: true });
+X('s_row_band', 'Remo con goma elástica', 'pull', 0, 'sentado', 'reps', 12, '', 'Goma fijada delante. Tira hacia el ombligo juntando los omóplatos y vuelve controlado en 3 segundos.', 'Si tienes fístula, haz el remo con el brazo opuesto o con carga mínima.', { arm: true });
+X('s_row_towel', 'Remo con toalla', 'pull', 0, 'sentado', 'reps', 10, '', 'Sentado con una toalla bajo los pies, tira de los extremos hacia el ombligo juntando los omóplatos.', 'Siente la espalda, no los brazos.', { arm: true });
+X('s_curl_band', 'Curl de bíceps con goma', 'pull', 0, 'sentado', 'reps', 10, '', 'Pisa la goma, codos pegados al cuerpo, sube las manos a los hombros y baja en 4 segundos.', 'Con fístula: usa el brazo contrario o el de la fístula solo con carga mínima y si tu equipo lo permite.', { arm: true });
+X('s_tri_band', 'Extensión de tríceps con goma', 'push', 1, 'de pie', 'reps', 10, 'shoulder', 'Goma detrás de la espalda o sobre la cabeza; mantén el codo quieto y extiende el antebrazo.', 'Solo se mueve el antebrazo.', { arm: true });
+X('s_grip', 'Fuerza de agarre con pelota blanda', 'grip', 0, 'sentado', 'reps', 15, 'hand', 'Aprieta una pelota blanda 3 segundos y suelta del todo. Repite.', 'Si tienes fístula, pregunta si puedes ejercitar ese brazo (a veces se indica para madurarla).', { arm: true, each: true });
+
+/* ---- core ---- */
+X('c_breath_brace', 'Activación abdominal con respiración', 'core', 0, 'sentado', 'isom', 6, 'catperit', 'Sentado y erguido, inspira por la nariz, espira suavemente contrayendo el abdomen como si te ciñeras un cinturón, mantén 5 segundos.', 'Sin aguantar la respiración.', { sets: 2 });
+X('c_pelvic', 'Báscula pélvica', 'core', 1, 'suelo', 'reps', 10, 'floor catperit', 'Tumbado con las rodillas dobladas, aplana la zona lumbar contra el suelo y relaja.', 'Movimiento pequeño.');
+X('c_wall_plank', 'Plancha inclinada en pared', 'core', 2, 'de pie', 'isom', 20, 'shoulder catperit', 'Antebrazos en la pared, cuerpo en línea recta, abdomen firme, aguanta.', 'Empieza con 10 segundos.', { sets: 2 });
+X('c_birddog', 'Cuadrupedia: brazo y pierna contrarios', 'core', 3, 'suelo', 'reps', 8, 'floor lumb knee catperit', 'A cuatro apoyos, estira el brazo derecho y la pierna izquierda manteniendo la pelvis nivelada. Cambia de lado.', 'Pelvis estable.', { each: true });
+
+/* ---- equilibrio ---- */
+X('b_weight', 'Transferencia de peso sentado', 'bal', 0, 'sentado', 'time', 40, '', 'Sentado con los pies firmes, inclina el cuerpo lentamente hacia un lado y vuelve; luego al otro.', 'Iniciación al control del tronco.');
+X('b_stand', 'Equilibrio de pie con apoyo', 'bal', 1, 'de pie', 'time', 30, 'balance', 'Pies juntos, mano cerca de un apoyo firme. Mantén la posición 30 segundos mirando al frente.', 'Cuando sea fácil, quita la mano un momento.');
+X('b_tandem', 'Posición en tándem', 'bal', 1, 'de pie', 'time', 20, 'balance', 'Un pie justo delante del otro (talón con punta), con apoyo cercano. Mantén. Cambia de pie delante.', 'Mantén la vista al frente.');
+X('b_side', 'Pasos laterales', 'bal', 1, 'de pie', 'reps', 10, 'balance', 'Junto a una pared o encimera, da 10 pasos laterales a la derecha y 10 a la izquierda.', 'Rodillas ligeramente flexionadas.');
+X('b_single', 'Apoyo sobre una pierna con apoyo', 'bal', 2, 'de pie', 'time', 15, 'balance', 'Con una mano en un apoyo firme, levanta un pie y mantén. Cambia de pierna.', 'Prueba a soltar el apoyo poco a poco.', { each: true });
+X('b_heeltoe', 'Marcha talón-punta con apoyo', 'bal', 2, 'caminando', 'reps', 10, 'balance', 'Camina colocando el talón de un pie justo delante de la punta del otro, junto a una pared.', 'Pasos cortos y seguros.');
+
+/* ---- respiración y estiramientos ---- */
+X('r_diaph', 'Respiración diafragmática', 'resp', 0, 'sentado', 'time', 90, '', 'Una mano en el vientre. Inspira por la nariz en 4 tiempos hinchando el abdomen; espira por la boca en 6 tiempos.', 'Ideal para terminar la sesión.', { dial: true });
+X('r_pursed', 'Respiración con labios fruncidos', 'resp', 0, 'sentado', 'time', 90, '', 'Inspira por la nariz 2 tiempos y espira con los labios fruncidos 4-6 tiempos.', 'Muy útil en EPOC o si te falta el aire.', { dial: true });
+X('f_calf', 'Estiramiento de gemelos', 'str', 1, 'de pie', 'time', 30, 'balance', 'Manos en la pared, un pie atrás con el talón en el suelo; inclina el cuerpo hacia delante hasta notar el estiramiento. Cambia de pierna.', 'Sin rebotes.', { each: true });
+X('f_ham', 'Estiramiento de isquiotibiales sentado', 'str', 0, 'sentado', 'time', 30, '', 'Sentado en el borde de la silla, estira una pierna con el talón en el suelo e inclina el tronco con la espalda recta.', 'Sin dolor.', { each: true });
+X('f_chest', 'Apertura de pecho', 'str', 0, 'sentado', 'time', 30, 'shoulder', 'Sentado, entrelaza las manos detrás de la espalda y abre el pecho. Respira.', 'Corrige la postura.');
+X('f_quad', 'Estiramiento de cuádriceps con apoyo', 'str', 2, 'de pie', 'time', 30, 'balance knee', 'Agarrado a un apoyo, lleva el talón hacia el glúteo con la mano y mantén.', 'Rodillas juntas.', { each: true });
+
+/* ====================== MOTOR ====================== */
+var NEFEX = (function () {
+  var E = {};
+  var DAY = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+  var PHASE = ['Adaptación', 'Adaptación', 'Construcción', 'Construcción', 'Progresión', 'Progresión', 'Consolidación', 'Consolidación'];
+  /* progresión por nivel (semanas 1-8): minutos aeróbicos por sesión, días aeróbicos/sem, series de fuerza, repeticiones */
+  var PROG = {
+    0: { aer: [5, 5, 8, 8, 10, 10, 12, 15], days: [3, 3, 3, 4, 4, 4, 5, 5], sets: [1, 1, 1, 2, 2, 2, 2, 2], reps: [8, 8, 10, 10, 10, 12, 12, 12], str: 2 },
+    1: { aer: [10, 10, 12, 15, 15, 18, 20, 20], days: [3, 3, 4, 4, 4, 5, 5, 5], sets: [1, 1, 2, 2, 2, 2, 2, 2], reps: [8, 10, 10, 10, 12, 12, 12, 12], str: 2 },
+    2: { aer: [20, 20, 25, 25, 30, 30, 30, 30], days: [3, 3, 4, 4, 5, 5, 5, 5], sets: [2, 2, 2, 2, 2, 3, 3, 3], reps: [10, 10, 12, 12, 12, 12, 12, 12], str: 2 },
+    3: { aer: [30, 30, 30, 35, 35, 40, 40, 40], days: [3, 4, 4, 5, 5, 5, 5, 5], sets: [2, 2, 3, 3, 3, 3, 3, 3], reps: [10, 10, 10, 12, 12, 12, 12, 12], str: 3 }
+  };
+  var LEVEL_NAME = ['Nivel 0 · Sentado y asistido', 'Nivel 1 · Base baja', 'Nivel 2 · Base media', 'Nivel 3 · Base buena'];
+
+  function has(a, x) { for (var i = 0; i < a.length; i++) { if (a[i] === x) { return true; } } return false; }
+
+  /* ---- nivel funcional ----
+     sts5: segundos para 5 levantadas de silla (0 = no puede); walk: 'si'|'pausas'|'no'; stairs: 'si'|'baranda'|'no';
+     grip (kg), gait (m/s) opcionales; falls: nº caídas en el último año; act: min/semana de actividad moderada */
+  E.level = function (f, sex, age) {
+    var s = 0, notes = [], low = {};
+    var sts = +f.sts5;
+    if (!f.sts5 && f.sts5 !== 0) { s += 1; }
+    else if (sts === 0) { s += 0; notes.push('No puede levantarse 5 veces de la silla: se empieza asistido y sentado.'); low.sts = true; }
+    else if (sts <= 12) { s += 3; } else if (sts <= 15) { s += 2; } else { s += 1; low.sts = true; notes.push('5 levantadas de silla > 15 s: fuerza de piernas baja (umbral EWGSOP2).'); }
+    s += f.walk === 'si' ? 3 : (f.walk === 'pausas' ? 2 : (f.walk === 'no' ? 0 : 1));
+    s += f.stairs === 'si' ? 3 : (f.stairs === 'baranda' ? 2 : (f.stairs === 'no' ? 0 : 1));
+    var gripCut = sex === 'M' ? 27 : 16;
+    if (f.grip && +f.grip < gripCut) { s -= 1; low.grip = true; notes.push('Fuerza de agarre baja (< ' + gripCut + ' kg, umbral EWGSOP2): riesgo de sarcopenia.'); }
+    if (f.gait && +f.gait <= 0.8) { s -= 1; low.gait = true; notes.push('Velocidad de marcha ≤ 0,8 m/s: función física baja (umbral EWGSOP2).'); }
+    if (+f.falls >= 2) { s -= 1; notes.push('Dos o más caídas en el último año: prioriza equilibrio y ejercicio supervisado.'); }
+    if (age >= 80) { s -= 1; }
+    if (+f.act >= 150) { s += 1; }
+    var lv = s >= 8 ? 3 : (s >= 5 ? 2 : (s >= 3 ? 1 : 0));
+    if ((low.sts || low.gait) && lv > 1) { lv = 1; notes.push('Se limita al nivel 1 por fuerza o marcha bajas.'); }
+    return { level: lv, score: s, name: LEVEL_NAME[lv], notes: notes, low: low };
+  };
+
+  /* banderas de contraindicación a partir del perfil */
+  E.flags = function (p, lvInfo) {
+    var c = p.conds || {}, ex = p.exconds || {}, f = {};
+    if (ex.cardio || c.icc) { f.cardio = true; }
+    if (ex.epoc) { f.epoc = true; }
+    if (ex.knee) { f.knee = true; }
+    if (ex.hip) { f.hip = true; }
+    if (ex.lumb) { f.lumb = true; }
+    if (ex.neuro || ex.pie) { f.neuro = true; }
+    if (ex.retin) { f.retin = true; }
+    if (ex.osteop || c.osteop) { f.osteop = true; }
+    if (ex.claud) { f.claud = true; }
+    if (ex.shoulder) { f.shoulder = true; }
+    if (ex.hand) { f.hand = true; }
+    if (ex.amput) { f.amput = true; }
+    if (p.stage === 'PD') { f.catperit = true; }
+    if (lvInfo.level <= 1 || (+((p.func || {}).falls) >= 1) || p.age >= 80 || ex.balance) { f.balance = true; }
+    if (lvInfo.level <= 1 || ex.amput) { f.floor = true; }
+    return f;
+  };
+
+  function allowed(exo, flags, level, ctxDial) {
+    if (exo.lv > level) { return false; }
+    for (var i = 0; i < exo.ci.length; i++) { if (flags[exo.ci[i]]) { return false; } }
+    if (ctxDial && !exo.dial) { return false; }
+    return true;
+  }
+  function pick(pat, n, flags, level, ctxDial, offset) {
+    var pool = [], id;
+    for (id in EXL) { if (EXL.hasOwnProperty(id) && EXL[id].pat === pat && allowed(EXL[id], flags, level, ctxDial)) { pool.push(EXL[id]); } }
+    /* preferir el de mayor nivel permitido (más desafiante), con rotación por 'offset' para variar entre semanas */
+    pool.sort(function (a, b) { return b.lv - a.lv || (a.id < b.id ? -1 : 1); });
+    var out = [], i, k = (offset || 0);
+    for (i = 0; i < pool.length && out.length < n; i++) { out.push(pool[(i + k) % pool.length]); }
+    return out;
+  }
+
+  function item(exo, sets, reps, secs, rest) {
+    var it = { id: exo.id, n: exo.n, pat: exo.pat, pos: exo.pos, type: exo.type, desc: exo.desc, tip: exo.tip, each: !!exo.each, arm: !!exo.arm };
+    it.sets = sets; it.reps = reps; it.secs = secs; it.rest = rest;
+    return it;
+  }
+  function strengthItems(exos, wk, level, p) {
+    var pr = PROG[level], out = [], i;
+    for (i = 0; i < exos.length; i++) {
+      var x = exos[i];
+      if (x.type === 'reps') { out.push(item(x, pr.sets[wk], x.pat === 'bal' ? x.base : Math.min(pr.reps[wk], x.base + 2 + (level >= 2 ? 2 : 0)), 0, 60)); }
+      else if (x.type === 'isom') { out.push(item(x, x.sets || pr.sets[wk], 0, x.base + (wk >= 4 ? 5 : 0), 45)); }
+      else { out.push(item(x, 1, 0, x.base, 20)); }
+    }
+    return out;
+  }
+
+  /* sesión de fuerza A (tren inferior + tirón) o B (empuje + core + cadera); en diálisis solo inferior sentado/tumbado */
+  function strengthSession(kind, wk, level, flags, dial) {
+    var off = wk % 2, ex = [];
+    if (dial) {
+      ex = [].concat(pick('sq', 1, flags, 0, true, off), pick('abd', 1, flags, 0, true, off), pick('calf', 1, flags, 0, true, 0), pick('hing', 1, flags, 0, true, 0), pick('wu', 0, flags, 0, true, 0));
+      return strengthItems(ex, wk, Math.min(level, 1), null);
+    }
+    if (kind === 'A') { ex = [].concat(pick('sq', 2, flags, level, false, off), pick('abd', 1, flags, level, false, off), pick('calf', 1, flags, level, false, 0), pick('pull', 2, flags, level, false, off), pick('core', 1, flags, level, false, 0)); }
+    else if (kind === 'B') { ex = [].concat(pick('hing', 1, flags, level, false, off), pick('sq', 1, flags, level, false, off + 1), pick('push', 2, flags, level, false, off), pick('pull', 1, flags, level, false, off + 1), pick('grip', 1, flags, level, false, 0), pick('abd', 1, flags, level, false, off + 1)); }
+    else { ex = [].concat(pick('sq', 1, flags, level, false, off), pick('hing', 1, flags, level, false, off), pick('push', 1, flags, level, false, off), pick('pull', 1, flags, level, false, off), pick('calf', 1, flags, level, false, 0), pick('core', 1, flags, level, false, 0)); }
+    var seen = {}, uniq = [], i;
+    for (i = 0; i < ex.length; i++) { if (!seen[ex[i].id]) { seen[ex[i].id] = true; uniq.push(ex[i]); } }
+    return strengthItems(uniq, wk, level, null);
+  }
+  function warmup(flags, level) {
+    var w = [].concat(pick('wu', 3, flags, level, false, 0));
+    var out = [], i; for (i = 0; i < w.length; i++) { out.push(item(w[i], 1, w[i].type === 'reps' ? w[i].base : 0, w[i].type === 'time' ? w[i].base : 0, 0)); }
+    return out;
+  }
+  function cooldown(flags, level, dial) {
+    var out = [], c = [].concat(pick('str', 2, flags, level, false, 0), pick('resp', 1, flags, level, dial, flags.epoc ? 1 : 0)), i;
+    if (flags.epoc) { c.sort(function (a, b) { return (b.id === 'r_pursed' ? 1 : 0) - (a.id === 'r_pursed' ? 1 : 0); }); }
+    for (i = 0; i < c.length; i++) { out.push(item(c[i], 1, c[i].type === 'reps' ? c[i].base : 0, c[i].type === 'time' ? c[i].base : 0, 0)); }
+    return out;
+  }
+  function balanceBlock(flags, level, wk) {
+    var b = pick('bal', level >= 2 ? 3 : 2, flags, level, false, wk % 2), out = [], i;
+    for (i = 0; i < b.length; i++) { out.push(item(b[i], 2, b[i].type === 'reps' ? b[i].base : 0, b[i].type === 'time' ? b[i].base : 0, 20)); }
+    return out;
+  }
+  function aerItem(flags, level, minutes, dial, wk) {
+    var x = dial ? EXL.a_pedal_dial : null;
+    if (!x) {
+      var pool = pick('aer', 4, flags, level, false, 0), chosen = null, i;
+      /* preferir caminata si se puede; si no, bici/pedalier; si no, marcha sentado */
+      for (i = 0; i < pool.length; i++) { if (pool[i].id === 'a_walk') { chosen = pool[i]; } }
+      if (!chosen && pool.length) { for (i = 0; i < pool.length; i++) { if (pool[i].id === 'a_bike') { chosen = pool[i]; } } }
+      x = chosen || pool[0] || EXL.a_march_sit;
+      if (wk >= 2 && wk % 2 === 1 && level >= 1) { for (i = 0; i < pool.length; i++) { if (pool[i].id === 'a_bike') { x = pool[i]; } } }
+    }
+    var it = item(x, 1, 0, minutes * 60, 0); it.min = minutes; return it;
+  }
+
+  function est(blocks) {
+    var t = 0, b, i, j;
+    for (b = 0; b < blocks.length; b++) {
+      for (i = 0; i < blocks[b].items.length; i++) {
+        var it = blocks[b].items[i];
+        if (it.type === 'time') { t += it.secs * it.sets; }
+        else if (it.type === 'isom') { t += (it.secs + 10) * it.sets * (it.each ? 2 : 1); }
+        else { t += (it.reps * 4 * (it.each ? 2 : 1) + it.rest) * it.sets; }
+      }
+    }
+    return Math.max(5, Math.round(t / 60));
+  }
+
+  /* semana de programa (wk 0-7): 7 días */
+  E.week = function (p, wk) {
+    var lvInfo = p.exLevel || E.level(p.func || {}, p.sex, p.age), level = lvInfo.level, flags = E.flags(p, lvInfo);
+    var pr = PROG[level], aerMin = pr.aer[wk], aerDays = pr.days[wk], strN = pr.str;
+    if (flags.cardio) { aerMin = Math.max(5, Math.round(aerMin * 0.8)); }
+    var hd = (p.stage === 'HD');
+    var hdDays = (p.hdDays && p.hdDays.length) ? p.hdDays : [0, 2, 4];
+    var days = [], d;
+    for (d = 0; d < 7; d++) { days.push({ day: d, name: DAY[d], kind: 'rest', focus: 'Descanso activo', icon: '🌿', blocks: [] }); }
+    var isDial = {}; if (hd) { for (d = 0; d < hdDays.length; d++) { isDial[hdDays[d]] = true; } }
+    /* fuerza: días no-diálisis separados */
+    var strDays = [];
+    if (hd) {
+      var nd = []; for (d = 0; d < 7; d++) { if (!isDial[d]) { nd.push(d); } }
+      strDays = nd.length >= 2 ? [nd[0], nd[nd.length > 3 ? 2 : 1]] : nd.slice(0, 2);
+    } else { strDays = strN === 3 ? [0, 2, 4] : [0, 3]; }
+    var aerList = [], order = [1, 3, 5, 2, 4, 6, 0], oi;
+    if (hd) { for (d = 0; d < hdDays.length; d++) { aerList.push(hdDays[d]); } }
+    for (oi = 0; oi < order.length && aerList.length < aerDays; oi++) {
+      var dd = order[oi];
+      if (has(aerList, dd) || has(strDays, dd) || dd === 6) { continue; }
+      if (hd && isDial[dd]) { continue; }
+      aerList.push(dd);
+    }
+    for (oi = 0; oi < strDays.length && aerList.length < aerDays; oi++) { if (!has(aerList, strDays[oi])) { aerList.push(strDays[oi]); } }
+    var balDays = (p.age >= 65 || flags.balance || level <= 1) ? [aerList[0], aerList[aerList.length - 1], strDays[0]] : [aerList[0]];
+    var si = 0, kinds = strN === 3 ? ['A', 'B', 'C'] : ['A', 'B'];
+    for (d = 0; d < 7; d++) {
+      var day = days[d], blocks = [], onAer = has(aerList, d), onStr = has(strDays, d), dialDay = !!isDial[d];
+      if (dialDay) {
+        day.kind = 'dial'; day.icon = '🩺'; day.focus = 'Diálisis: pedaleo + piernas';
+        blocks.push({ k: 'wu', t: 'Calentamiento (1.ª hora de diálisis)', items: warmup(flags, 0).slice(0, 2) });
+        var dm = Math.min(aerMin, level >= 2 ? 30 : (level === 1 ? 20 : 15));
+        blocks.push({ k: 'aer', t: 'Pedaleo suave', items: [aerItem(flags, level, dm, true, wk)] });
+        if (wk >= 2) { blocks.push({ k: 'str', t: 'Fuerza de piernas en la camilla', items: strengthSession('A', wk, level, flags, true) }); }
+        blocks.push({ k: 'cd', t: 'Vuelta a la calma', items: [item(EXL.r_diaph, 1, 0, 90, 0)] });
+      } else {
+        if (onStr) {
+          day.kind = 'str'; day.icon = '💪'; var kd = kinds[si % kinds.length]; si++;
+          day.focus = 'Fuerza ' + kd + (kd === 'A' ? ' · piernas y espalda' : (kd === 'B' ? ' · empuje y cadera' : ' · cuerpo completo'));
+          blocks.push({ k: 'wu', t: 'Calentamiento', items: warmup(flags, level) });
+          blocks.push({ k: 'str', t: 'Fuerza', items: strengthSession(kd, wk, level, flags, false) });
+          if (has(balDays, d)) { blocks.push({ k: 'bal', t: 'Equilibrio', items: balanceBlock(flags, level, wk) }); }
+          if (onAer) { blocks.push({ k: 'aer', t: 'Aeróbico corto', items: [aerItem(flags, level, Math.max(5, Math.round(aerMin / 2)), false, wk)] }); }
+          blocks.push({ k: 'cd', t: 'Estiramientos y calma', items: cooldown(flags, level, false) });
+        } else if (onAer) {
+          day.kind = 'aer'; day.icon = '🚶'; day.focus = 'Aeróbico · ' + aerMin + ' min';
+          blocks.push({ k: 'wu', t: 'Calentamiento', items: warmup(flags, level) });
+          blocks.push({ k: 'aer', t: 'Aeróbico moderado (RPE 11-13)', items: [aerItem(flags, level, aerMin, false, wk)] });
+          if (has(balDays, d)) { blocks.push({ k: 'bal', t: 'Equilibrio', items: balanceBlock(flags, level, wk) }); day.focus += ' + equilibrio'; }
+          blocks.push({ k: 'cd', t: 'Estiramientos y calma', items: cooldown(flags, level, false) });
+        } else {
+          day.kind = 'rest'; day.icon = '🌿'; day.focus = 'Descanso activo · pasea y estira';
+          blocks.push({ k: 'cd', t: 'Movilidad suave (opcional)', items: [item(EXL.w_ank, 1, 0, 40, 0), item(EXL.f_chest, 1, 0, 30, 0), item(EXL.r_diaph, 1, 0, 90, 0)] });
+        }
+      }
+      day.blocks = blocks; day.mins = est(blocks);
+    }
+    var totalAer = 0; for (d = 0; d < 7; d++) { for (var b = 0; b < days[d].blocks.length; b++) { if (days[d].blocks[b].k === 'aer') { totalAer += days[d].blocks[b].items[0].min || 0; } } }
+    return { wk: wk, phase: PHASE[wk], level: level, levelName: LEVEL_NAME[level], days: days, aerMin: aerMin, totalAer: totalAer, sets: pr.sets[wk], reps: pr.reps[wk], flags: flags };
+  };
+
+  /* avisos de seguridad personalizados */
+  E.safety = function (p) {
+    var lvInfo = p.exLevel || E.level(p.func || {}, p.sex, p.age), flags = E.flags(p, lvInfo), c = p.conds || {}, out = [];
+    function a(l, t, s) { out.push({ lvl: l, t: t, src: (s || '').split(' ') }); }
+    a('info', 'Antes de empezar un programa estructurado, coméntalo con tu médico o nefrólogo (valoración cardiovascular previa según tu riesgo). Esta app no sustituye esa valoración.', 'baker22 kdigo24');
+    a('info', 'Intensidad: RPE 11-13 de 20 ("algo duro") y prueba del habla (puedes hablar en frases, no cantar). Se evita guiar por frecuencia cardiaca: 220−edad no es fiable en ERC, con betabloqueantes ni en diálisis.', 'baker22');
+    a('warn', 'No entrenes hoy si tienes fiebre, vómitos, diarrea, infección, dolor torácico, mareo importante o te encuentras claramente peor. Criterios prudentes de práctica clínica; no proceden de un ensayo.', 'baker22');
+    a('warn', 'Para y avisa si aparece: dolor u opresión en el pecho, falta de aire desproporcionada, mareo o desmayo, palpitaciones irregulares, calambres intensos, visión borrosa o dolor de cabeza fuerte.', 'baker22');
+    if (c.dmhypo) { a('warn', 'Insulina/sulfonilureas: mide la glucemia antes. Si es < 100 mg/dL, toma 15-20 g de hidratos (glucosa en comprimidos, no zumo de naranja) y repite; si es > 250 mg/dL con cetonas o > 300 mg/dL, no entrenes. Puede haber hipoglucemia tardía horas después.', 'kdigodm22'); }
+    if (p.stage === 'HD') { a('warn', 'Hemodiálisis: ejercicio intradiálisis solo en las primeras 1-2 horas, con enfermería informada; no cargues ni comprimas el brazo de la fístula; evita ejercicio justo tras la sesión si te mareas o tienes hipotensión. Para si calambres o bajada de tensión.', 'baker22 clarkson19'); }
+    if (p.stage === 'PD') { a('warn', 'Diálisis peritoneal: protege el orificio del catéter, evita esfuerzos con el abdomen muy lleno y los ejercicios abdominales intensos o con aguantar la respiración (riesgo de hernia/fugas). Algunos pacientes prefieren entrenar con el abdomen drenado.', 'baker22'); }
+    if (flags.cardio) { a('warn', 'Cardiopatía/insuficiencia cardiaca: intensidad más baja (RPE 11-12), sin maniobra de Valsalva, y programa pactado con cardiología.', 'baker22'); }
+    if (flags.retin) { a('warn', 'Retinopatía proliferativa: evita ejercicios con aguantar la respiración, cabeza por debajo del corazón y esfuerzos máximos.', 'kdigodm22'); }
+    if (flags.neuro) { a('warn', 'Neuropatía/pie diabético: revisa los pies cada día, calzado adecuado, evita impacto; prioriza bici y ejercicios sentados si hay úlceras.', 'kdigodm22'); }
+    if (flags.osteop) { a('info', 'Osteoporosis/enfermedad ósea de la ERC: evita flexión de columna con carga y torsiones amplias; prioriza caminata, fuerza de piernas y equilibrio.', 'baker22'); }
+    if (flags.claud) { a('info', 'Claudicación: camina hasta dolor moderado, descansa hasta que pase y repite (intervalos).', 'baker22'); }
+    if (flags.epoc) { a('info', 'EPOC: respiración con labios fruncidos y ritmo pausado; evita aguantar el aire.', 'baker22'); }
+    if ((p.func || {}).falls >= 1 || p.age >= 65) { a('info', 'Riesgo de caídas: incluye equilibrio 3 días/semana (recomendación OMS 2020 en mayores) y entrena junto a un apoyo firme.', 'who20'); }
+    a('info', 'Al terminar, levántate despacio (cuenta hasta 5), sobre todo con antihipertensivos. Bebe solo dentro de tus límites de líquidos.', '');
+    return out;
+  };
+
+  /* consejos de sincronía dieta-ejercicio */
+  E.synergy = function (p, T) {
+    var o = [];
+    o.push('Tras la sesión de fuerza, toma una merienda con proteína de bajo fósforo (clara, pollo, yogur natural si tu fósforo lo permite). La distribución de proteína alrededor del ejercicio se extrapola de otras poblaciones: es razonable, no probada en ERC.');
+    if (T && T.kMode !== 'libre') { o.push('Antes de entrenar, mejor un tentempié bajo en potasio (pan blanco sin sal con mermelada o manzana) y evita bebidas "deportivas" y plátano.'); }
+    if (p.conds && p.conds.dmhypo) { o.push('Si usas insulina o sulfonilureas, no entrenes en ayunas y lleva glucosa de rescate.'); }
+    if (p.stage === 'HD') { o.push('En días de diálisis, lleva un tentempié para después de la sesión; entrenar en ayunas y con la tensión baja aumenta el riesgo de mareo.'); }
+    return o;
+  };
+  E.PHASE = PHASE; E.PROG = PROG; E.LEVEL_NAME = LEVEL_NAME; E.DAY = DAY;
+  return E;
+})();
+
+/* ==== refs ==== */
+/* NEFRONA · bibliografía y controversias.
+   v: 1 = título/DOI/revista comprobados en línea durante la elaboración; 0 = cita de la literatura conocida, DOI no comprobado en línea (verifícalo antes de citarla). */
+var REFS = {};
+function R(id, v, cit, doi, note) { REFS[id] = { id: id, v: v, cit: cit, doi: doi || '', note: note || '' }; }
+R('kdigo24', 0, 'KDIGO CKD Work Group. KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease. Kidney Int. 2024;105(4S):S117–S314.', '10.1016/j.kint.2023.10.018', 'Proteína 0,8 g/kg en G3-G5 sin diálisis; evitar >1,3 g/kg; sodio <2 g/día; patrón vegetal; considerar objetivos proteicos mayores en mayores frágiles; actividad física moderada ≥150 min/sem.');
+R('kdoqi20', 1, 'Ikizler TA, Burrowes JD, Byham-Gray LD, et al. KDOQI Clinical Practice Guideline for Nutrition in CKD: 2020 Update. Am J Kidney Dis. 2020;76(3 Suppl 1):S1–S107.', '10.1053/j.ajkd.2020.05.006', 'Proteína 0,55–0,6 g/kg (no diabéticos) o 0,6–0,8 (diabéticos) en G3-G5 metabólicamente estables; 1,0–1,2 g/kg en diálisis; energía 25–35 kcal/kg; sodio <2,3 g; potasio y fósforo ajustados al nivel sérico.');
+R('kdigodm22', 0, 'KDIGO Diabetes Work Group. KDIGO 2022 Clinical Practice Guideline for Diabetes Management in CKD. Kidney Int. 2022;102(5S):S1–S127.', '10.1016/j.kint.2022.06.008', 'Proteína 0,8 g/kg/día en diabetes + ERC sin diálisis; patrón rico en vegetales, fibra y grasas insaturadas; riesgo de hipoglucemia con insulina/sulfonilureas.');
+R('hahn20', 1, 'Hahn D, Hodson EM, Fouque D. Low protein diets for non-diabetic adults with chronic kidney disease. Cochrane Database Syst Rev. 2020;10:CD001892.', '10.1002/14651858.CD001892.pub5', 'Revisión Cochrane: la dieta baja en proteínas probablemente reduce poco el riesgo de ERC terminal; certeza moderada-baja y heterogeneidad entre ensayos.');
+R('espen21', 0, 'Fiaccadori E, Sabatino A, Barazzoni R, et al. ESPEN guideline on clinical nutrition in hospitalized patients with acute or chronic kidney disease. Clin Nutr. 2021;40(4):1644–1668.', '10.1016/j.clnu.2021.01.028', 'Recomendaciones de energía y proteína en ERC y diálisis.');
+R('asn25', 1, 'ASN Kidney Health Guidance on Potassium and Phosphorus Food Additives. J Am Soc Nephrol. 2025 (publicación en línea 18 sep 2025).', '10.1681/ASN.0000000873', 'Evitar aditivos fosfatados; individualizar los aditivos potásicos.');
+R('carballo24', 1, 'Carballo-Casla A, Avesani CM, Beridze G, et al. Protein intake and mortality in older adults with chronic kidney disease. JAMA Netw Open. 2024;7(8):e2426577.', '10.1001/jamanetworkopen.2024.26577', 'Estudio observacional: en mayores con ERC, una mayor ingesta proteica se asoció con menor mortalidad. No demuestra causalidad.');
+R('protage13', 0, 'Bauer J, Biolo G, Cederholm T, et al. Evidence-based recommendations for optimal dietary protein intake in older people: a position paper from the PROT-AGE Study Group. J Am Med Dir Assoc. 2013;14(8):542–559.', '10.1016/j.jamda.2013.05.021', 'En mayores sanos 1,0–1,2 g/kg; más en enfermedad aguda/crónica, salvo ERC grave sin diálisis (TFG <30) no diabética.');
+R('carrero20', 0, 'Carrero JJ, González-Ortiz A, Avesani CM, et al. Plant-based diets to manage the risks and complications of chronic kidney disease. Nat Rev Nephrol. 2020;16(9):525–542.', '10.1038/s41581-020-0297-2', 'Dietas vegetales: menor carga ácida y de fósforo biodisponible, beneficio cardiometabólico; riesgo de hiperpotasemia poco documentado en la práctica.');
+R('clase20', 0, 'Clase CM, Carrero JJ, Ellison DH, et al. Potassium homeostasis and management of dyskalemia in kidney diseases: conclusions from a KDIGO Controversies Conference. Kidney Int. 2020;97(1):42–61.', '10.1016/j.kint.2019.09.018', 'Poca evidencia de que restringir potasio en la dieta prevenga hiperpotasemia; el potasio de las frutas y verduras no equivale al de los aditivos.');
+R('kz10', 0, 'Kalantar-Zadeh K, Gutekunst L, Mehrotra R, et al. Understanding sources of dietary phosphorus in the treatment of patients with chronic kidney disease. Clin J Am Soc Nephrol. 2010;5(3):519–530.', '10.2215/CJN.06080809', 'Absorción: aditivos ~90 %, proteína animal 40–60 %, vegetal menos (fitatos).');
+R('moe11', 0, 'Moe SM, Zidehsarai MP, Chambers MA, et al. Vegetarian compared with meat dietary protein source and phosphorus homeostasis in chronic kidney disease. Clin J Am Soc Nephrol. 2011;6(2):257–264.', '10.2215/CJN.05040610', 'Ensayo cruzado pequeño y corto: la proteína vegetal produjo menos fosfaturia/FGF23 que la de carne con igual fósforo total.');
+R('mcmahon13', 0, 'McMahon EJ, Bauer JD, Hawley CM, et al. A randomized trial of dietary sodium restriction in CKD. J Am Soc Nephrol. 2013;24(12):2096–2103.', '10.1681/ASN.2013030285', 'Ensayo cruzado: menor sodio redujo PA, edema y proteinuria.');
+R('goraya14', 0, 'Goraya N, Simoni J, Jo CH, Wesson DE. Treatment of metabolic acidosis in patients with stage 3 CKD with fruits and vegetables or sodium bicarbonate. Clin J Am Soc Nephrol. 2013;8:371–381 (y seguimiento en Kidney Int. 2014;86:1031–1038).', '', 'La fruta y verdura corrigen en parte la acidosis en G3-G4 con hipertensión; estudios pequeños.');
+R('pineda16', 0, 'Técnicas culinarias para reducir el potasio de verduras y legumbres (cocción con agua desechada, remojo, congelación); cita a comprobar: Nefrología (English ed.) 2016, DOI 10.1016/j.nefroe.2016.03.009.', '10.1016/j.nefroe.2016.03.009', 'La reducción por congelación solo se ha estudiado en pocos alimentos (judías verdes, acelgas); no extrapolar al resto.');
+R('garneata16', 0, 'Garneata L, Stancu A, Dragomir D, Stefan G, Mircescu G. Ketoanalogue-supplemented vegetarian very low-protein diet and CKD progression. J Am Soc Nephrol. 2016;27(7):2164–2176.', '', 'Ensayo abierto en Rumanía: dieta vegetariana muy baja en proteínas + cetoanálogos retrasó la diálisis frente a 0,6 g/kg; población muy seleccionada.');
+R('ikizler13', 0, 'Ikizler TA, Cano NJ, Franch H, et al. Prevention and treatment of protein energy wasting in chronic kidney disease patients: a consensus statement by the International Society of Renal Nutrition and Metabolism. Kidney Int. 2013;84(6):1096–1107.', '10.1038/ki.2013.147', '');
+R('fouque08', 0, 'Fouque D, Kalantar-Zadeh K, Kopple J, et al. A proposed nomenclature and diagnostic criteria for protein-energy wasting in acute and chronic kidney disease. Kidney Int. 2008;73(4):391–398.', '10.1038/sj.ki.5002585', '');
+R('kzf17', 0, 'Kalantar-Zadeh K, Fouque D. Nutritional management of chronic kidney disease. N Engl J Med. 2017;377(18):1765–1776.', '10.1056/NEJMra1700312', 'Revisión de referencia sobre manejo nutricional y controversias.');
+R('klahr94', 0, 'Klahr S, Levey AS, Beck GJ, et al. The effects of dietary protein restriction and blood-pressure control on the progression of chronic renal disease (MDRD Study). N Engl J Med. 1994;330(13):877–884.', '10.1056/NEJM199403313301301', 'Ensayo clásico; el beneficio de la restricción proteica fue pequeño y discutido en análisis posteriores.');
+R('ko20', 0, 'Ko GJ, Rhee CM, Kalantar-Zadeh K, Joshi S. The effects of high-protein diets on kidney health and longevity. J Am Soc Nephrol. 2020;31(8):1667–1679.', '10.1681/ASN.2020010028', 'Dietas hiperproteicas: sin daño demostrado en renal sano, pero no se recomiendan en ERC.');
+R('carrero18', 0, 'Carrero JJ, Hecking M, Chesnaye NC, Jager KJ. Sex and gender disparities in the epidemiology and outcomes of chronic kidney disease. Nat Rev Nephrol. 2018;14(3):151–164.', '10.1038/nrneph.2017.181', 'Diferencias por sexo en prevalencia y progresión; casi sin ensayos dietéticos que las evalúen.');
+R('ewgsop19', 0, 'Cruz-Jentoft AJ, Bahat G, Bauer J, et al. Sarcopenia: revised European consensus on definition and diagnosis (EWGSOP2). Age Ageing. 2019;48(1):16–31.', '10.1093/ageing/afy169', 'Umbrales: 5 levantadas de silla >15 s, agarre <27 kg (H) / <16 kg (M), velocidad de marcha ≤0,8 m/s.');
+R('ckdepi21', 0, 'Inker LA, Eneanya ND, Coresh J, et al. New creatinine- and cystatin C–based equations to estimate GFR without race. N Engl J Med. 2021;385(19):1737–1749.', '10.1056/NEJMoa2102953', 'Ecuación CKD-EPI 2021 de creatinina.');
+R('mifflin90', 0, 'Mifflin MD, St Jeor ST, Hill LA, et al. A new predictive equation for resting energy expenditure in healthy individuals. Am J Clin Nutr. 1990;51(2):241–247.', '10.1093/ajcn/51.2.241', '');
+R('baker22', 1, 'Baker LA, March DS, Wilkinson TJ, et al. Clinical practice guideline exercise and lifestyle in chronic kidney disease. BMC Nephrol. 2022;23(1).', '10.1186/s12882-021-02618-1', 'Guía de ejercicio en ERC (UK Kidney Association/ BASES): ejercicio aeróbico y de fuerza seguros y beneficiosos; cribado previo.');
+R('clarkson19', 0, 'Clarkson MJ, Bennett PN, Fraser SF, Warmington SA. Exercise interventions for improving objective physical function in patients with end-stage kidney disease on dialysis: a systematic review and meta-analysis. Am J Physiol Renal Physiol. 2019;316(5):F856–F872.', '10.1152/ajprenal.00317.2018', 'Mejora de la función física con ejercicio intradiálisis; calidad de evidencia variable.');
+R('who20', 0, 'Bull FC, Al-Ansari SS, Biddle S, et al. World Health Organization 2020 guidelines on physical activity and sedentary behaviour. Br J Sports Med. 2020;54(24):1451–1462.', '10.1136/bjsports-2020-102955', '150–300 min/sem de actividad moderada, fuerza ≥2 días/sem, equilibrio ≥3 días/sem en ≥65 años.');
+R('acsm11', 0, 'Garber CE, Blissmer B, Deschenes MR, et al. Quantity and quality of exercise for developing and maintaining cardiorespiratory, musculoskeletal, and neuromotor fitness (ACSM position stand). Med Sci Sports Exerc. 2011;43(7):1334–1359.', '10.1249/MSS.0b013e318213fefb', '');
+R('borg82', 0, 'Borg GA. Psychophysical bases of perceived exertion. Med Sci Sports Exerc. 1982;14(5):377–381.', '', 'Escala RPE 6–20.');
+R('ssass21', 0, 'Neal B, Wu Y, Feng X, et al. Effect of salt substitution on cardiovascular events and death (SSaSS). N Engl J Med. 2021;385(12):1067–1077.', '10.1056/NEJMoa2105675', 'Los sustitutos con KCl redujeron eventos en población general con ictus/hipertensión; los pacientes con ERC avanzada o hiperpotasemia no eran representativos.');
+
+var CONTR = [
+  { id: 'prot', t: '¿Cuánta proteína en ERC sin diálisis?', pos: [
+    ['KDIGO 2024', '0,8 g/kg/día en G3-G5; evitar >1,3 g/kg. Considerar más en mayores frágiles.'],
+    ['KDOQI 2020', '0,55–0,6 g/kg (o 0,6–0,8 en diabéticos) con vigilancia; opción: ≤0,6 con cetoanálogos.'],
+    ['Muy baja + cetoanálogos', '0,3–0,4 g/kg suplementada: retrasa diálisis en ensayos pequeños, difícil de sostener.']],
+    ev: 'Moderada-baja. Cochrane 2020: la restricción probablemente cambia poco el riesgo de ERC terminal. El MDRD no mostró beneficio claro en el análisis principal.',
+    app: 'Por defecto 0,8 g/kg (KDIGO). La pauta 0,6 g/kg es opcional, solo en adultos no frágiles G3b-G5 y se desactiva con fragilidad, sarcopenia o riesgo de desnutrición.', refs: 'kdigo24 kdoqi20 hahn20 klahr94 garneata16' },
+  { id: 'old', t: 'Mayores: ¿restringir o proteger la masa muscular?', pos: [
+    ['Argumento de restricción', 'Menos urea y acidosis; frenar la progresión.'],
+    ['Argumento de protección', 'Sarcopenia y desnutrición pesan más en mortalidad; PROT-AGE y estudios observacionales apuntan a mayor proteína.']],
+    ev: 'Baja: el estudio de Carballo-Casla 2024 es observacional (confusión por indicación posible).',
+    app: 'Edad ≥70, sarcopenia o riesgo nutricional → 1,0 g/kg en G1-G3 y no se aplica la pauta 0,6.', refs: 'carballo24 protage13 kdigo24' },
+  { id: 'veg', t: 'Proteína vegetal frente a animal', pos: [
+    ['A favor de vegetal', 'Menos fósforo absorbible, menor carga ácida, mejor perfil cardiometabólico.'],
+    ['Cautelas', 'Más potasio en legumbres, riesgo de déficit proteico si hay desnutrición, ensayos cortos.']],
+    ev: 'Baja-moderada; la mayoría son estudios cortos, fisiológicos u observacionales.',
+    app: 'Más de la mitad de la proteína sale de fuentes vegetales o de pescado/huevo/pollo con poco fósforo; hay opción vegetariana y vegana.', refs: 'carrero20 moe11 kz10' },
+  { id: 'k', t: 'Restringir el potasio: ¿sí o no?', pos: [
+    ['Restricción clásica', '2–3 g/día si K sérico alto.'],
+    ['Enfoque actual', 'La evidencia de que la dieta controle el K sérico es débil; el K de frutas y verduras se absorbe menos y se asocia a beneficio; lo que más empuja el K son aditivos, acidosis, fármacos (IECA/ARA-II/ARM) y estreñimiento.']],
+    ev: 'Baja. No hay ensayos que comparen restricción frente a no restricción con desenlaces clínicos.',
+    app: 'Sin potasio sérico alto no se restringe. Con K >5,0 se aplican topes orientativos (3.000 / 2.500 / 2.000 mg) y se quitan las frutas más ricas en K. Se anima a tratar la causa antes que retirar IECA/ARA-II.', refs: 'clase20 kdoqi20 kdigo24 asn25' },
+  { id: 'p', t: 'Fósforo: aditivos frente a un tope en mg', pos: [
+    ['Tope numérico', '800–1000 mg/día en hiperfosforemia (práctica habitual).'],
+    ['Origen del fósforo', 'Aditivos ≈90 % de absorción; animal 40–60 %; vegetal menos. Medir solo mg engaña.']],
+    ev: 'Baja: los datos de fosforemia y mortalidad son observacionales; no hay ensayo de dieta baja en fósforo con eventos duros.',
+    app: 'Menús sin aditivos y con tope orientativo; se prioriza el origen (clara, pollo, pescado, vegetal) además del número.', refs: 'kz10 moe11 asn25 kdoqi20' },
+  { id: 'na', t: 'Sodio: <2,0 g o <2,3 g y sustitutos de sal', pos: [
+    ['KDIGO 2024', '<2 g sodio (<5 g de sal).'],
+    ['KDOQI 2020', '<2,3 g/día en G3-G5.'],
+    ['Sal potásica', 'Beneficiosa en población general (SSaSS), pero peligrosa en ERC avanzada o con hiperpotasemia.']],
+    ev: 'Moderada para PA y proteinuria a corto plazo; baja para desenlaces duros en ERC.',
+    app: 'Menús calculados sin sal añadida. Se avisa de no usar sal de potasio salvo indicación.', refs: 'kdigo24 kdoqi20 mcmahon13 ssass21' },
+  { id: 'ca', t: 'Calcio dietético frente a fósforo', pos: [
+    ['Objetivo', '800–1000 mg/día (KDOQI) para balance neutro.'],
+    ['Problema', 'Los lácteos aportan calcio y fósforo; restringirlos baja el calcio.']],
+    ev: 'Baja. Los quelantes cálcicos suman calcio.',
+    app: 'El plan queda por debajo de 800 mg de calcio dietético; no se compensa con suplementos sin indicación médica.', refs: 'kdoqi20' },
+  { id: 'leach', t: 'Remojo, hervido y congelación para bajar el potasio', pos: [
+    ['Hervido', 'Reduce el K de las verduras si se desecha el agua.'],
+    ['Congelación y remojo', 'Solo estudiado en pocos alimentos; el efecto del remojo largo es modesto.']],
+    ev: 'Baja: estudios de laboratorio pequeños.',
+    app: 'Las verduras se calculan hervidas con el agua desechada.', refs: 'pineda16' },
+  { id: 'ex', t: 'Ejercicio: ¿masa muscular o función?', pos: [
+    ['Masa muscular', 'El entrenamiento de fuerza aumenta la masa en algunos ensayos.'],
+    ['Función física', 'Mejora más clara: levantarse de la silla, marcha, calidad de vida.']],
+    ev: 'Moderada para función y calidad de vida; baja para progresión de ERC y mortalidad.',
+    app: 'Se mide función (levantarse de silla, marcha), no solo peso.', refs: 'baker22 clarkson19 who20' },
+  { id: 'sex', t: 'Diferencias por sexo', pos: [
+    ['Hallazgos', 'Menor progresión en mujeres en estudios observacionales; peso muscular y TFG calculada difieren.'],
+    ['Limitación', 'No hay ensayos dietéticos por sexo; las pautas se ajustan por peso, talla y edad.']],
+    ev: 'Muy baja.',
+    app: 'El sexo entra en la fórmula de energía (Mifflin-St Jeor), en los umbrales de agarre y en el peso ideal; no cambia las reglas clínicas.', refs: 'carrero18 mifflin90 ewgsop19' }
+];
+
+/* ==== app ==== */
+/* NEFRONA · interfaz (ES5) */
+var APP = (function () {
+  var KEY = 'nefrona_v1';
+  var A = {};
+  var wipeArmed = false, S, plan = null, T = null, ctx = null, view, runState = null, timer = null;
+  var STAGES = [['G1', 'G1 (TFG ≥ 90)'], ['G2', 'G2 (60-89)'], ['G3a', 'G3a (45-59)'], ['G3b', 'G3b (30-44)'], ['G4', 'G4 (15-29)'], ['G5', 'G5 sin diálisis (< 15)'], ['HD', 'Hemodiálisis'], ['PD', 'Diálisis peritoneal']];
+  var DAYS = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+  var MONTHS = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function $(id) { return document.getElementById(id); }
+  function isoToday() { var d = new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+  function defaults() {
+    return { p: { sex: 'M', age: '', weight: '', height: '', stage: 'G3b', albu: 'A1', pal: 'sed', goal: 'mant', labs: {}, conds: {}, diet: { veg: 0 }, exconds: {}, func: {}, hdDays: [0, 2, 4], startDate: isoToday(), seed: 'nefrona', restrict: false, panSal: false },
+      ok: false, tab: 'perfil', wk: 0, day: 0, exwk: 0, over: {}, done: {}, shop: {}, shopWk: 0, open: {}, built: false };
+  }
+  function load() {
+    var d = defaults(), r = null;
+    try { r = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { r = null; }
+    if (r && r.p) { for (var k in d) { if (d.hasOwnProperty(k) && r[k] === undefined) { r[k] = d[k]; } } for (k in d.p) { if (d.p.hasOwnProperty(k) && r.p[k] === undefined) { r.p[k] = d.p[k]; } } return r; }
+    return d;
+  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* sin almacenamiento */ } }
+  function toast(t) { var e = document.createElement('div'); e.className = 'toast'; e.textContent = t; document.body.appendChild(e); setTimeout(function () { if (e.parentNode) { e.parentNode.removeChild(e); } }, 2200); }
+  function setPath(o, path, v) { var ks = path.split('.'), i; for (i = 0; i < ks.length - 1; i++) { if (!o[ks[i]]) { o[ks[i]] = {}; } o = o[ks[i]]; } o[ks[ks.length - 1]] = v; }
+  function getPath(o, path) { var ks = path.split('.'), i; for (i = 0; i < ks.length; i++) { if (o == null) { return ''; } o = o[ks[i]]; } return o == null ? '' : o; }
+
+  /* ---------- bibliografía ---------- */
+  function refTags(src) {
+    if (!src || !src.length) { return ''; }
+    var out = '', i, seen = {};
+    for (i = 0; i < src.length; i++) { var id = src[i]; if (!id || seen[id]) { continue; } seen[id] = 1; var r = REFS[id]; out += '<span class="tag ' + (r && r.v ? '' : 'v0') + '" data-act="ref" data-id="' + esc(id) + '">' + esc(r ? refShort(r) : id) + '</span>'; }
+    return out;
+  }
+  function refShort(r) { var m = /^([^,.]+)/.exec(r.cit); var y = /(19|20)\d\d/.exec(r.cit); var nm = m ? m[1] : r.id; if (r.id === 'kdigo24') { nm = 'KDIGO'; } if (r.id === 'kdigodm22') { nm = 'KDIGO DM'; } if (r.id === 'kdoqi20') { nm = 'KDOQI'; } if (r.id === 'asn25') { nm = 'ASN'; } if (r.id === 'espen21') { nm = 'ESPEN'; } if (r.id === 'who20') { nm = 'OMS'; } return nm + ' ' + (y ? y[0] : ''); }
+
+  /* ---------- construcción del plan ---------- */
+  function P() { return S.p; }
+  function prepProfile() {
+    var p = JSON.parse(JSON.stringify(S.p));
+    p.age = +p.age; p.weight = +p.weight; p.height = +p.height;
+    var lb = {}, k; for (k in p.labs) { if (p.labs.hasOwnProperty(k) && p.labs[k] !== '' && p.labs[k] != null && +p.labs[k] > 0) { lb[k] = +p.labs[k]; } } p.labs = lb;
+    p.exLevel = NEFEX.level(p.func || {}, p.sex, p.age);
+    return p;
+  }
+  function build() {
+    var p = prepProfile();
+    T = NEF.computeTargets(p);
+    if (T.blocked) { plan = null; return; }
+    plan = NEF.generatePlan(p, T);
+    ctx = NEF.newCtx(p, T);
+    var k, parts, n = 0;
+    for (k in S.over) { if (S.over.hasOwnProperty(k)) { parts = k.split('_'); if (+parts[0] < plan.days.length) { NEF.swapMeal(ctx, plan, +parts[0], parts[1], S.over[k]); n++; } } }
+    S.built = true; save();
+  }
+  function ensure() { if (S.built && !plan) { try { build(); } catch (e) { plan = null; } } }
+
+  /* ---------- vistas ---------- */
+  function chk(key, label, path) { return '<label class="ck"><input type="checkbox" data-k="' + path + '"' + (getPath(S.p, path) ? ' checked' : '') + '>' + label + '</label>'; }
+  function inp(label, path, type, ph, step) { return '<div><label>' + label + '</label><input data-k="' + path + '"' + (type === 'number' ? ' data-num="1" type="text" inputmode="decimal" autocomplete="off"' : ' type="' + (type || 'text') + '"') + ' value="' + esc(getPath(S.p, path)) + '"' + (ph ? ' placeholder="' + ph + '"' : '') + '></div>'; }
+  function sel(label, path, opts) { var o = '', i, cur = String(getPath(S.p, path)); for (i = 0; i < opts.length; i++) { o += '<option value="' + opts[i][0] + '"' + (String(opts[i][0]) === cur ? ' selected' : '') + '>' + opts[i][1] + '</option>'; } return '<div><label>' + label + '</label><select data-k="' + path + '">' + o + '</select></div>'; }
+
+  function vProfile() {
+    var h = '<h2>Tu perfil</h2>';
+    h += '<div class="box warn"><b>Herramienta de apoyo, no sustituye al médico ni al dietista.</b> Las pautas son orientativas y derivan de guías; confirma cualquier cambio de dieta o ejercicio con tu nefrólogo, sobre todo con potasio sérico alto, diálisis, insulina o cardiopatía. Si el potasio es ≥ 6 mmol/L o tienes síntomas, acude a urgencias.</div>';
+    h += '<div class="card"><h3>Datos básicos</h3><div class="row">' + inp('Edad (años)', 'age', 'number') + sel('Sexo', 'sex', [['M', 'Hombre'], ['F', 'Mujer']]) + '</div><div class="row">' + inp('Peso (kg)', 'weight', 'number', '', '0.1') + inp('Talla (cm)', 'height', 'number') + '</div>';
+    h += '<div class="row">' + sel('Estadio de ERC', 'stage', STAGES) + sel('Albuminuria', 'albu', [['A1', 'A1 (< 30 mg/g)'], ['A2', 'A2 (30-300)'], ['A3', 'A3 (> 300)']]) + '</div>';
+    h += '<div class="row">' + sel('Actividad habitual', 'pal', [['sed', 'Sedentaria'], ['lig', 'Ligera'], ['mod', 'Moderada']]) + sel('Objetivo de peso', 'goal', [['mant', 'Mantener'], ['perder', 'Perder peso'], ['ganar', 'Ganar peso']]) + '</div>';
+    h += '<label>Calcular TFG (CKD-EPI 2021) · creatinina (mg/dL)</label><div class="row"><input id="creat" type="text" inputmode="decimal" autocomplete="off" placeholder="p. ej. 1,6"><button class="btn s" data-act="egfr" type="button">Calcular</button></div><div id="egfrOut" class="mut"></div></div>';
+    h += '<div class="card"><h3>Analítica (opcional pero recomendable)</h3><div class="row">' + inp('Potasio (mmol/L)', 'labs.k', 'number', '', '0.1') + inp('Fósforo (mg/dL)', 'labs.p', 'number', '', '0.1') + inp('Albúmina (g/dL)', 'labs.alb', 'number', '', '0.1') + '</div><div class="mut">Sin analítica se usa una pauta orientativa por estadio. Con ella, el potasio y el fósforo se ajustan a tus valores.</div></div>';
+    h += '<div class="card"><h3>Comorbilidades y tratamientos</h3><div class="row"><div>' + chk('', 'Diabetes tipo 2', 'conds.dm2') + chk('', 'Diabetes con insulina/sulfonilureas', 'conds.dmhypo') + chk('', 'Hipertensión', 'conds.hta') + chk('', 'Insuficiencia cardiaca', 'conds.icc') + chk('', 'Toma IECA/ARA-II/ARM', 'conds.raasi') + chk('', 'Toma iSGLT2', 'conds.sglt2') + chk('', 'Anticoagulado con warfarina/acenocumarol', 'conds.warf') + '</div><div>' + chk('', 'Gota / hiperuricemia', 'conds.gota') + chk('', 'Acidosis metabólica', 'conds.acid') + chk('', 'Hiperfosforemia conocida', 'conds.hiperp') + chk('', 'Hiperpotasemia previa', 'conds.hiperkprev') + chk('', 'Sarcopenia', 'conds.sarcop') + chk('', 'Desnutrición / desgaste proteico', 'conds.pew') + chk('', 'Pierde sal (no restringir sodio)', 'conds.salwast') + chk('', 'Osteoporosis', 'conds.osteop') + '</div></div></div>';
+    h += '<div class="card"><h3>Preferencias de dieta</h3>' + sel('Patrón', 'diet.veg', [[0, 'Omnívora'], [1, 'Vegetariana (con huevo y lácteos)'], [2, 'Vegana']]) + '<div class="row"><div>' + chk('', 'Sin gluten', 'diet.noGluten') + chk('', 'Sin lactosa/lácteos', 'diet.noLact') + chk('', 'Sin huevo', 'diet.noHuevo') + chk('', 'Sin pescado', 'diet.noPescado') + '</div><div>' + chk('', 'Sin frutos secos', 'diet.noFrutosec') + chk('', 'Sin soja', 'diet.noSoja') + chk('', 'Sin legumbres', 'diet.noLegumbre') + chk('', 'Usar pan con sal (sodio mayor)', 'panSal') + '</div></div>' + chk('', 'Pauta hipoproteica 0,6 g/kg (solo con supervisión; se ignora si hay fragilidad)', 'restrict') + '<div class="mut">Inicio del plan</div>' + '<input data-k="startDate" type="date" value="' + esc(S.p.startDate) + '"></div>';
+    h += '<div class="card"><h3>Ejercicio: cribado funcional</h3><div class="mut">Esta prueba decide tu nivel de partida.</div><div class="row">' + inp('5 levantadas de silla (segundos; 0 = no puede)', 'func.sts5', 'number', '', '0.1') + sel('Camina 10 min seguidos', 'func.walk', [['', 'Sin datos'], ['si', 'Sí'], ['pausas', 'Con pausas'], ['no', 'No']]) + sel('Sube un piso de escaleras', 'func.stairs', [['', 'Sin datos'], ['si', 'Sí'], ['baranda', 'Con barandilla'], ['no', 'No']]) + '</div><div class="row">' + inp('Fuerza de agarre (kg)', 'func.grip', 'number') + inp('Velocidad de marcha (m/s)', 'func.gait', 'number', '', '0.01') + inp('Caídas último año', 'func.falls', 'number') + inp('Min/sem actividad moderada', 'func.act', 'number') + '</div>';
+    h += '<h3>Limitaciones</h3><div class="row"><div>' + chk('', 'Cardiopatía', 'exconds.cardio') + chk('', 'EPOC', 'exconds.epoc') + chk('', 'Rodilla', 'exconds.knee') + chk('', 'Cadera', 'exconds.hip') + chk('', 'Lumbar', 'exconds.lumb') + chk('', 'Hombro', 'exconds.shoulder') + '</div><div>' + chk('', 'Neuropatía / pie diabético', 'exconds.neuro') + chk('', 'Retinopatía proliferativa', 'exconds.retin') + chk('', 'Claudicación', 'exconds.claud') + chk('', 'Mano/muñeca', 'exconds.hand') + chk('', 'Amputación', 'exconds.amput') + chk('', 'Mareos / inestabilidad', 'exconds.balance') + '</div></div>';
+    h += '<div class="mut">Días de hemodiálisis (si aplica)</div><div class="chips">';
+    var i; for (i = 0; i < 7; i++) { var on = false, j; for (j = 0; j < S.p.hdDays.length; j++) { if (S.p.hdDays[j] === i) { on = true; } } h += '<button class="chip' + (on ? ' on' : '') + '" data-act="hdday" data-d="' + i + '">' + DAYS[i] + '</button>'; }
+    h += '</div></div>';
+    h += '<div class="card"><label class="ack"><input type="checkbox" id="ack"' + (S.ok ? ' checked' : '') + '><span>Entiendo que NEFRONA es un apoyo informativo y que debo contrastar la pauta con mi equipo sanitario antes de aplicarla. No es un producto sanitario validado.</span></label></div>';
+    h += '<button class="btn w" data-act="gen">Generar mi plan de 2 meses</button><div class="row" style="margin-top:10px"><button class="btn s" data-act="export" type="button">Exportar datos</button><button class="btn s" data-act="import" type="button">Importar</button><button class="btn s" data-act="reset" type="button">Borrar todo</button></div><input type="file" id="impf" class="hide" accept=".json,application/json">';
+    return h;
+  }
+
+  function meter(label, val, cap, unit, invert) {
+    var pct = cap ? Math.min(100, Math.round(val / cap * 100)) : 0, over = cap && (invert ? false : val > cap * 1.03);
+    return '<div class="meter' + (over ? ' over' : '') + '"><div class="t"><span>' + label + '</span><span>' + Math.round(val) + (cap ? ' / ' + Math.round(cap) : '') + ' ' + unit + '</span></div><div class="b"><i style="width:' + pct + '%"></i></div></div>';
+  }
+  function dateLabel(iso) { var d = new Date(iso + 'T12:00:00'); return DAYS[(d.getDay() + 6) % 7] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()]; }
+
+  function targetsCard() {
+    var h = '<div class="card"><h3>Tu pauta</h3><div class="kv">';
+    h += '<div><b>' + T.protDay + ' g</b><small>proteína · ' + T.protG + ' g/kg de ' + T.refW + ' kg</small></div>';
+    h += '<div><b>' + T.kcal + '</b><small>kcal · ' + T.kcalPerKg + ' kcal/kg</small></div>';
+    h += '<div><b>' + (T.na ? '< ' + T.na + ' mg' : 'sin tope') + '</b><small>sodio</small></div>';
+    h += '<div><b>' + (T.kCap ? '< ' + T.kCap + ' mg' : 'libre') + '</b><small>potasio (' + T.kMode + ')</small></div>';
+    h += '<div><b>' + (T.pCap ? '< ' + T.pCap + ' mg' : 'sin tope') + '</b><small>fósforo (' + T.pMode + ')</small></div>';
+    h += '<div><b>' + T.ca[0] + '-' + T.ca[1] + ' mg</b><small>calcio objetivo</small></div></div>';
+    h += '<div class="mut" style="margin-top:6px">' + esc(T.kWhy) + ' ' + esc(T.pWhy) + '</div><div class="mut"><b>Líquidos:</b> ' + esc(T.fluid) + '</div>';
+    var i; for (i = 0; i < T.rules.length; i++) { var r = T.rules[i]; h += '<div class="box ' + r.lvl + '">' + esc(r.t) + '<div>' + refTags(r.src) + '</div></div>'; }
+    return h + '</div>';
+  }
+
+  function vDiet() {
+    ensure();
+    if (T && T.blocked === 'peds') { return '<h2>Dieta</h2><div class="box alert">NEFRONA es solo para adultos (≥ 18 años). En pediatría la dieta renal la pauta nefrología pediátrica.</div>'; }
+    if (T && T.blocked === 'datos') { return '<h2>Dieta</h2><div class="box warn">Faltan datos: introduce edad, peso y talla en Perfil.</div>'; }
+    if (!plan) { return '<h2>Dieta</h2><div class="box info">Rellena tu perfil y pulsa «Generar mi plan».</div>'; }
+    var st = plan.stats, h = '<h2>Dieta · 8 semanas</h2>' + targetsCard();
+    h += '<div class="card"><h3>Resumen del plan</h3><div class="kv"><div><b>' + st.ok + '/' + st.n + '</b><small>días dentro de objetivos</small></div><div><b>' + Math.round(st.avg.kcal) + '</b><small>kcal medias</small></div><div><b>' + st.avg.p.toFixed(0) + ' g</b><small>proteína media</small></div><div><b>' + Math.round(st.avg.k) + '</b><small>K medio (mg)</small></div><div><b>' + Math.round(st.avg.ph) + '</b><small>P medio (mg)</small></div><div><b>' + Math.round(st.avg.na) + '</b><small>Na medio (mg)</small></div></div><div class="mut" style="margin-top:6px">Reparto de energía: proteínas ' + st.avg.pc.toFixed(0) + ' % · hidratos ' + st.avg.cc.toFixed(0) + ' % · grasas ' + st.avg.fc.toFixed(0) + ' %. Calcio dietético medio ' + Math.round(st.avg.ca) + ' mg (por debajo del objetivo: ver Evidencia).</div><button class="btn s sm" data-act="print" style="margin-top:8px">Imprimir / PDF</button></div>';
+    h += '<div class="chips">'; var w; for (w = 0; w < 8; w++) { h += '<button class="chip' + (S.wk === w ? ' on' : '') + '" data-act="wk" data-w="' + w + '">Sem. ' + (w + 1) + '</button>'; } h += '</div><div class="chips">';
+    var d; for (d = 0; d < 7; d++) { var idx = S.wk * 7 + d; if (idx >= plan.days.length) { break; } h += '<button class="chip' + (S.day === d ? ' on' : '') + '" data-act="day" data-d="' + d + '">' + dateLabel(plan.days[idx].date) + '</button>'; } h += '</div>';
+    var di = Math.min(S.wk * 7 + S.day, plan.days.length - 1), day = plan.days[di];
+    h += '<div class="card"><h3>' + dateLabel(day.date) + (day.ok ? '' : ' <span class="mut">· revisa: ' + day.issues.join(', ') + '</span>') + '</h3>';
+    h += meter('Energía', day.tot.kcal, T.kcal, 'kcal', true) + meter('Proteína', day.tot.p, T.protDay, 'g', true) + (T.kCap ? meter('Potasio', day.tot.k, T.kCap, 'mg') : meter('Potasio', day.tot.k, 0, 'mg')) + (T.pCap ? meter('Fósforo', day.tot.ph, T.pCap, 'mg') : meter('Fósforo', day.tot.ph, 0, 'mg')) + meter('Sodio', day.tot.na, T.na || 0, 'mg');
+    var s, SL = NEF.SLOTS; for (s = 0; s < SL.length; s++) { h += mealHtml(di, SL[s], day.meals[SL[s]]); }
+    return h + '</div>';
+  }
+  function mealHtml(di, slot, m) {
+    if (!m) { return ''; }
+    var key = di + '_' + slot, open = !!S.open[key], i, h = '<div class="meal"><div class="h" data-act="meal" data-key="' + key + '"><div><div class="mut">' + NEF.SLOT_NAME[slot] + '</div><b>' + esc(m.name) + '</b></div><div class="mut" style="text-align:right">' + Math.round(m.tot.kcal) + ' kcal<br>' + m.tot.p.toFixed(0) + ' g prot.</div></div>';
+    h += '<ul>'; for (i = 0; i < m.items.length; i++) { var it = m.items[i]; if (it.f === 'cafe') { continue; } h += '<li>' + esc(NEF.fmtQty(it.f, it.g)) + ' · ' + esc(FOODS[it.f].n) + '</li>'; }
+    if (m.postre) { h += '<li>' + esc(NEF.fmtQty(m.postre.f, m.postre.g)) + ' · ' + esc(FOODS[m.postre.f].n) + ' (postre)</li>'; }
+    h += '</ul><div class="mut">K ' + Math.round(m.tot.k) + ' · P ' + Math.round(m.tot.ph) + ' · Na ' + Math.round(m.tot.na) + ' mg</div>';
+    if (open) {
+      var dsh = DISHES[m.dish];
+      h += '<div class="det">';
+      if (dsh) { h += '<ol>'; for (i = 0; i < dsh.st.length; i++) { h += '<li>' + esc(dsh.st[i]) + '</li>'; } h += '</ol>'; if (dsh.tip) { h += '<div class="mut">' + esc(dsh.tip) + '</div>'; } h += '<div class="mut">≈ ' + dsh.min + ' min</div>'; }
+      if (!m.virt) { h += '<button class="btn s sm" data-act="alts" data-key="' + key + '" style="margin-top:6px">Cambiar plato</button>'; }
+      h += '<div id="alt_' + key + '"></div></div>';
+    }
+    return h + '</div>';
+  }
+
+  function vShop() {
+    ensure();
+    if (!plan) { return '<h2>Compra</h2><div class="box info">Genera primero tu plan.</div>'; }
+    var h = '<h2>Lista de la compra</h2><div class="chips"><button class="chip' + (S.shopWk === -1 ? ' on' : '') + '" data-act="shopwk" data-w="-1">Total</button>';
+    var w; for (w = 0; w < 8; w++) { h += '<button class="chip' + (S.shopWk === w ? ' on' : '') + '" data-act="shopwk" data-w="' + w + '">Sem. ' + (w + 1) + '</button>'; }
+    h += '</div>'; var groups = NEF.shoppingGroups(NEF.shopping(plan, S.shopWk)), g, r;
+    for (g = 0; g < groups.length; g++) { h += '<div class="card"><h3>' + groups[g].name + '</h3>'; for (r = 0; r < groups[g].rows.length; r++) { var row = groups[g].rows[r], k = S.shopWk + '_' + row.f; h += '<label class="ck"><input type="checkbox" data-shop="' + k + '"' + (S.shop[k] ? ' checked' : '') + '>' + esc(FOODS[row.f].n) + ' · ' + esc(NEF.fmtQty(row.f, row.g)) + '</label>'; } h += '</div>'; }
+    return h + '<div class="mut">Cantidades en peso en crudo salvo indicación; incluye todas las tomas. El calabacín, la verdura y la patata se cuecen y se desecha el agua.</div>';
+  }
+
+  function dose(it) {
+    var each = it.each ? ' por lado' : '';
+    if (it.type === 'reps') { return it.sets + ' × ' + it.reps + each; }
+    if (it.type === 'isom') { return it.sets + ' × ' + it.secs + ' s' + each; }
+    if (it.min) { return it.min + ' min'; }
+    return it.secs >= 60 ? Math.round(it.secs / 60 * 10) / 10 + ' min' : it.secs + ' s' + each;
+  }
+  function vEx() {
+    var p = prepProfile(), lvl = p.exLevel, wk = NEFEX.week(p, S.exwk), h = '<h2>Ejercicio · 8 semanas</h2>';
+    h += '<div class="card"><h3>' + esc(lvl.name) + '</h3><div class="mut">Puntuación funcional ' + lvl.score + '. Edad ' + (p.age || '?') + ', ' + (p.sex === 'F' ? 'mujer' : 'hombre') + ', estadio ' + p.stage + '.</div>';
+    var i; for (i = 0; i < lvl.notes.length; i++) { h += '<div class="box info">' + esc(lvl.notes[i]) + '</div>'; }
+    h += '<div class="mut">Intensidad: RPE 11-13 de 20 y prueba del habla. Fuerza ' + (lvl.level >= 3 ? 3 : 2) + ' días/sem. ' + refTags(['baker22', 'who20', 'acsm11', 'borg82']) + '</div></div>';
+    h += '<div class="chips">'; var w; for (w = 0; w < 8; w++) { h += '<button class="chip' + (S.exwk === w ? ' on' : '') + '" data-act="exwk" data-w="' + w + '">Sem. ' + (w + 1) + '</button>'; } h += '</div>';
+    h += '<div class="card"><b>Semana ' + (S.exwk + 1) + ' · ' + wk.phase + '</b><div class="mut">≈ ' + wk.totalAer + ' min de aeróbico · ' + wk.sets + ' series × ' + wk.reps + ' repeticiones de fuerza</div></div>';
+    var d; for (d = 0; d < 7; d++) {
+      var day = wk.days[d], key = S.exwk + '_' + d, open = !!S.open['x' + key], done = !!S.done[key];
+      h += '<div class="card"><div class="meal" style="border:0;padding:0"><div class="h" data-act="exday" data-key="x' + key + '"><div><b>' + day.icon + ' ' + day.name + '</b><div class="mut">' + esc(day.focus) + (day.kind === 'rest' ? '' : ' · ≈ ' + day.mins + ' min') + '</div></div><div>' + (done ? '✅' : '▸') + '</div></div>';
+      if (open) {
+        var b, j;
+        for (b = 0; b < day.blocks.length; b++) { h += '<h3>' + esc(day.blocks[b].t) + '</h3>'; for (j = 0; j < day.blocks[b].items.length; j++) { var it = day.blocks[b].items[j]; h += '<div class="ex"><b>' + esc(it.n) + '</b> · ' + dose(it) + '<div class="mut">' + esc(it.desc) + (it.tip ? ' <i>' + esc(it.tip) + '</i>' : '') + '</div></div>'; } }
+        if (day.kind !== 'rest') { h += '<div class="row" style="margin-top:8px"><button class="btn sm" data-act="run" data-key="' + key + '">Empezar sesión</button><button class="btn s sm" data-act="done" data-key="' + key + '">' + (done ? 'Desmarcar' : 'Marcar hecha') + '</button></div>'; }
+      }
+      h += '</div></div>';
+    }
+    var sf = NEFEX.safety(p); h += '<div class="card"><h3>Seguridad</h3>'; for (i = 0; i < sf.length; i++) { h += '<div class="box ' + sf[i].lvl + '">' + esc(sf[i].t) + '<div>' + refTags(sf[i].src) + '</div></div>'; } h += '</div>';
+    ensure(); var sy = NEFEX.synergy(p, T); h += '<div class="card"><h3>Dieta y ejercicio</h3>'; for (i = 0; i < sy.length; i++) { h += '<div class="box info">' + esc(sy[i]) + '</div>'; } return h + '</div>';
+  }
+
+  function vEvid() {
+    var h = '<h2>Evidencia</h2><div class="box warn"><b>Sobre la bibliografía.</b> Cada referencia indica si se comprobó en línea (título, revista y DOI) durante la elaboración (verde) o si es una cita de la literatura cuyo DOI conviene verificar (ámbar). Antes de citar una referencia, ábrela en doi.org o PubMed.</div>';
+    h += '<h3>Controversias</h3>'; var i, j;
+    for (i = 0; i < CONTR.length; i++) {
+      var c = CONTR[i], open = !!S.open['c' + c.id];
+      h += '<div class="card"><div class="meal" style="border:0;padding:0"><div class="h" data-act="contr" data-key="c' + c.id + '"><b>' + esc(c.t) + '</b><span>' + (open ? '▾' : '▸') + '</span></div>';
+      if (open) { h += '<ul>'; for (j = 0; j < c.pos.length; j++) { h += '<li><b>' + esc(c.pos[j][0]) + ':</b> ' + esc(c.pos[j][1]) + '</li>'; } h += '</ul><div class="box info"><b>Certeza de la evidencia:</b> ' + esc(c.ev) + '</div><div class="box warn"><b>Qué hace NEFRONA:</b> ' + esc(c.app) + '</div><div>' + refTags(c.refs.split(' ')) + '</div>'; }
+      h += '</div></div>';
+    }
+    h += '<h3>Método y límites</h3><div class="card"><ul><li>Energía: Mifflin-St Jeor × actividad, acotada a 25-35 kcal/kg del peso de referencia (peso ajustado si IMC ≥ 25).</li><li>Proteína y electrolitos: reglas de KDIGO 2024, KDOQI 2020, ESPEN 2021, ASN 2025 y KDIGO diabetes 2022 (ver Perfil y Dieta).</li><li>Composición de alimentos: tabla propia con valores aproximados (USDA/BEDCA, redondeados); verduras como hervidas con agua desechada. Puede diferir de tu producto o etiquetado.</li><li>Los 56 días se generan con un planificador por puntuación con comprobación diaria de objetivos; los menús rotan por estación.</li><li>Limitaciones conocidas: el calcio dietético queda por debajo de 800 mg; en dieta vegana en hemodiálisis el fósforo queda cerca del tope; los hidratos suponen 52-65 % de la energía.</li><li>No hay validación clínica prospectiva de NEFRONA. Software de prescripción personalizada puede considerarse producto sanitario (Reglamento UE 2017/745); no usar como tal sin evaluación.</li></ul></div>';
+    h += '<h3>Referencias</h3>'; var ids = [], k; for (k in REFS) { if (REFS.hasOwnProperty(k)) { ids.push(k); } }
+    for (i = 0; i < ids.length; i++) { var r = REFS[ids[i]]; h += '<div class="card" id="ref_' + r.id + '"><span class="tag ' + (r.v ? '' : 'v0') + '">' + (r.v ? 'comprobada' : 'DOI por verificar') + '</span><div>' + esc(r.cit) + '</div>' + (r.doi ? '<div class="mut">DOI: <a href="https://doi.org/' + esc(r.doi) + '" target="_blank" rel="noopener">' + esc(r.doi) + '</a></div>' : '') + (r.note ? '<div class="mut">' + esc(r.note) + '</div>' : '') + '</div>'; }
+    return h;
+  }
+
+  /* ---------- render ---------- */
+  var TABS = [['perfil', '👤', 'Perfil'], ['dieta', '🥗', 'Dieta'], ['ejer', '🚶', 'Ejercicio'], ['compra', '🛒', 'Compra'], ['evid', '📚', 'Evidencia']];
+  function render() {
+    var h = '';
+    if (S.tab === 'perfil') { h = vProfile(); } else if (S.tab === 'dieta') { h = vDiet(); } else if (S.tab === 'ejer') { h = vEx(); } else if (S.tab === 'compra') { h = vShop(); } else { h = vEvid(); }
+    view.innerHTML = h;
+    var n = '', i; for (i = 0; i < TABS.length; i++) { n += '<button class="' + (S.tab === TABS[i][0] ? 'on' : '') + '" data-act="tab" data-t="' + TABS[i][0] + '"><i>' + TABS[i][1] + '</i>' + TABS[i][2] + '</button>'; }
+    $('tabs').innerHTML = n;
+  }
+  function rerender(keepScroll) { var y = window.pageYOffset; render(); if (keepScroll) { window.scrollTo(0, y); } }
+
+  /* ---------- sesión guiada ---------- */
+  function flat(day) {
+    var steps = [], b, j, s, it;
+    for (b = 0; b < day.blocks.length; b++) {
+      for (j = 0; j < day.blocks[b].items.length; j++) {
+        it = day.blocks[b].items[j];
+        if (it.type === 'reps') { steps.push({ it: it, kind: 'reps', title: it.n, txt: it.sets + ' series × ' + it.reps + (it.each ? ' por lado' : '') + '. Descansa ' + it.rest + ' s entre series.' }); }
+        else { var n = it.min ? 1 : (it.sets || 1); for (s = 0; s < n; s++) { steps.push({ it: it, kind: 'time', secs: it.secs, title: it.n + (n > 1 ? ' (' + (s + 1) + '/' + n + ')' : ''), txt: dose(it) }); } }
+      }
+    }
+    return steps;
+  }
+  function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
+  function fmtT(s) { var m = Math.floor(s / 60), r = s % 60; return m + ':' + (r < 10 ? '0' : '') + r; }
+  function runView() {
+    var r = runState, st = r.steps[r.i], el = $('run');
+    if (!st) { el.innerHTML = '<h2>¡Sesión completada! 🎉</h2><p>Bebe agua dentro de tus límites, levántate despacio y anótala como hecha.</p><button class="btn w" data-act="runfin">Marcar hecha y salir</button>'; return; }
+    var h = '<div class="mut">Paso ' + (r.i + 1) + ' de ' + r.steps.length + '</div><h2>' + esc(st.title) + '</h2><p>' + esc(st.it.desc) + '</p><p class="mut">' + esc(st.it.tip) + '</p><div class="box info">' + esc(st.txt) + '</div>';
+    if (st.kind === 'time') { h += '<div class="big" id="clk">' + fmtT(r.left == null ? st.secs : r.left) + '</div><div class="row"><button class="btn" data-act="runstart">' + (timer ? 'Pausa' : 'Iniciar') + '</button></div>'; }
+    h += '<div class="row" style="margin-top:12px"><button class="btn s" data-act="runprev">Anterior</button><button class="btn" data-act="runnext">Siguiente</button></div><button class="btn s w" style="margin-top:10px" data-act="runexit">Salir</button>';
+    el.innerHTML = h;
+  }
+  function startRun(key) {
+    var parts = key.split('_'), p = prepProfile(), wk = NEFEX.week(p, +parts[0]), day = wk.days[+parts[1]];
+    runState = { key: key, steps: flat(day), i: 0, left: null }; $('run').classList.remove('hide'); runView();
+  }
+  function tick() {
+    var r = runState; if (!r) { stopTimer(); return; }
+    if (r.left == null) { r.left = r.steps[r.i].secs; }
+    r.left--; var c = $('clk'); if (c) { c.textContent = fmtT(Math.max(0, r.left)); }
+    if (r.left <= 0) { stopTimer(); try { if (navigator.vibrate) { navigator.vibrate(300); } } catch (e) { /* sin vibración */ } toast('Tiempo'); r.left = null; r.i++; runView(); }
+  }
+
+  /* ---------- eventos ---------- */
+  function onClick(ev) {
+    var t = ev.target, act = null, i;
+    while (t && t !== document) { if (t.getAttribute && t.getAttribute('data-act')) { act = t; break; } t = t.parentNode; }
+    if (!act) { return; }
+    var a = act.getAttribute('data-act');
+    if (a === 'tab') { S.tab = act.getAttribute('data-t'); save(); render(); window.scrollTo(0, 0); }
+    else if (a === 'gen') {
+      if (!$('ack').checked) { toast('Marca la casilla de aviso'); return; }
+      S.ok = true; var p = S.p; if (!(+p.age >= 18) || !(+p.weight > 25) || !(+p.height > 120)) { toast('Completa edad (≥18), peso y talla'); return; }
+      var b = act; b.textContent = 'Calculando…'; setTimeout(function () { try { S.over = {}; build(); S.tab = 'dieta'; S.wk = 0; S.day = 0; save(); render(); window.scrollTo(0, 0); } catch (e) { toast('Error al generar: ' + e.message); b.textContent = 'Generar mi plan de 2 meses'; } }, 30);
+    }
+    else if (a === 'hdday') { var d = +act.getAttribute('data-d'), arr = S.p.hdDays.slice(), ix = arr.indexOf(d); if (ix >= 0) { arr.splice(ix, 1); } else { arr.push(d); arr.sort(); } S.p.hdDays = arr; save(); rerender(true); }
+    else if (a === 'egfr') {
+      var cr = parseFloat(String($('creat').value).replace(',', '.')), age = +S.p.age, f = S.p.sex === 'F';
+      if (!(cr > 0) || !(age >= 18)) { toast('Falta creatinina o edad'); return; }
+      var k = f ? 0.7 : 0.9, al = f ? -0.241 : -0.302, e = 142 * Math.pow(Math.min(cr / k, 1), al) * Math.pow(Math.max(cr / k, 1), -1.2) * Math.pow(0.9938, age) * (f ? 1.012 : 1);
+      var g = e >= 90 ? 'G1' : e >= 60 ? 'G2' : e >= 45 ? 'G3a' : e >= 30 ? 'G3b' : e >= 15 ? 'G4' : 'G5';
+      $('egfrOut').textContent = 'TFG estimada ≈ ' + Math.round(e) + ' mL/min/1,73 m² → estadio ' + g + ' (orientativo; requiere ≥ 3 meses y valoración clínica).';
+    }
+    else if (a === 'wk') { S.wk = +act.getAttribute('data-w'); S.day = 0; save(); rerender(); }
+    else if (a === 'day') { S.day = +act.getAttribute('data-d'); save(); rerender(); }
+    else if (a === 'meal') { var kk = act.getAttribute('data-key'); S.open[kk] = !S.open[kk]; save(); rerender(true); }
+    else if (a === 'alts') {
+      var key = act.getAttribute('data-key'), pr = key.split('_'), alts = NEF.alternatives(ctx, plan, +pr[0], pr[1], 6), h = '<div class="mut" style="margin-top:6px">Alternativas:</div>';
+      if (!alts.length) { h = '<div class="mut">No hay alternativas que cumplan tu pauta.</div>'; }
+      for (i = 0; i < alts.length; i++) { h += '<button class="chip" style="display:block;margin:4px 0;width:100%;text-align:left" data-act="doswap" data-key="' + key + '" data-dish="' + alts[i].id + '">' + esc(alts[i].name) + ' · ' + Math.round(alts[i].tot.kcal) + ' kcal · ' + alts[i].tot.p.toFixed(0) + ' g prot.</button>'; }
+      $('alt_' + key).innerHTML = h;
+    }
+    else if (a === 'doswap') { var k2 = act.getAttribute('data-key'), p2 = k2.split('_'); if (NEF.swapMeal(ctx, plan, +p2[0], p2[1], act.getAttribute('data-dish'))) { S.over[k2] = act.getAttribute('data-dish'); save(); rerender(true); toast('Plato cambiado'); } }
+    else if (a === 'shopwk') { S.shopWk = +act.getAttribute('data-w'); save(); rerender(); }
+    else if (a === 'exwk') { S.exwk = +act.getAttribute('data-w'); save(); rerender(); }
+    else if (a === 'exday' || a === 'contr') { var k3 = act.getAttribute('data-key'); S.open[k3] = !S.open[k3]; save(); rerender(true); }
+    else if (a === 'done') { var k4 = act.getAttribute('data-key'); S.done[k4] = !S.done[k4]; save(); rerender(true); }
+    else if (a === 'run') { startRun(act.getAttribute('data-key')); }
+    else if (a === 'runstart') { if (timer) { stopTimer(); } else { timer = setInterval(tick, 1000); } runView(); }
+    else if (a === 'runnext') { stopTimer(); runState.i++; runState.left = null; runView(); }
+    else if (a === 'runprev') { stopTimer(); runState.i = Math.max(0, runState.i - 1); runState.left = null; runView(); }
+    else if (a === 'runexit') { stopTimer(); runState = null; $('run').classList.add('hide'); }
+    else if (a === 'runfin') { stopTimer(); S.done[runState.key] = true; runState = null; save(); $('run').classList.add('hide'); rerender(true); }
+    else if (a === 'ref') { var id = act.getAttribute('data-id'); S.tab = 'evid'; save(); render(); var el = $('ref_' + id); if (el) { el.scrollIntoView(); el.style.outline = '2px solid var(--pri)'; } }
+    else if (a === 'print') { printPlan(); }
+    else if (a === 'export') { exportData(); }
+    else if (a === 'import') { $('impf').click(); }
+    else if (a === 'theme') { S.theme = (curTheme() === 'dark') ? 'light' : 'dark'; applyTheme(); save(); }
+    else if (a === 'wipe' || a === 'reset') {
+      if (!wipeArmed) { wipeArmed = true; toast('Pulsa de nuevo 🗑 para borrar TODO'); var hb = document.querySelector('header [data-act=wipe]'); if (hb) { hb.style.background = '#b91c1c'; } setTimeout(function () { wipeArmed = false; var h2 = document.querySelector('header [data-act=wipe]'); if (h2) { h2.style.background = ''; } }, 4000); return; }
+      wipeArmed = false; var hb2 = document.querySelector('header [data-act=wipe]'); if (hb2) { hb2.style.background = ''; }
+      var th = S.theme; try { localStorage.removeItem(KEY); } catch (e) { /* nada */ } S = defaults(); S.theme = th; plan = null; T = null; stopTimer(); runState = null; $('run').classList.add('hide'); save(); render(); window.scrollTo(0, 0); toast('Datos del paciente borrados'); }
+  }
+  function onChange(ev) {
+    var t = ev.target, k = t.getAttribute && t.getAttribute('data-k');
+    if (k) {
+      var v;
+      if (t.type === 'checkbox') { v = t.checked; } else if (t.getAttribute('data-num')) { v = t.value === '' ? '' : parseFloat(String(t.value).replace(',', '.')); if (v !== '' && isNaN(v)) { v = ''; } } else { v = t.value; }
+      if (k === 'diet.veg') { v = +v; }
+      setPath(S.p, k, v); save(); return;
+    }
+    if (t.getAttribute && t.getAttribute('data-shop')) { S.shop[t.getAttribute('data-shop')] = t.checked; save(); return; }
+    if (t.id === 'ack') { S.ok = t.checked; save(); return; }
+    if (t.id === 'impf' && t.files && t.files[0]) {
+      var fr = new FileReader(); fr.onload = function () { try { var o = JSON.parse(fr.result); if (!o.p) { throw new Error('formato'); } S = o; var d0 = defaults(), q; for (q in d0) { if (d0.hasOwnProperty(q) && S[q] === undefined) { S[q] = d0[q]; } } plan = null; save(); render(); toast('Datos importados'); } catch (e) { toast('Archivo no válido'); } }; fr.readAsText(t.files[0]);
+    }
+  }
+  function exportData() {
+    var s = JSON.stringify(S, null, 1);
+    try { var b = new Blob([s], { type: 'application/json' }), a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'nefrona-datos.json'; document.body.appendChild(a); a.click(); setTimeout(function () { document.body.removeChild(a); }, 500); }
+    catch (e) { toast('No se pudo exportar'); }
+  }
+  function printPlan() {
+    ensure(); if (!plan) { return; }
+    var h = '<h1>NEFRONA · plan de 8 semanas</h1><p>Proteína ' + T.protDay + ' g · ' + T.kcal + ' kcal · Na &lt; ' + (T.na || '—') + ' mg · K ' + (T.kCap ? '&lt; ' + T.kCap + ' mg' : 'libre') + ' · P ' + (T.pCap ? '&lt; ' + T.pCap + ' mg' : 'sin tope') + '. Herramienta de apoyo; contrasta con tu equipo sanitario.</p>';
+    var w, d, s, SL = NEF.SLOTS;
+    for (w = 0; w < 8; w++) {
+      h += '<h2>Semana ' + (w + 1) + '</h2><table><tr><th>Día</th>';
+      for (s = 0; s < SL.length; s++) { h += '<th>' + NEF.SLOT_NAME[SL[s]] + '</th>'; }
+      h += '</tr>';
+      for (d = 0; d < 7; d++) {
+        var di = w * 7 + d; if (di >= plan.days.length) { break; }
+        h += '<tr><td>' + dateLabel(plan.days[di].date) + '</td>';
+        for (s = 0; s < SL.length; s++) { var m = plan.days[di].meals[SL[s]]; var its = []; if (m) { var q; for (q = 0; q < m.items.length; q++) { if (m.items[q].f !== 'cafe') { its.push(NEF.fmtQty(m.items[q].f, m.items[q].g) + ' ' + FOODS[m.items[q].f].n); } } if (m.postre) { its.push(NEF.fmtQty(m.postre.f, m.postre.g) + ' ' + FOODS[m.postre.f].n); } } h += '<td><b>' + esc(m ? m.name : '') + '</b><br>' + esc(its.join('; ')) + '</td>'; }
+        h += '</tr>';
+      }
+      h += '</table>';
+    }
+    $('print').innerHTML = h; window.print();
+  }
+
+  function curTheme() { if (S.theme) { return S.theme; } try { return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; } catch (e) { return 'light'; } }
+  function applyTheme() { document.documentElement.setAttribute('data-theme', curTheme()); var m = document.querySelector('meta[name=theme-color]'); if (m) { m.setAttribute('content', curTheme() === 'dark' ? '#0d1a1e' : '#0f766e'); } }
+  /* ---------- PWA ---------- */
+  function setupPWA() {
+    try {
+      var c = document.createElement('canvas'); c.width = c.height = 180; var x = c.getContext('2d');
+      x.fillStyle = '#0f766e'; x.fillRect(0, 0, 180, 180); x.fillStyle = '#fff'; x.font = 'bold 110px -apple-system,Helvetica,Arial'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText('N', 90, 96);
+      var url = c.toDataURL('image/png'), l = document.createElement('link'); l.rel = 'apple-touch-icon'; l.href = url; document.head.appendChild(l);
+      var m = { name: 'NEFRONA', short_name: 'NEFRONA', start_url: '.', display: 'standalone', background_color: '#f4f7f8', theme_color: '#0f766e', icons: [{ src: url, sizes: '180x180', type: 'image/png' }] };
+      var ml = document.createElement('link'); ml.rel = 'manifest'; ml.href = URL.createObjectURL(new Blob([JSON.stringify(m)], { type: 'application/manifest+json' })); document.head.appendChild(ml);
+    } catch (e) { /* sin icono */ }
+  }
+
+  A.init = function () {
+    S = load(); view = $('view'); applyTheme();
+    document.addEventListener('click', onClick, false);
+    document.addEventListener('change', onChange, false);
+    setupPWA(); render();
+  };
+  A.dbg = function () { return { S: S, plan: plan, T: T }; };
+  return A;
+})();
+document.addEventListener('DOMContentLoaded', function () { APP.init(); }, false);
+</script></body></html>
