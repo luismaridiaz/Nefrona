@@ -504,6 +504,134 @@ D('c_veg_tofu_patata', 'Tofu a la plancha con patatas y judías verdes', 'C CE',
 
 /* ======================= POSTRES / FRUTA (se generan por temporada) ======================= */
 /* Meses 1-12. m: [inicio, fin] */
+
+/* ======================= AMPLIACIÓN DE PLATOS PRINCIPALES ======================= */
+D('c_n_bacalao_calabacin', 'Bacalao con calabacín y arroz al limón', 'C CE',
+  [['bacalao', 130, 'p'], ['calabacin', 90, 'v'], ['arroz', 140, 'e'], ['aove', 8, 'e'], ['limon', 8, 'x']],
+  ['Si usas bacalao fresco o desalado, desala bien y escúrrelo.', 'Hierve el calabacín en abundante agua y desecha el agua.', 'Cocina el bacalao al vapor o a la plancha con limón.', 'Sirve con arroz hervido sin sal.'],
+  'El bacalao fresco aporta poco sodio; el salado debe desalarse 24-48 h cambiando el agua.', 25);
+D('c_n_dorada_patata', 'Dorada al horno con patata y pimiento', 'C CE',
+  [['dorada', 130, 'p'], ['patata', 150, 'e'], ['pimiento', 60, 'v'], ['cebolla', 30, 'v'], ['aove', 8, 'e']],
+  ['Corta la patata en dados pequeños, hiérvela y desecha el agua.', 'Hornea la dorada con cebolla y pimiento a 180 °C unos 20 minutos.', 'Sirve con la patata.'],
+  'Hornear conserva el sabor sin añadir sal.', 35);
+D('c_n_lubina_coliflor', 'Lubina a la plancha con coliflor y cuscús', 'C CE',
+  [['lubina', 130, 'p'], ['coliflor', 100, 'v'], ['cuscus', 140, 'e'], ['aove', 8, 'e'], ['limon', 8, 'x']],
+  ['Hierve la coliflor y desecha el agua.', 'Plancha la lubina con limón y pimienta.', 'Hidrata el cuscús con agua hirviendo y mézclalo con aceite.'],
+  'Alternativa baja en fósforo al arroz integral.', 25);
+D('c_n_rape_puerro', 'Rape con puerro y arroz', 'C CE',
+  [['rape', 140, 'p'], ['puerro', 80, 'v'], ['arroz', 140, 'e'], ['aove', 8, 'e'], ['ajo', 3, 'x']],
+  ['Rehoga el puerro y el ajo laminado con el aceite.', 'Añade el rape en trozos y cocina 8-10 minutos tapado.', 'Sirve con arroz hervido sin sal.'],
+  'El rape es de los pescados con menos fósforo por ración.', 25);
+D('c_n_merluza_verduras_pasta', 'Merluza en salsa de verduras con pasta', 'C CE',
+  [['merluza', 140, 'p'], ['pasta', 160, 'e'], ['zanahoria', 40, 'v'], ['calabacin', 60, 'v'], ['aove', 8, 'e']],
+  ['Hierve las verduras en dados pequeños y desecha el agua.', 'Saltea con el aceite y añade la merluza en trozos 6-8 minutos.', 'Mezcla con la pasta cocida sin sal.'],
+  'Salsa sin tomate frito comercial (lleva sal y azúcar).', 25);
+D('c_n_merluza_papillote', 'Merluza en papillote con verduras', 'C CE',
+  [['merluza', 140, 'p'], ['patata', 120, 'e'], ['judias', 70, 'v'], ['zanahoria', 40, 'v'], ['aove', 8, 'e'], ['limon', 8, 'x']],
+  ['Precuece patata, judías y zanahoria en dados y desecha el agua.', 'Envuelve con la merluza en papel de horno con limón y aceite.', 'Hornea 15 minutos a 190 °C.'],
+  'Mantiene los jugos sin necesidad de sal.', 30);
+D('c_n_salmon_arroz', 'Salmón a la plancha con arroz y coliflor', 'C CE',
+  [['salmon', 100, 'p'], ['arroz', 150, 'e'], ['coliflor', 80, 'v'], ['limon', 8, 'x'], ['aove', 4, 'e']],
+  ['Plancha el salmón con limón y pimienta.', 'Hierve la coliflor y desecha el agua.', 'Sirve con arroz.'],
+  'El salmón aporta omega-3, pero también más fósforo y potasio: ración moderada.', 20);
+D('c_n_cerdo_pimiento', 'Lomo de cerdo con pimiento y patata', 'C CE',
+  [['cerdo', 120, 'p'], ['pimiento', 70, 'v'], ['patata', 140, 'e'], ['cebolla', 30, 'v'], ['aove', 8, 'e']],
+  ['Corta la patata en dados pequeños, hiérvela y desecha el agua.', 'Saltea el cerdo en tiras con cebolla y pimiento.', 'Sirve con la patata.'],
+  'Usa lomo magro sin adobos comerciales (llevan sal y fosfatos).', 30);
+D('c_n_cerdo_arroz_judias', 'Cerdo salteado con judías verdes y arroz', 'C CE',
+  [['cerdo', 120, 'p'], ['judias', 90, 'v'], ['arroz', 150, 'e'], ['ajo', 3, 'x'], ['aove', 8, 'e']],
+  ['Hierve las judías y desecha el agua.', 'Saltea el cerdo con ajo y pimentón.', 'Añade las judías y sirve con arroz.'],
+  'Pimentón y ajo dan sabor sin sal.', 25);
+D('c_n_conejo_cebolla', 'Conejo guisado con cebolla y arroz', 'C CE',
+  [['conejo', 130, 'p'], ['cebolla', 50, 'v'], ['zanahoria', 40, 'v'], ['arroz', 140, 'e'], ['aove', 8, 'e']],
+  ['Dora el conejo con el aceite.', 'Añade cebolla, zanahoria y agua, y cuece 30 minutos.', 'Sirve con arroz hervido.'],
+  'Sin caldo comercial (llevan mucho sodio y potasio).', 45);
+D('c_n_ternera_berenjena', 'Ternera con berenjena y cuscús', 'C CE',
+  [['ternera', 110, 'p'], ['berenjena', 100, 'v'], ['cuscus', 140, 'e'], ['cebolla', 30, 'v'], ['aove', 8, 'e']],
+  ['Cuece la berenjena en dados y desecha el agua.', 'Saltea la ternera en tiras con cebolla.', 'Mezcla con la berenjena y sirve con cuscús.'],
+  'Alterna carnes rojas con aves y pescado.', 30);
+D('c_n_ternera_pasta', 'Pasta con ternera y verduras', 'C CE',
+  [['ternera', 100, 'p'], ['pasta', 160, 'e'], ['tomate', 60, 'v'], ['pimiento', 40, 'v'], ['aove', 8, 'e']],
+  ['Cuece la pasta sin sal.', 'Saltea la ternera picada con pimiento y tomate natural.', 'Mezcla con la pasta.'],
+  'Tomate natural, no frito en bote.', 25);
+D('c_n_pavo_calabacin', 'Pavo al horno con calabacín y arroz', 'C CE',
+  [['pavo', 120, 'p'], ['calabacin', 90, 'v'], ['arroz', 150, 'e'], ['aove', 8, 'e'], ['limon', 8, 'x']],
+  ['Hornea el pavo con limón y pimienta 20 minutos.', 'Saltea el calabacín cocido.', 'Sirve con arroz.'],
+  'El pavo fresco, no el fiambre.', 30);
+D('c_n_pavo_cuscus', 'Pavo en tiras con verduras y cuscús', 'C CE',
+  [['pavo', 120, 'p'], ['cuscus', 140, 'e'], ['pimiento', 50, 'v'], ['cebolla', 30, 'v'], ['aove', 8, 'e']],
+  ['Saltea el pavo en tiras con pimiento y cebolla.', 'Hidrata el cuscús y mézclalo.'],
+  'Especias suaves: comino, cúrcuma, pimienta.', 20);
+D('c_n_pollo_curry', 'Pollo al curry suave con arroz', 'C CE',
+  [['pollo', 120, 'p'], ['arroz', 150, 'e'], ['cebolla', 40, 'v'], ['calabacin', 60, 'v'], ['aove', 8, 'e']],
+  ['Dora el pollo en dados con cebolla.', 'Añade el calabacín, curry en polvo sin sal y un poco de agua; cuece 15 minutos.', 'Sirve con arroz.'],
+  'Comprueba que el curry en polvo no contenga sal añadida.', 25);
+D('c_n_pollo_patata_limon', 'Pollo al limón con patatas', 'C CE',
+  [['pollo', 120, 'p'], ['patata', 150, 'e'], ['judias', 70, 'v'], ['limon', 10, 'x'], ['aove', 8, 'e']],
+  ['Hierve patata en dados y judías, desecha el agua.', 'Dora el pollo y termina con el zumo de limón.', 'Sirve con las verduras.'],
+  'El limón realza el sabor.', 30);
+D('c_n_pollo_pasta_calabacin', 'Pasta con pollo y calabacín', 'C CE',
+  [['pollo', 110, 'p'], ['pasta', 160, 'e'], ['calabacin', 80, 'v'], ['ajo', 3, 'x'], ['aove', 8, 'e']],
+  ['Cuece la pasta sin sal.', 'Saltea el pollo en dados con ajo y el calabacín.', 'Mezcla.'],
+  'Sin queso rallado (aporta sodio y fósforo).', 25);
+D('c_n_pollo_ensalada_arroz', 'Ensalada templada de pollo y arroz', 'C CE',
+  [['pollo', 110, 'p'], ['arroz', 140, 'e'], ['lechuga', 60, 'v'], ['pepino', 50, 'v'], ['aove', 8, 'e'], ['limon', 8, 'x']],
+  ['Plancha el pollo y córtalo en tiras.', 'Mezcla con arroz hervido tibio, lechuga y pepino.', 'Aliña con aceite y limón.'],
+  'Verduras crudas de bajo potasio: lechuga y pepino.', 20);
+D('c_n_clara_tortilla', 'Tortilla de claras con calabacín y pan', 'C CE',
+  [['clara', 150, 'p'], ['calabacin', 80, 'v'], ['pan', 60, 'e'], ['aove', 8, 'e'], ['cebolla', 20, 'v']],
+  ['Pocha cebolla y calabacín cocido.', 'Añade las claras batidas y cuaja.', 'Sirve con pan sin sal.'],
+  'Las claras aportan proteína con muy poco fósforo.', 15);
+D('c_n_qfresco_ensalada', 'Ensalada de queso fresco, tomate y pasta', 'C CE',
+  [['qfresco', 150, 'p'], ['pasta', 150, 'e'], ['tomate', 70, 'v'], ['pepino', 50, 'v'], ['aove', 8, 'e']],
+  ['Cuece y enfría la pasta.', 'Mezcla con tomate, pepino y queso fresco batido.', 'Aliña con aceite y orégano.'],
+  'Lácteo con fósforo moderado: no repetir cada día.', 15);
+/* --- ampliación vegetal --- */
+D('c_n_tofu_limon', 'Tofu al limón con arroz y judías verdes', 'C CE',
+  [['tofu', 150, 'p'], ['arroz', 150, 'e'], ['judias', 80, 'v'], ['limon', 10, 'x'], ['aove', 8, 'e']],
+  ['Hierve las judías y desecha el agua.', 'Dora el tofu en dados y termina con zumo de limón y pimienta.', 'Sirve con arroz.'],
+  'Opción vegana.', 20);
+D('c_n_tofu_tomate', 'Tofu en salsa de tomate natural con pasta', 'C CE',
+  [['tofu', 140, 'p'], ['pasta', 160, 'e'], ['tomate', 80, 'v'], ['cebolla', 30, 'v'], ['aove', 8, 'e']],
+  ['Sofríe cebolla y tomate triturado natural.', 'Añade el tofu en dados y cuece 8 minutos.', 'Mezcla con la pasta sin sal.'],
+  'Opción vegana. Sin tomate frito de bote.', 25);
+D('c_n_tofu_berenjena', 'Tofu con berenjena y cuscús', 'C CE',
+  [['tofu', 140, 'p'], ['berenjena', 100, 'v'], ['cuscus', 140, 'e'], ['cebolla', 30, 'v'], ['aove', 8, 'e']],
+  ['Cuece la berenjena en dados y desecha el agua.', 'Dora el tofu y saltea con la cebolla.', 'Sirve con cuscús.'],
+  'Opción vegana.', 25);
+D('c_n_tofu_calabacin_patata', 'Tofu a la plancha con calabacín y patata', 'C CE',
+  [['tofu', 140, 'p'], ['calabacin', 80, 'v'], ['patata', 150, 'e'], ['aove', 8, 'e'], ['ajo', 3, 'x']],
+  ['Hierve patata en dados pequeños y desecha el agua.', 'Plancha el tofu con ajo y pimienta.', 'Saltea el calabacín cocido.'],
+  'Opción vegana, baja en potasio por el hervido.', 25);
+D('c_n_arroz_tofu_frito', 'Arroz salteado con tofu y verduras', 'C CE',
+  [['tofu', 130, 'p'], ['arroz', 160, 'e'], ['zanahoria', 40, 'v'], ['pimiento', 40, 'v'], ['aove', 8, 'e']],
+  ['Cuece el arroz y deja que se enfríe.', 'Saltea el tofu con las verduras en dados.', 'Añade el arroz y remueve a fuego alto. Sin salsa de soja (alto sodio).'],
+  'Opción vegana. Evita salsa de soja; usa jengibre o limón.', 25);
+D('c_n_tofu_cuscus_ensalada', 'Ensalada de cuscús con tofu y pepino', 'C CE',
+  [['tofu', 130, 'p'], ['cuscus', 140, 'e'], ['pepino', 60, 'v'], ['lechuga', 40, 'v'], ['aove', 8, 'e'], ['limon', 8, 'x']],
+  ['Hidrata el cuscús y deja enfriar.', 'Mezcla con tofu en dados, pepino y lechuga.', 'Aliña con aceite y limón.'],
+  'Opción vegana, fría.', 15);
+D('c_n_tofu_pimiento_arroz', 'Tofu salteado con pimiento y arroz', 'C CE',
+  [['tofu', 140, 'p'], ['pimiento', 70, 'v'], ['arroz', 150, 'e'], ['cebolla', 30, 'v'], ['aove', 8, 'e']],
+  ['Saltea cebolla y pimiento.', 'Añade el tofu con pimentón y cuece 6 minutos.', 'Sirve con arroz.'],
+  'Opción vegana.', 20);
+D('c_n_tofu_zanahoria_pasta', 'Pasta con tofu, zanahoria y calabacín', 'C CE',
+  [['tofu', 130, 'p'], ['pasta', 160, 'e'], ['zanahoria', 50, 'v'], ['calabacin', 60, 'v'], ['aove', 8, 'e']],
+  ['Cuece la pasta sin sal.', 'Saltea el tofu con las verduras cocidas.', 'Mezcla.'],
+  'Opción vegana.', 20);
+D('c_n_lentejas_verduras', 'Lentejas con verduras y arroz', 'C CE',
+  [['lentejas', 130, 'p'], ['arroz', 70, 'e'], ['zanahoria', 40, 'v'], ['puerro', 40, 'v'], ['aove', 8, 'e']],
+  ['Cuece las lentejas desechando la primera agua.', 'Añade puerro y zanahoria.', 'Sirve con arroz hervido aparte.'],
+  'Opción vegana; las legumbres aportan potasio: se excluyen si el K es alto.', 40);
+D('c_n_garbanzos_espinaca', 'Garbanzos con calabacín y cuscús', 'C CE',
+  [['garbanzos', 90, 'p'], ['calabacin', 80, 'v'], ['cuscus', 120, 'e'], ['cebolla', 30, 'v'], ['aove', 8, 'e']],
+  ['Saltea cebolla y calabacín cocido.', 'Añade los garbanzos lavados.', 'Sirve con cuscús.'],
+  'Opción vegana. Aclara los garbanzos de bote.', 20);
+D('c_n_huevo_calabacin', 'Tortilla de calabacín con pan y ensalada', 'C CE',
+  [['huevo', 110, 'p'], ['calabacin', 80, 'v'], ['pan', 60, 'e'], ['lechuga', 40, 'v'], ['aove', 8, 'e']],
+  ['Pocha el calabacín cocido.', 'Añade los huevos batidos y cuaja.', 'Sirve con pan y lechuga.'],
+  'Opción vegetariana.', 15);
+
 var FRUTAS = {
   manzana: { m: [1, 12], g: 150 }, pera: { m: [8, 4], g: 150 }, fresas: { m: [3, 6], g: 120 },
   arandanos: { m: [5, 9], g: 100 }, uvas: { m: [8, 11], g: 100 }, mandarina: { m: [10, 2], g: 150 },
@@ -1729,10 +1857,11 @@ var APP = (function () {
     else if (a === 'wk') { S.wk = +act.getAttribute('data-w'); S.day = 0; save(); rerender(); }
     else if (a === 'day') { S.day = +act.getAttribute('data-d'); save(); rerender(); }
     else if (a === 'meal') { var kk = act.getAttribute('data-key'); S.open[kk] = !S.open[kk]; save(); rerender(true); }
-    else if (a === 'alts') {
-      var key = act.getAttribute('data-key'), pr = key.split('_'), alts = NEF.alternatives(ctx, plan, +pr[0], pr[1], 6), h = '<div class="mut" style="margin-top:6px">Alternativas:</div>';
+    else if (a === 'alts' || a === 'altmore') {
+      var key = act.getAttribute('data-key'), pr = key.split('_'), all = (a === 'altmore'), alts = NEF.alternatives(ctx, plan, +pr[0], pr[1], 80), lim = all ? alts.length : 12, h = '<div class="mut" style="margin-top:6px">' + alts.length + ' alternativas que cumplen tu pauta:</div>';
       if (!alts.length) { h = '<div class="mut">No hay alternativas que cumplan tu pauta.</div>'; }
-      for (i = 0; i < alts.length; i++) { h += '<button class="chip" style="display:block;margin:4px 0;width:100%;text-align:left" data-act="doswap" data-key="' + key + '" data-dish="' + alts[i].id + '">' + esc(alts[i].name) + ' · ' + Math.round(alts[i].tot.kcal) + ' kcal · ' + alts[i].tot.p.toFixed(0) + ' g prot.</button>'; }
+      for (i = 0; i < alts.length && i < lim; i++) { h += '<button class="chip" style="display:block;margin:4px 0;width:100%;text-align:left;white-space:normal" data-act="doswap" data-key="' + key + '" data-dish="' + alts[i].id + '">' + esc(alts[i].name) + ' · ' + Math.round(alts[i].tot.kcal) + ' kcal · ' + alts[i].tot.p.toFixed(0) + ' g prot. · K ' + Math.round(alts[i].tot.k) + ' · P ' + Math.round(alts[i].tot.ph) + '</button>'; }
+      if (alts.length > lim) { h += '<button class="btn s sm" data-act="altmore" data-key="' + key + '">Ver las ' + alts.length + '</button>'; }
       $('alt_' + key).innerHTML = h;
     }
     else if (a === 'doswap') { var k2 = act.getAttribute('data-key'), p2 = k2.split('_'); if (NEF.swapMeal(ctx, plan, +p2[0], p2[1], act.getAttribute('data-dish'))) { S.over[k2] = act.getAttribute('data-dish'); save(); rerender(true); toast('Plato cambiado'); } }
